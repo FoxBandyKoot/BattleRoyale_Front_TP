@@ -56,7 +56,7 @@ function Login() {
                 />
                 <Button onClick={postLogin}>Se connecter</Button>
             </Form>
-            <Link to="/signup">Mot de passe oublié ?</Link>
+            <Link to="/forgot-password">Mot de passe oublié ?</Link>
             <Link to="/signup">Je n'ai pas encore de compte ?</Link>
             { isError &&<Error>Utilisateur ou mot de passe incorrect</Error> }
         </Card>

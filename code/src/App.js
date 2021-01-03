@@ -41,6 +41,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/forgot-password" component={Signup} />
 
         </Router>
     </AuthContext.Provider>
