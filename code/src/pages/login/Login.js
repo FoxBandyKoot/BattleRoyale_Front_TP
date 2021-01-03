@@ -36,7 +36,7 @@ function Login() {
     return (
         <Card>
             {/*<Logo src={logoImg} />*/}
-            <h1>Connexion</h1>
+            <h1>Bienvenue !</h1>
             <Form>
                 <Input
                     type="username"
@@ -44,7 +44,7 @@ function Login() {
                     onChange={e => {
                         setUserName(e.target.value);
                     }}
-                    placeholder="username"
+                    placeholder="email"
                 />
                 <Input
                     type="password"
@@ -52,11 +52,12 @@ function Login() {
                     onChange={e => {
                         setPassword(e.target.value);
                     }}
-                    placeholder="password"
+                    placeholder="mot de passe"
                 />
-                <Button onClick={postLogin}>Sign In</Button>
+                <Button onClick={postLogin}>Se connecter</Button>
             </Form>
-            <Link to="/signup">Créer un compte</Link>
+            <Link to="/signup">Mot de passe oublié ?</Link>
+            <Link to="/signup">Je n'ai pas encore de compte ?</Link>
             { isError &&<Error>Utilisateur ou mot de passe incorrect</Error> }
         </Card>
     );
