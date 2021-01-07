@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import React, {useState } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { AuthContext } from "./context/auth";
