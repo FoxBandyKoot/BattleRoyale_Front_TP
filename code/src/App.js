@@ -5,6 +5,7 @@ import { AuthContext } from "./context/auth";
 import Home from './pages/home/Home';
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
+import forgotPassword from "./pages/forgot-password/Forgot-password";
 import Logout from "./components/Logout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "react-bootstrap/cjs/Navbar";
@@ -41,7 +42,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/forgot-password" component={Signup} />
+        <Route path="/forgot-password" component={forgotPassword} />
 
         </Router>
     </AuthContext.Provider>

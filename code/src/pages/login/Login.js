@@ -8,14 +8,14 @@ import { useAuth } from "../../context/auth";
 function Login() {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [isError, setIsError] = useState(false);
-    const [userName, setUserName] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { setAuthTokens } = useAuth();
     const { authTokens } = useAuth();
 
     function postLogin() {
         axios.post("http://localhost:8080/login", {
-            "username": userName,
+            "username": email,
             "password": password
         }).then(result => {
             if (result.status === 200) {
@@ -39,10 +39,10 @@ function Login() {
             <h1>Bienvenue !</h1>
             <Form>
                 <Input
-                    type="username"
-                    value={userName}
+                    type="email"
+                    value={email}
                     onChange={e => {
-                        setUserName(e.target.value);
+                        setEmail(e.target.value);
                     }}
                     placeholder="email"
                 />
