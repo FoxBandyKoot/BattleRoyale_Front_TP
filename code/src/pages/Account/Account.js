@@ -23,6 +23,10 @@ class Account extends React.Component {
         });
     }
 
+    handleClick() {
+
+    }
+
     render() {
         return (
             <Card>
@@ -49,7 +53,7 @@ class Account extends React.Component {
                         placeholder="Mot de passe"
                         name="password"
                     />
-                    <Button>Sauvegarder</Button>
+                    <Button onClick={this.handleClick}>Sauvegarder</Button>
                     <Button>Supprimer le compte</Button>
                     <Button>Crédits</Button>
                 </Form>

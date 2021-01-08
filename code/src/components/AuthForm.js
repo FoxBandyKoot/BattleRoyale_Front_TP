@@ -33,6 +33,7 @@ const Button = styled.button`
   width: 100%;
   margin-bottom: 15px;
   font-size: 20px;
+  border: none;
 `;
 
 const Logo = styled.img`
