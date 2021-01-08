@@ -24,15 +24,14 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  background: linear-gradient(to bottom, #6371c7, #5563c1);
-  border-color: #F05029;
-  border-radius: 3px;
-  padding: 1rem;
+  background-color: #F05029;
+  border-radius: 50px;
+  padding: 10px;
   color: white;
   font-weight: 700;
   width: 100%;
-  margin-bottom: 1rem;
-  font-size: 0.8rem;
+  margin-bottom: 15px;
+  font-size: 20px;
 `;
 
 const Logo = styled.img`
