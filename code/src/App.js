@@ -11,6 +11,7 @@ import Logout from "./components/Logout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "react-bootstrap/cjs/Navbar";
 import Nav from "react-bootstrap/cjs/Nav";
+import Account from "./pages/Account/Account";
 
 export const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).token : '';
 export const expires = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).expires : '';
@@ -41,6 +42,7 @@ function App() {
             {!authTokens ? <Nav.Link href="/login">Connexion</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/signup">Inscription</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/createGame">Create game</Nav.Link> : ''}
+            {!authTokens ? <Nav.Link href="/account">Mon compte</Nav.Link> : ''}
           </Nav>
           {authTokens ? <Logout></Logout> : ''}
         </Navbar>
@@ -49,6 +51,7 @@ function App() {
         <Route path="/signup" component={Signup} />
         <Route path="/forgot-password" component={forgotPassword} />
         <Route path="/createGame" component={CreateGame} />
+        <Route path="/account" component={Account} />
 
         </Router>
     </AuthContext.Provider>
