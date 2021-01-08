@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Card, Form, Input, Button } from "../../components/AuthForm";
-import { DropdownList } from 'react-widgets'
+//import { DropdownList } from 'react-widgets'
 import './CreateGame.css';
 import PropTypes from 'prop-types'
 
@@ -11,11 +11,11 @@ class CreateGame extends Component{
         super(props);
 
         // let { DropdownList }
-        let colors = ['orange', 'red', 'blue', 'purple']   
+        //let colors = ['orange', 'red', 'blue', 'purple']   
 
         this.state = {
             gameName: "", 
-            colors: colors,
+            //colors: colors,
             listOpen: false,
             headerTitle: this.props.title}
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Button } from "../../components/AuthForm";
+import { Card, Form, Input, Button } from "../../components/ForgotPasswordForm";
 
 
 function ForgotPassword() {
@@ -8,18 +8,20 @@ function ForgotPassword() {
 
     return (
         <>
-            <h1>Accéder à votre compte</h1>
-            <Form>
-                <Input
-                    type="email"
-                    value={email}
-                    onChange={e => {
-                        setEmail(e.target.value);
-                    }}
-                    placeholder="email"
-                />
-                <Button>Continuer</Button>
-            </Form>
+            <Card>
+                <h1>Accéder à votre compte</h1>
+                <Form>
+                    <Input
+                        type="email"
+                        value={email}
+                        onChange={e => {
+                            setEmail(e.target.value);
+                        }}
+                        placeholder="email"
+                    />
+                    <Button>Continuer</Button>
+                </Form>
+            </Card>
         </>
     )
 }
