@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
 // import logoImg from "../img/logo.jpg";
 import { Card, Form, Input, Button, Error } from "../../components/AuthForm";
-import { useAuth } from "../../context/auth";
+//import { useAuth } from "../../context/auth";
 import data from "./data.json"
 
 class Login extends React.Component {
@@ -21,13 +21,12 @@ class Login extends React.Component {
             isError: false,
             setIsError: false,
             email: '',
-            setEmail: '',
             password: '',
-            setPassword: '',
             //setAuthTokens: useAuth(),
             //authTokens: useAuth()
         };
-        this.postLogin.bind(this);
+        this.postLogin = this.postLogin.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     handleInputChange(event) {
@@ -57,14 +56,11 @@ class Login extends React.Component {
         });
     }*/
 
-
     postLogin(e) {
         e.preventDefault();
-        var email = this.email;
-        var password = this.password;
-
-        console.log(email);
-        console.log(password);
+            if(this.state.email === data[0].email && this.state.password === data[0].password) {
+                console.log("it works");
+            }
     }
 
     /*if (isLoggedIn || authTokens) {
@@ -82,12 +78,14 @@ class Login extends React.Component {
                         value={this.state.email}
                         onChange={this.handleInputChange}
                         placeholder="email" 
+                        name="email"
                     />
                     <Input
                         type="password"
-                        value={this.stat.password}
+                        value={this.state.password}
                         onChange={this.handleInputChange}
                         placeholder="mot de passe"
+                        name="password"
                     />
                     <Button onClick={this.postLogin}>Se connecter</Button>
                 </Form>
