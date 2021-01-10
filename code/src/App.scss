@@ -1,25 +1,16 @@
-.backgroundApp{
-  background-color: #053244;
-}
 
-/* .input *{
-    
-    border-radius: 35;
-} */
+/***************** libs *****************/
+@import '~react-widgets/lib/scss/react-widgets';
 
-.input{
-  border-radius: 35;
-}
 
-body{
-  background-color:#053244;
-}
+/***************** components *****************/
+// @import 'components/AuthForm';
+@import 'scss/inputs.scss';
 
-.title{
-  color: white;
-}
 
-.buttonA{
-  background: #F05029;
-}
+/***************** specifics *****************/
+
+
+/***************** themes *****************/
+@import 'scss/classic.scss'
 
