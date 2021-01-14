@@ -67,30 +67,32 @@ class Login extends React.Component {
 
     render() {
         return (
-            <Card>
+            <div className="main">
                 {/*<Logo src={logoImg} />*/}
-                <h1>Bienvenue !</h1>
-                <Form>
-                    <Input
+                <h1 className="title-page">Bienvenue !</h1>
+                <form className="custom-form">
+                    <input
+                        className="custom-input"
                         type="email"
                         value={this.state.email}
                         onChange={this.handleInputChange}
-                        placeholder="email" 
+                        placeholder="email"
                         name="email"
                     />
-                    <Input
+                    <input
+                        className="custom-input"
                         type="password"
                         value={this.state.password}
                         onChange={this.handleInputChange}
                         placeholder="mot de passe"
                         name="password"
                     />
-                    <Button onClick={this.postLogin}>Se connecter</Button>
-                </Form>
+                    <button className="custom-button" onClick={this.postLogin}>Se connecter</button>
+                </form>
                 <Link to="/forgot-password">Mot de passe oublié ?</Link>
                 <Link to="/signup">Je n'ai pas encore de compte ?</Link>
-                { this.state.isError &&<Error>Utilisateur ou mot de passe incorrect</Error> }
-            </Card>
+                { this.state.isError &&<error>Utilisateur ou mot de passe incorrect</error> }
+            </div>
         );
     }
     
