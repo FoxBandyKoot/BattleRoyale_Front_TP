@@ -15,16 +15,13 @@ class Login extends React.Component {
     const { authTokens } = useAuth();*/
     constructor(props) {
         super(props);
-        this.state = {
-            isLoggedIn: false,
-            setLoggedIn: false,
-            isError: false,
-            setIsError: false,
-            email: '',
-            password: '',
-            //setAuthTokens: useAuth(),
-            //authTokens: useAuth()
-        };
+        this.state = data;
+        this.isLoggedIn = false;
+        this.setLoggedIn = false;
+        this.isError = false;
+        this.setIsError = false;
+        this.email = '';
+        this.password = '';
         this.postLogin = this.postLogin.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -56,11 +53,12 @@ class Login extends React.Component {
         });
     }*/
 
-    postLogin(e) {
-        e.preventDefault();
-            if(this.state.email === data[0].email && this.state.password === data[0].password) {
-                console.log("it works");
-            }
+    postLogin() {
+        if(this.state.email===data[0].email && this.state.password === data[0].password) {
+            console.log("Logged")
+        } else {
+            console.log("Wrong authentication");
+        }
     }
 
     /*if (isLoggedIn || authTokens) {

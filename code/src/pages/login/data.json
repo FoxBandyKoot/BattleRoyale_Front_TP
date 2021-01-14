@@ -4,17 +4,5 @@
         "pseudo" : "pseudo1",
         "email" : "pseudo1@gmail.com",
         "password" : "test"
-    },
-    {
-        "id" : 2,
-        "pseudo" : "pseudo2",
-        "email" : "pseudo2@gmail.com",
-        "password" : "test"
-    },
-    {
-        "id" : 3,
-        "pseudo" : "pseudo3",
-        "email" : "pseudo3@gmail.com",
-        "password" : "test"
     }
 ]
