@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Card, Form, Input, Button } from "../../components/AuthForm";
 import { DropdownList } from 'react-widgets'
-import './CreateGame.css';
 import PropTypes from 'prop-types'
 
 
@@ -10,12 +8,15 @@ class CreateGame extends Component{
     constructor(props){
         super(props);
 
-        // let { DropdownList }
-        let colors = ['orange', 'red', 'blue', 'purple']   
+        let playerNumber = ['1', '2', '3', '4']   
+        let property = ['Public', 'Private']   
+        let maps = ['Green', 'Blue', 'Red']   
 
         this.state = {
             gameName: "", 
-            colors: colors,
+            playerNumber: playerNumber,
+            property: property,
+            maps: maps,
             listOpen: false,
             headerTitle: this.props.title}
 
@@ -44,59 +45,47 @@ class CreateGame extends Component{
         const{list} = this.props
         const{listOpen, headerTitle} = this.state
         return(
-            <Card className="backgroundApp">
+            <div className="main">
                 
                 {/********************** TITLE  **********************/}
-                <h1 className="title">Create a game</h1>
+                <h1 className="title-page">Create a game</h1>
                 
-                <Form>
+                <form className="custom-form">
                   {/********************** GAME NAME  **********************/}
-                  <Input
-                      className="input"
+                  <input
+                      className="custom-input"
                       type="text"
                       value={this.state.gameName}
-                      placeholder="game name*"
+                      placeholder="Game name*"
                       onChange={this.handleChange}
                   />
-                  <br></br>
 
                   {/********************** PLAYER NUMBER SELECTOR  **********************/}
-                    {/* <>
-                      <DropdownList
-                    data={this.state.colors}
-                    defaultValue={"blue"}
-                    disabled={["red", "purple"]}/>
-                    </> */}
-
-                  <select className="sc-dlfnbm boijVN input" id="playerNumberSelector">
-                    <option className="playerNumberOption" value="2">2</option>
-                    <option className="playerNumberOption" value="3">3</option>
-                    <option className="playerNumberOption" value="4">4</option>
-                    <option className="playerNumberOption" value="5">5</option>
-                  </select>
-                  <br></br>
+                    <>
+                    <DropdownList
+                    data={this.state.playerNumber}
+                    defaultValue={"Player number*"}/>
+                    </>
 
                   {/********************** PROPERTY SELECTOR  **********************/}
-                  <select className="sc-dlfnbm boijVN input" id="propertySelector">
-                    <option className="propertyOption" value="Private">Private</option>
-                    <option className="propertyOption" value="Public">Public</option>
-                  </select>
-                  <br></br>
+                  <>
+                  <DropdownList
+                    data={this.state.property}
+                    defaultValue={"Who can join ?*"}/>
+                  </>
 
-                  {/********************** LEVEL SELECTOR  **********************/}
-                  <select className="sc-dlfnbm boijVN input" id="levelSelector">
-                    <option className="levelOption" value="Level 1">Level 1</option>
-                    <option className="levelOption" value="Level 2">Level 2</option>
-                    <option className="levelOption" value="Level 3">Level 3</option>
-                  </select>
-
-                  <br></br>
+                  {/********************** MAP SELECTOR  **********************/}
+                    <>
+                    <DropdownList
+                    data={this.state.maps}
+                    defaultValue={"Select the map*"}/>
+                    </>
 
                   {/********************** CREATE GAME BUTTON  **********************/}
-                  <Button className="buttonA">Create saloon</Button>
+                  <button className="custom-button">Create saloon</button>
 
-                </Form>
-            </Card> 
+                </form>
+            </div> 
 
         )      
     }
