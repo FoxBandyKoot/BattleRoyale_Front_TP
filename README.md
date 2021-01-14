@@ -11,6 +11,8 @@ Made with :
         7-1 architecture pattern was used for css (github.com/HugoGiraudel/sass-boilerplate)
         scss files was preferred
         react-widgets lib was used for dropdowns inputs (https://jquense.github.io/react-widgets)
+        reactjs-popup for modals creating (https://react-popup.elazizi.com/)
+        font-awesome for svg icons (https://fontawesome.com/)
     
   
     ????? technology for back. 
