@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "react-bootstrap/cjs/Navbar";
 import Nav from "react-bootstrap/cjs/Nav";
 import Account from "./pages/Account/Account";
+import 'reactjs-popup/dist/index.css';
 
 export const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).token : '';
 export const expires = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).expires : '';
