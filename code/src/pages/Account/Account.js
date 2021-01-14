@@ -27,53 +27,56 @@ class Account extends React.Component {
 
     render() {
         return <>
-                <Card>
-                    <h1>Compte</h1>
-                    <Form>
-                        <Input
+                <div className="main">
+                    <h1 className="title-page">Compte</h1>
+                    <form className="custom-form">
+                        <input
                             type="text"
                             value={this.state.pseudo}
                             onChange={this.handleInputChange}
                             placeholder="Pseudo"
                             name="pseudo"
+                            className="custom-input"
                         />
-                        <Input
+                        <input
                             type="email"
                             value={this.state.email}
                             onChange={this.handleInputChange}
                             placeholder="Email"
                             name="email"
+                            className="custom-input"
                         />
-                        <Input
+                        <input
                             type="password"
                             value={this.state.password}
                             onChange={this.handleInputChange}
                             placeholder="Mot de passe"
                             name="password"
+                            className="custom-input"
                         />
-                        <Button onClick={this.handleClick}>Sauvegarder</Button>
+                    </form>
+                    <button className="custom-button" onClick={this.handleClick}>Sauvegarder</button>
 
-                        <Popup
-                            trigger={<Button>Supprimer le compte</Button>}
-                            modal
-                            nested
-                        >
-                            {close => (
-                                <>
-                                    <button className="close" onClick={close}>
-                                        &times;
-                                    </button>
-                                    <div className="content">
-                                        <Button>Confirmer la suppression du compte</Button>
-                                        <Button onClick={close}>Annuler</Button>
-                                    </div>
-                                </>
-                            )}
-                        </Popup>
+                    <Popup
+                        trigger={<button className="custom-button">Supprimer le compte</button>}
+                        modal
+                        nested
+                    >
+                        {close => (
+                            <>
+                                <button className="close" onClick={close}>
+                                    &times;
+                                </button>
+                                <div className="content">
+                                    <button className="custom-button">Confirmer la suppression du compte</button>
+                                    <button className="custom-button" onClick={close}>Annuler</button>
+                                </div>
+                            </>
+                        )}
+                    </Popup>
 
-                        <Button>Crédits</Button>
-                    </Form>
-                </Card>
+                    <button className="custom-button">Crédits</button>
+                </div>
         </>;
     }
 }
