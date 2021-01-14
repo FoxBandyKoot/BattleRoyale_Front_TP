@@ -1,3 +1,4 @@
+import 'react-widgets/dist/css/react-widgets.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';

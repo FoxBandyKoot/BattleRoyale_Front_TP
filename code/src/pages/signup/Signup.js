@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Link, Redirect} from 'react-router-dom';
 // import logoImg from "../img/logo.jpg";
-import {Card, Form, Input, Button, Error} from '../../components/AuthForm';
+// import {Card, Form, Error} from '../../components/AuthForm';
 import {useAuth} from "../../context/auth";
 import axios from "axios";
 
@@ -36,11 +36,12 @@ function Signup() {
     }
 
     return (
-        <Card>
+        <div className="main">
             {/*<Logo src={logoImg} />*/}
-            <h1>Inscription</h1>
-            <Form>
-                <Input
+            <h1 className="title-page">Inscription</h1>
+            <form className="custom-form">
+                <input
+                    className="custom-input"    
                     type="username"
                     value={userName}
                     onChange={e => {
@@ -48,7 +49,8 @@ function Signup() {
                     }}
                     placeholder="username"
                 />
-                <Input
+                <input
+                    className="custom-input"
                     type="password"
                     value={password}
                     onChange={e => {
@@ -56,11 +58,11 @@ function Signup() {
                     }}
                     placeholder="password"
                 />
-                <Button onClick={postSignUp}>Sign Up</Button>
-            </Form>
+                <button className="custom-button" onClick={postSignUp}>Sign Up</button>
+            </form>
             <Link to="/login">Déjà un compte ?</Link>
-            { isError &&<Error>Erreur lors de la création de l"'"utilisateur</Error> }
-        </Card>
+            { isError &&<error>Erreur lors de la création de l"'"utilisateur</error> }
+        </div>
     );
 }
 
