@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
 // import logoImg from "../img/logo.jpg";
-import { Card, Form, Input, Button, Error } from "../../components/AuthForm";
+// import { Card, Form, Error } from "../../components/AuthForm";
 //import { useAuth } from "../../context/auth";
 import data from "./data.json"
 
@@ -95,7 +95,6 @@ class Login extends React.Component {
             </div>
         );
     }
-    
 }
 
 export default Login;
