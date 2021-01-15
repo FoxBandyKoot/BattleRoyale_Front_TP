@@ -36,10 +36,12 @@ function Signup() {
     }
 
     return (
-        <div className="main">
+        <div className="div-form">
             {/*<Logo src={logoImg} />*/}
             <h1 className="title-page">Inscription</h1>
             <form className="custom-form">
+
+            <label className="custom-label">Adresse email</label>
                 <input
                     className="custom-input"    
                     type="username"
@@ -47,8 +49,10 @@ function Signup() {
                     onChange={e => {
                         setUserName(e.target.value);
                     }}
-                    placeholder="username"
+                    placeholder="Email"
                 />
+
+<label className="custom-label">Mot de passe </label>
                 <input
                     className="custom-input"
                     type="password"
@@ -56,7 +60,7 @@ function Signup() {
                     onChange={e => {
                         setPassword(e.target.value);
                     }}
-                    placeholder="password"
+                    placeholder="Mot de passe"
                 />
                 <button className="custom-button" onClick={postSignUp}>Sign Up</button>
             </form>

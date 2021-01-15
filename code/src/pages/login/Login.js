@@ -36,25 +36,25 @@ class Login extends React.Component {
         });
     }
 
-/*
-    function postLogin() {
-        axios.post("http://localhost:8080/login", {
-            "email": email,
-            "password": password
-        }).then(result => {
-            if (result.status === 200) {
-                setAuthTokens(result.data);
-                setLoggedIn(true);
-            } else {
+    /*
+        function postLogin() {
+            axios.post("http://localhost:8080/login", {
+                "email": email,
+                "password": password
+            }).then(result => {
+                if (result.status === 200) {
+                    setAuthTokens(result.data);
+                    setLoggedIn(true);
+                } else {
+                    setIsError(true);
+                }
+            }).catch(e => {
                 setIsError(true);
-            }
-        }).catch(e => {
-            setIsError(true);
-        });
-    }*/
+            });
+        }*/
 
     postLogin() {
-        if(this.state.email===data[0].email && this.state.password === data[0].password) {
+        if (this.state.email === data[0].email && this.state.password === data[0].password) {
             console.log("Logged")
         } else {
             console.log("Wrong authentication");
@@ -67,10 +67,12 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="main">
+            <div className="div-form">
                 {/*<Logo src={logoImg} />*/}
                 <h1 className="title-page">Bienvenue !</h1>
                 <form className="custom-form">
+
+                    <label className="custom-label">Adresse email</label>
                     <input
                         className="custom-input"
                         type="email"
@@ -79,6 +81,9 @@ class Login extends React.Component {
                         placeholder="email"
                         name="email"
                     />
+
+                    <label className="custom-label">Mot de passe</label>
+
                     <input
                         className="custom-input"
                         type="password"
@@ -91,7 +96,7 @@ class Login extends React.Component {
                 <button className="custom-button" onClick={this.postLogin}>Se connecter</button>
                 <Link to="/forgot-password">Mot de passe oublié ?</Link>
                 <Link to="/signup">Je n'ai pas encore de compte ?</Link>
-                { this.state.isError &&<error>Utilisateur ou mot de passe incorrect</error> }
+                { this.state.isError && <error>Utilisateur ou mot de passe incorrect</error>}
             </div>
         );
     }

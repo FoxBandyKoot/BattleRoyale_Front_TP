@@ -1,100 +1,124 @@
 import React, { Component } from "react";
-import { DropdownList } from 'react-widgets'
-import PropTypes from 'prop-types'
+import { Observer } from 'mobx-react'
+import CreateGameStore from './CreateGameStore';
 
+export default class CreateGame extends Component {
 
-class CreateGame extends Component{
+  constructor(props) {
+    super(props)
 
-    constructor(props){
-        super(props);
+    this.form = React.createRef();
 
-        let playerNumber = ['1', '2', '3', '4']   
-        let property = ['Public', 'Private']   
-        let maps = ['Green', 'Blue', 'Red']   
+    let playerNumbers = [1, 2, 3, 4]
+    let properties = ['Publique', 'Privée']
+    let maps = ['Verte', 'Blue', 'Rouge']
 
-        this.state = {
-            gameName: "", 
-            playerNumber: playerNumber,
-            property: property,
-            maps: maps,
-            listOpen: false,
-            headerTitle: this.props.title}
-
-        this.handleChange = this.handleChange.bind(this);
-
+    this.state = {
+      gameName: " ",
+      playerNumber: playerNumbers,
+      property: properties,
+      map: maps
     }
+  }
 
-    // init form
-    handleChange(event) {
-        this.setState({gameName: event.target.value});
+
+  onChange = (e) => {
+    const formData = new FormData((this.form.current))
+    CreateGameStore.setFormData(formData)
+    this.buttonSubmit = document.getElementById("mySubmit")
+
+    this.currentGameName = CreateGameStore.createGameFormData.get('gameNameInput')
+    this.currentPlayerNumber = CreateGameStore.createGameFormData.get('playerNumberSelect')
+    this.currentProperty = CreateGameStore.createGameFormData.get('propertySelect')
+    this.currentMap = CreateGameStore.createGameFormData.get('mapSelect')
+
+    // Enable or disable button of form validation
+    this.formIsValid = 
+      this.currentGameName !== "" && 
+      this.currentPlayerNumber !== 0 && 
+      this.currentProperty !== "" && 
+      this.currentMap !== ""
+
+      this.render()
+  };
+
+  render = () => {
+  
+    // {/* // Regarder Login/js -> Balise "redirect" */}         
+    
+    if(this.buttonSubmit && this.formIsValid){
+      this.buttonSubmit.disabled = false
+    } else if(this.buttonSubmit && !this.formIsValid){
+      this.buttonSubmit.disabled = true
     }
+    
+    return <>
+      {/********************** DISPLAY PAGE  **********************/}
+      <div className="div-form">
 
-    handleClickOutside(){
-        this.setState({
-          listOpen: false
-        })
-      }
-      toggleList(){
-        this.setState(prevState => ({
-          listOpen: !prevState.listOpen
-        }))
-      }
+        {/********************** TITLE  **********************/}
+        <h1 className="title-page">Créer une partie</h1>
 
+        <form className="custom-form" ref={this.form} onChange={this.onChange}>
+          
+          {/********************** GAME NAME  **********************/}
+          <label className="custom-label">Nom de la partie</label>
+          <input
+            className="custom-input"
+            type="text"
+            name="gameNameInput"
+          />
+          
+          {/********************** PLAYER NUMBER SELECTOR  **********************/}
+          <label className="custom-label">Nombre de joueurs sur la carte</label>
+          <select className="custom-dropdown" name="playerNumberSelect">
+            {
+              this.state.playerNumber.map((e, i) => <option key={i} value={e}>
+                {e}
+              </option>)
+            }
+          </select>
+    
+          {/********************** PROPERTY SELECTOR  **********************/}
+          <label className="custom-label">Qui peut rejoindre la partie ?</label>
+          <select className="custom-dropdown" name="propertySelect">
+            {
+              this.state.property.map((e, i) => <option key={i} value={e}>
+                {e}
+              </option>)
+            }
+          </select>
 
-    render(){
-        const{list} = this.props
-        const{listOpen, headerTitle} = this.state
-        return(
-            <div className="main">
-                
-                {/********************** TITLE  **********************/}
-                <h1 className="title-page">Create a game</h1>
-                
-                <form className="custom-form">
-                  {/********************** GAME NAME  **********************/}
-                  <input
-                      className="custom-input"
-                      type="text"
-                      value={this.state.gameName}
-                      placeholder="Game name*"
-                      onChange={this.handleChange}
-                  />
+          {/********************** MAP SELECTOR  **********************/}
+          <label className="custom-label">Sélectionner la carte</label>
+          <select className="custom-dropdown" name="mapSelect">
+            {
+              this.state.map.map((e, i) => <option key={i} value={e}>
+                {e}
+              </option>)
+            }
+          </select>
+      
+          <button id="mySubmit" className="custom-button" disabled>Create saloon</button>
 
-                  {/********************** PLAYER NUMBER SELECTOR  **********************/}
-                    <>
-                    <DropdownList
-                    data={this.state.playerNumber}
-                    defaultValue={"Player number*"}/>
-                    </>
+          {/********************** CREATE GAME BUTTON  **********************/}
+          <Observer>
+            {
+              () => <>
+                {/* WILL BE USE FOR OTHERS FUNCTIONNALITIES */}
+                {/* {CreateGameStore.createGameFormData.get('gameNameInput')} */}
+                {/* {JSON.stringify(CreateGameStore.createGameFormData.keys())} */}
+              </>
+            }
+          </Observer>
 
-                  {/********************** PROPERTY SELECTOR  **********************/}
-                  <>
-                  <DropdownList
-                    data={this.state.property}
-                    defaultValue={"Who can join ?*"}/>
-                  </>
-
-                  {/********************** MAP SELECTOR  **********************/}
-                    <>
-                    <DropdownList
-                    data={this.state.maps}
-                    defaultValue={"Select the map*"}/>
-                    </>
-
-                  {/********************** CREATE GAME BUTTON  **********************/}
-                  <button className="custom-button">Create saloon</button>
-
-                </form>
-            </div> 
-
-        )      
-    }
+          {/* <DropdownList
+            data={this.state.playerNumber}
+            placeholder={"Player number*"}
+            onChange={this.onChange}
+          /> */}
+        </form>       
+      </div>
+    </>
+  }
 }
-
-// createSaloon = ({}) => (return true)
-
-// CreateGame.propTypes = {
-//     state.gameName: PropTypes.string.isRequired
-// }
-
-export default CreateGame;

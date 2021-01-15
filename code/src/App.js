@@ -53,7 +53,7 @@ function App() {
 
             {!authTokens ? <Nav.Link href="/login">Connexion</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/signup">Inscription</Nav.Link> : ''}
-            {!authTokens ? <Nav.Link href="/createGame">Create game</Nav.Link> : ''}
+            {!authTokens ? <Nav.Link href="/createGame">Créer une partie</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/searchGame">Rechercher une partie</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/currentGames">Parties en cours</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/account">Mon compte</Nav.Link> : ''}

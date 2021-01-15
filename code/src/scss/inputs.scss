@@ -9,13 +9,22 @@
   background-color: rgb(192, 247, 247);
 }
 
+.custom-dropdown{
+  border-radius: 35px;
+  padding: 0.5rem;
+}
+
+.custom-dropdown:hover{
+  background-color: rgb(192, 247, 247);
+}
+
 .custom-input {
   padding: 0.5rem;
   text-align: center;
-  margin-top: 2rem;
   border-radius: 35px;
   border: 0;
 }
+
 .double-password-input,
 .double-passwordConfirm-input {
   width: 346px;
@@ -37,8 +46,8 @@ input:hover {
   border-radius: 35px;
   border: 0;
   padding: 0.5rem;
+  margin-bottom: 2rem; 
   margin-top: 2rem;
-  //margin-bottom: 2rem;
   color: white;
   font-weight: 400;
   width: 100%;
@@ -48,6 +57,14 @@ button:hover {
   background-color: coral;
 }
 
+button:disabled {
+  background-color: gray;
+}
+
+.custom-label{
+  color: white;
+  margin-top: 2rem; 
+}
 .exit-btn {
   background-color: #F05029;
 }

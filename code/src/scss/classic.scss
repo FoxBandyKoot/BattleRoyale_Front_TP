@@ -18,9 +18,9 @@ body {
   background-color: red;
 }
 
+.div-form,
 .main,
 .global {
-  // OLD CARD class/tag
   box-sizing: border-box;
   max-width: 410px;
   margin: 0 auto;
@@ -34,6 +34,10 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.custom-p{
+  color: white;
 }
 table {
   color: #FFF;
