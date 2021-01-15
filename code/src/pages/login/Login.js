@@ -1,8 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
-// import logoImg from "../img/logo.jpg";
-import { Card, Form, Input, Button, Error } from "../../components/AuthForm";
 //import { useAuth } from "../../context/auth";
 import data from "./data.json"
 
@@ -54,7 +52,7 @@ class Login extends React.Component {
     }*/
 
     postLogin() {
-        if(this.state.email===data[0].email && this.state.password === data[0].password) {
+        if(this.state.email===data.email && this.state.password === data.password) {
             console.log("Logged")
         } else {
             console.log("Wrong authentication");
@@ -68,7 +66,6 @@ class Login extends React.Component {
     render() {
         return (
             <div className="main">
-                {/*<Logo src={logoImg} />*/}
                 <h1 className="title-page">Bienvenue !</h1>
                 <form className="custom-form">
                     <input
@@ -87,8 +84,8 @@ class Login extends React.Component {
                         placeholder="mot de passe"
                         name="password"
                     />
-                    <button className="custom-button" onClick={this.postLogin}>Se connecter</button>
                 </form>
+                <button className="custom-button" onClick={this.postLogin}>Se connecter</button>
                 <Link to="/forgot-password">Mot de passe oublié ?</Link>
                 <Link to="/signup">Je n'ai pas encore de compte ?</Link>
                 { this.state.isError &&<error>Utilisateur ou mot de passe incorrect</error> }

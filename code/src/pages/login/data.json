@@ -1,8 +1,7 @@
-[
+
     {
         "id" : 1,
         "pseudo" : "pseudo1",
         "email" : "pseudo1@gmail.com",
         "password" : "test"
     }
-]
