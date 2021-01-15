@@ -13,7 +13,9 @@ import Navbar from "react-bootstrap/cjs/Navbar";
 import Nav from "react-bootstrap/cjs/Nav";
 import Account from "./pages/Account/Account";
 import 'reactjs-popup/dist/index.css';
-import CurrentGames from "./pages/CurrentGames";
+import CurrentGames from "./pages/current-games/CurrentGames";
+import SearchGame from "./pages/search-game/SearchGame";
+import SearchGameStore from "./observer/SearchGameStore";
 
 export const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).token : '';
 export const expires = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).expires : '';
@@ -44,6 +46,7 @@ function App() {
             {!authTokens ? <Nav.Link href="/login">Connexion</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/signup">Inscription</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/createGame">Create game</Nav.Link> : ''}
+            {!authTokens ? <Nav.Link href="/searchGame">Rechercher une partie</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/currentGames">Parties en cours</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/account">Mon compte</Nav.Link> : ''}
           </Nav>
@@ -56,6 +59,7 @@ function App() {
         <Route path="/createGame" component={CreateGame} />
         <Route path="/account" component={Account} />
         <Route path="/currentGames" component={CurrentGames} />
+        <Route path="/searchGame" render={() => <SearchGame store={SearchGameStore} />} />
 
         </Router>
     </AuthContext.Provider>
