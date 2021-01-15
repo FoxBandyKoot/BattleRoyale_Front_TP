@@ -16,14 +16,14 @@ class SearchGameStore {
             date: "17/01/21"
         },
     ];
-    search = '';
+    formData = new FormData(undefined);
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    setSearch(search) {
-        this.search = search;
+    setFormData(data) {
+        this.formData = data;
     }
 }
 
