@@ -15,7 +15,9 @@ import Nav from "react-bootstrap/cjs/Nav";
 import Account from "./pages/Account/Account";
 import ModifyPassword from "./pages/modify-password/ModifyPassword";
 import 'reactjs-popup/dist/index.css';
-import CurrentGames from "./pages/CurrentGames";
+import CurrentGames from "./pages/current-games/CurrentGames";
+import SearchGame from "./pages/search-game/SearchGame";
+import SearchGameStore from "./observer/SearchGameStore";
 
 
 export const token = localStorage.getItem("token")
@@ -52,6 +54,7 @@ function App() {
             {!authTokens ? <Nav.Link href="/login">Connexion</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/signup">Inscription</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/createGame">Create game</Nav.Link> : ''}
+            {!authTokens ? <Nav.Link href="/searchGame">Rechercher une partie</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/currentGames">Parties en cours</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/account">Mon compte</Nav.Link> : ''}
 
@@ -66,6 +69,7 @@ function App() {
         <Route path="/account" component={Account} />
         <Route path="/modify-password" component={ModifyPassword} />
         <Route path="/currentGames" component={CurrentGames} />
+        <Route path="/searchGame" render={() => <SearchGame store={SearchGameStore} />} />
 
         </Router>
 
