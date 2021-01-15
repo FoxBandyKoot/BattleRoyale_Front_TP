@@ -87,8 +87,8 @@ class Login extends React.Component {
                         placeholder="mot de passe"
                         name="password"
                     />
-                    <button className="custom-button" onClick={this.postLogin}>Se connecter</button>
                 </form>
+                <button className="custom-button" onClick={this.postLogin}>Se connecter</button>
                 <Link to="/forgot-password">Mot de passe oublié ?</Link>
                 <Link to="/signup">Je n'ai pas encore de compte ?</Link>
                 { this.state.isError &&<error>Utilisateur ou mot de passe incorrect</error> }
