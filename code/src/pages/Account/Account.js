@@ -28,7 +28,7 @@ class Account extends React.Component {
     render() {
         return <>
                 <div className="main">
-                    <h1 className="title-page">Compte</h1>
+                    <div className="title-page">Compte</div>
                     <form className="custom-form">
                         <input
                             type="text"

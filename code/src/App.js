@@ -13,8 +13,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "react-bootstrap/cjs/Navbar";
 import Nav from "react-bootstrap/cjs/Nav";
 import Account from "./pages/Account/Account";
-import "reactjs-popup/dist/index.css";
 import ModifyPassword from "./pages/modify-password/ModifyPassword";
+import 'reactjs-popup/dist/index.css';
+import CurrentGames from "./pages/CurrentGames";
+
 
 export const token = localStorage.getItem("token")
   ? JSON.parse(localStorage.getItem("token")).token
@@ -46,14 +48,13 @@ function App() {
         <Navbar bg="dark" variant="dark" className="mb-3">
           <Navbar.Brand href="/">Battle Royal</Navbar.Brand>
           <Nav className="mr-auto">
-            {!authTokens ? <Nav.Link href="/login">Connexion</Nav.Link> : ""}
-            {!authTokens ? <Nav.Link href="/signup">Inscription</Nav.Link> : ""}
-            {!authTokens ? (
-              <Nav.Link href="/createGame">Create game</Nav.Link>
-            ) : (
-              ""
-            )}
-            {!authTokens ? <Nav.Link href="/account">Mon compte</Nav.Link> : ""}
+
+            {!authTokens ? <Nav.Link href="/login">Connexion</Nav.Link> : ''}
+            {!authTokens ? <Nav.Link href="/signup">Inscription</Nav.Link> : ''}
+            {!authTokens ? <Nav.Link href="/createGame">Create game</Nav.Link> : ''}
+            {!authTokens ? <Nav.Link href="/currentGames">Parties en cours</Nav.Link> : ''}
+            {!authTokens ? <Nav.Link href="/account">Mon compte</Nav.Link> : ''}
+
           </Nav>
           {authTokens ? <Logout></Logout> : ""}
         </Navbar>
@@ -64,7 +65,10 @@ function App() {
         <Route path="/createGame" component={CreateGame} />
         <Route path="/account" component={Account} />
         <Route path="/modify-password" component={ModifyPassword} />
-      </Router>
+        <Route path="/currentGames" component={CurrentGames} />
+
+        </Router>
+
     </AuthContext.Provider>
   );
 

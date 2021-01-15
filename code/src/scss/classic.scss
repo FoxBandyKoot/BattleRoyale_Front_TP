@@ -6,6 +6,7 @@ body {
   color: white;
   margin-top: 2rem;
   margin-bottom: 3rem;
+  font-size: 1.75rem;
 }
 
 .logo {
@@ -34,3 +35,16 @@ body {
   flex-direction: column;
   width: 100%;
 }
+table {
+  color: #FFF;
+
+  tr {
+    border-bottom: 2px solid #FFF;
+  }
+
+  td, th {
+    padding: 10px;
+    text-align: center;
+  }
+}
+
