@@ -30,10 +30,11 @@ class CurrentGames extends React.Component {
     componentDidMount() {
     }
 
-    leaveGame(index) {
+    leaveGame(index, close) {
         const newList = this.state.games;
         newList.splice(index, 1);
         this.setState({ games: newList });
+        close();
     }
 
     render() {
@@ -69,7 +70,7 @@ class CurrentGames extends React.Component {
                                                         &times;
                                                     </button>
                                                     <div className="content">
-                                                        <button className="custom-button" onClick={this.leaveGame.bind(this, index)}>Êtes-vous sûr de vouloir quitter la partie ?</button>
+                                                        <button className="custom-button" onClick={this.leaveGame.bind(this, index, close)}>Êtes-vous sûr de vouloir quitter la partie ?</button>
                                                         <button className="custom-button" onClick={close}>Annuler</button>
                                                     </div>
                                                 </>
