@@ -18,6 +18,9 @@ Made with :
             customize-cra was added to use decorator with JS files
              babel-preset-mobx
             "Git Graph" VSC extension was used for Git
+            reactjs-popup for modals creating (https://react-popup.elazizi.com/)
+            font-awesome for svg icons (https://fontawesome.com/)
+    
   
     ExpressJS technology for back
   

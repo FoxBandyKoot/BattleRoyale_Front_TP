@@ -1,16 +1,14 @@
 import React from "react";
 import {Button, Card, Form, Input} from "../../components/AuthForm";
+import data from "./data.json"
+import Popup from "reactjs-popup";
 
 class Account extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            pseudo: '',
-            email: '',
-            password: '',
-            music: false
-        };
+        this.state = data;
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleInputChange(event) {
@@ -28,37 +26,58 @@ class Account extends React.Component {
     }
 
     render() {
-        return (
-            <Card>
-                <h1>Compte</h1>
-                <Form>
-                    <Input
-                        type="text"
-                        value={this.state.pseudo}
-                        onChange={this.handleInputChange}
-                        placeholder="Pseudo"
-                        name="pseudo"
-                    />
-                    <Input
-                        type="email"
-                        value={this.state.email}
-                        onChange={this.handleInputChange}
-                        placeholder="Email"
-                        name="email"
-                    />
-                    <Input
-                        type="password"
-                        value={this.state.password}
-                        onChange={this.handleInputChange}
-                        placeholder="Mot de passe"
-                        name="password"
-                    />
-                    <Button onClick={this.handleClick}>Sauvegarder</Button>
-                    <Button>Supprimer le compte</Button>
-                    <Button>Crédits</Button>
-                </Form>
-            </Card>
-        );
+        return <>
+                <div className="main">
+                    <h1 className="title-page">Compte</h1>
+                    <form className="custom-form">
+                        <input
+                            type="text"
+                            value={this.state.pseudo}
+                            onChange={this.handleInputChange}
+                            placeholder="Pseudo"
+                            name="pseudo"
+                            className="custom-input"
+                        />
+                        <input
+                            type="email"
+                            value={this.state.email}
+                            onChange={this.handleInputChange}
+                            placeholder="Email"
+                            name="email"
+                            className="custom-input"
+                        />
+                        <input
+                            type="password"
+                            value={this.state.password}
+                            onChange={this.handleInputChange}
+                            placeholder="Mot de passe"
+                            name="password"
+                            className="custom-input"
+                        />
+                    </form>
+                    <button className="custom-button" onClick={this.handleClick}>Sauvegarder</button>
+
+                    <Popup
+                        trigger={<button className="custom-button">Supprimer le compte</button>}
+                        modal
+                        nested
+                    >
+                        {close => (
+                            <>
+                                <button className="close" onClick={close}>
+                                    &times;
+                                </button>
+                                <div className="content">
+                                    <button className="custom-button">Confirmer la suppression du compte</button>
+                                    <button className="custom-button" onClick={close}>Annuler</button>
+                                </div>
+                            </>
+                        )}
+                    </Popup>
+
+                    <button className="custom-button">Crédits</button>
+                </div>
+        </>;
     }
 }
 

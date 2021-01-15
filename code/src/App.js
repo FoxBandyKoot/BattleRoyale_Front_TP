@@ -5,12 +5,14 @@ import { AuthContext } from "./context/auth";
 import Home from './pages/home/Home';
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
+import forgotPassword from "./pages/forgot-password/Forgot-password";
 import CreateGame from "./pages/createGame/CreateGame";
 import Logout from "./components/Logout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "react-bootstrap/cjs/Navbar";
 import Nav from "react-bootstrap/cjs/Nav";
 import Account from "./pages/Account/Account";
+import 'reactjs-popup/dist/index.css';
 
 export const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).token : '';
 export const expires = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).expires : '';
@@ -48,6 +50,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/forgot-password" component={forgotPassword} />
         <Route path="/createGame" component={CreateGame} />
         <Route path="/account" component={Account} />
 
