@@ -34,7 +34,7 @@ function Login() {
     }
 
     return (
-        <div className="main">
+        <div className="div-form">
             {/*<Logo src={logoImg} />*/}
             <h1 className="title-page">Connexion</h1>
             <form className="custom-form">

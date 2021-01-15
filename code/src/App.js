@@ -39,7 +39,7 @@ function App() {
           <Nav className="mr-auto">
             {!authTokens ? <Nav.Link href="/login">Connexion</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/signup">Inscription</Nav.Link> : ''}
-            {!authTokens ? <Nav.Link href="/createGame">Create game</Nav.Link> : ''}
+            {!authTokens ? <Nav.Link href="/createGame">Créer une partie</Nav.Link> : ''}
           </Nav>
           {authTokens ? <Logout></Logout> : ''}
         </Navbar>

@@ -18,7 +18,7 @@ body{
   background-color: red;
 }
 
-.main { // OLD CARD class/tag
+.div-form { // old tag "CARD" 
   box-sizing: border-box;
   max-width: 410px;
   margin: 0 auto;
@@ -32,4 +32,8 @@ body{
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.custom-p{
+  color: white;
 }
