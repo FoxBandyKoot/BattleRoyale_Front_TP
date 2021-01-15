@@ -3,30 +3,31 @@ import { observer } from "mobx-react-lite";
 import {DropdownList} from "react-widgets/lib";
 
 const SearchGame = observer(({ store }) => {
-    // const form = useRef(null);
+    const form = useRef(null);
     const onChange = (e) => {
-        console.log(e)
-        const formData = new FormData(e.target);
+        const formData = new FormData(form.current);
         store.setFormData(formData);
     }
     return <div className="searchGames">
             <div className="main">
                 <div className="title-page">Rechercher une partie</div>
-                <form onChange={onChange}>
+                <form onChange={onChange} ref={form}>
                     <input
                         type="search"
-                        value=""
                         placeholder="Rechercher par nom/code"
                         name="search"
                         className="custom-input"
                     />
+                    <div className="display-search">{store.formData.get('search')}</div>
                     <DropdownList
                         data=""
                         defaultValue={"Carte"}
+                        name="map"
                     />
                     <DropdownList
                         data=""
                         defaultValue={"Propriété"}
+                        name="props"
                     />
                 </form>
                 <table>
