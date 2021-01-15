@@ -14,6 +14,7 @@ import Nav from "react-bootstrap/cjs/Nav";
 import Account from "./pages/Account/Account";
 import 'reactjs-popup/dist/index.css';
 import CurrentGames from "./pages/CurrentGames";
+import { slide as Menu } from 'react-burger-menu';
 
 export const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).token : '';
 export const expires = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).expires : '';
@@ -38,17 +39,16 @@ function App() {
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
 
-        <Navbar bg="dark" variant="dark" className="mb-3">
-          <Navbar.Brand href="/">Battle Royal</Navbar.Brand>
-          <Nav className="mr-auto">
-            {!authTokens ? <Nav.Link href="/login">Connexion</Nav.Link> : ''}
-            {!authTokens ? <Nav.Link href="/signup">Inscription</Nav.Link> : ''}
-            {!authTokens ? <Nav.Link href="/createGame">Create game</Nav.Link> : ''}
-            {!authTokens ? <Nav.Link href="/currentGames">Parties en cours</Nav.Link> : ''}
-            {!authTokens ? <Nav.Link href="/account">Mon compte</Nav.Link> : ''}
-          </Nav>
-          {authTokens ? <Logout></Logout> : ''}
-        </Navbar>
+        <Menu pageWrapId= { "page-wrap" } outerContainerId = { "main" }>
+          <main id = "page-wrap">
+            {!authTokens ? <a><Nav.Link href="/login">Connexion</Nav.Link></a> : ''}
+            {!authTokens ? <a><Nav.Link href="/signup">Inscription</Nav.Link></a> : ''}
+            {!authTokens ? <a><Nav.Link href="/createGame">Create game</Nav.Link></a> : ''}
+            {!authTokens ? <a><Nav.Link href="/currentGames">Parties en cours</Nav.Link></a> : ''}
+            {!authTokens ? <a><Nav.Link href="/account">Mon compte</Nav.Link></a> : ''}
+            {authTokens ? <Logout></Logout> : ''}
+          </main>
+        </Menu>
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
