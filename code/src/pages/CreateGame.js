@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Observer } from 'mobx-react'
 import CreateGameStore from '../observers/MyGamesStore';
 import Menu from "../components/Menu";
 import axios from "axios";
@@ -103,9 +102,7 @@ export default class CreateGame extends Component {
             type="text"
             name="gameNameInput"
           />
-
-          <p className="custom-p" name="resultGet" value={this.state.resultGetAfterLoad}>{this.state.resultGetAfterLoad}</p>
-
+          
           {/********************** PLAYER NUMBER SELECTOR **********************/}
           <label className="custom-label">Nombre de joueurs sur la carte</label>
           <select className="custom-dropdown" name="playerNumberSelect">
@@ -116,6 +113,7 @@ export default class CreateGame extends Component {
             }
           </select>
 
+    
           {/********************** PROPERTY SELECTOR **********************/}
           <label className="custom-label">Qui peut rejoindre la partie ?</label>
           <select className="custom-dropdown" name="propertySelect">

@@ -1,24 +1,23 @@
 import React from "react";
-// import { Link, Redirect } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import axios from 'axios';
-//import { useAuth } from "../../context/auth";
-import Menu from "../components/Menu";
-
-// import MyGamesStore from '../observers/MyGamesStore';
-import SearchGameStore from "../observers/SearchGameStore";
+import SearchGameStore from "../observers/SearchGameStore"
+import Menu from "../components/Menu"
 
 class Login extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = [];
+        this.isLoggedIn = false;
+        this.setLoggedIn = false;
         this.isError = false;
         this.setIsError = false;
         this.email = '';
         this.password = '';
         this.handleInputChange = this.handleInputChange.bind(this);
         this.signin = this.signin.bind(this);
+
     }
 
     handleInputChange(event) {
@@ -85,46 +84,44 @@ class Login extends React.Component {
         });
     }
 
-    /*if (isLoggedIn || authTokens) {
-        return <Redirect to="/" />;
-    }*/
-
     render() {
         return (
             <>
-                <Menu />
-                <div className="div-form">
-                    <h1 className="title-page">Bienvenue !</h1>
-                    <form className="custom-form" onSubmit={this.signin}>
+        <Menu />
+            <div className="div-form">
+                <h1 className="title-page">Bienvenue !</h1>
+                <form className="custom-form">
 
-                        <label className="custom-label">Adresse email</label>
-                        <input
-                            className="custom-input"
-                            type="email"
-                            value={this.state.email}
-                            onChange={this.handleInputChange}
-                            placeholder="email"
-                            name="email"
-                        />
+                    <label className="custom-label">Adresse email</label>
+                    <input
+                        className="custom-input"
+                        type="email"
+                        value={this.state.email}
+                        onChange={this.handleInputChange}
+                        placeholder="email"
+                        name="email"
+                    />
 
-                        <label className="custom-label">Mot de passe</label>
+                    <label className="custom-label">Mot de passe</label>
 
-                        <input
-                            className="custom-input"
-                            type="password"
-                            value={this.state.password}
-                            onChange={this.handleInputChange}
-                            placeholder="mot de passe"
-                            name="password"
-                        />
-                        <input type="submit" id="mySubmit" className="custom-button" onSubmit={this.signin} value="Se connecter" />
-                    </form>
+                    <input
+                        className="custom-input"
+                        type="password"
+                        value={this.state.password}
+                        onChange={this.handleInputChange}
+                        placeholder="mot de passe"
+                        name="password"
+                    />
 
-                    <Link to="/forgot-password">Mot de passe oublié ?</Link>
-                    <Link to="/signup">Je n'ai pas encore de compte ?</Link>
-                    {this.state.isError && <error>Utilisateur ou mot de passe incorrect</error>}
-                </div>
-            </>
+                    <input type="submit" id="mySubmit" className="custom-button" onSubmit={this.signin} value="Se connecter" />
+
+                </form>
+
+                <Link to="/forgot-password">Mot de passe oublié ?</Link>
+                <Link to="/signup">Je n'ai pas encore de compte ?</Link>
+                { this.state.isError && <error>Utilisateur ou mot de passe incorrect</error>}
+            </div>
+        </>
         );
     }
 }

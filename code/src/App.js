@@ -6,18 +6,26 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import CreateGame from "./pages/CreateGame";
-import "bootstrap/dist/css/bootstrap.min.css";
 import ForgotPassword from "./pages/Forgot-password";
 import ModifyPassword from "./pages/ModifyPassword";
 import Account from "./pages/Account";
 import CurrentGames from "./pages/CurrentGames";
 import Map1 from "./maps/Map1";
-
 import SearchGame from "./pages/SearchGame";
 import SearchGameStore from "./observers/SearchGameStore";
 import Saloon from "./pages/Saloon";
 import SaloonStore from "./observers/SaloonStore";
 import PrivateRoute from "./context/PrivateRoute";
+
+// export const token = localStorage.getItem("token")
+//   ? JSON.parse(localStorage.getItem("token")).token
+//   : "";
+// export const expires = localStorage.getItem("token")
+//   ? JSON.parse(localStorage.getItem("token")).expires
+//   : "";
+// export const userId = localStorage.getItem("token")
+//   ? JSON.parse(localStorage.getItem("token")).userId
+//   : "";
 
 function App() {
 
