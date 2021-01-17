@@ -12,6 +12,7 @@
 .custom-dropdown{
   border-radius: 35px;
   padding: 0.5rem;
+  width: 100%;
 }
 
 .custom-dropdown:hover{
@@ -23,6 +24,7 @@
   text-align: center;
   border-radius: 35px;
   border: 0;
+  width: 100%;
 }
 
 .double-password-input,
@@ -63,7 +65,8 @@ button:disabled {
 
 .custom-label{
   color: white;
-  margin-top: 2rem; 
+  margin-top: 2rem;
+  width: 100%;
 }
 .exit-btn {
   background-color: #F05029;

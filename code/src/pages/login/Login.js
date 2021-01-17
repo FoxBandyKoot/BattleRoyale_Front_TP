@@ -1,8 +1,8 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
-import axios from 'axios';
+// import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import axios from 'axios';
 // import logoImg from "../img/logo.jpg";
-// import { Card, Form, Error } from "../../components/AuthForm";
 //import { useAuth } from "../../context/auth";
 import data from "./data.json"
 

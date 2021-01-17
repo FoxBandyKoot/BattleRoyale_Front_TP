@@ -1,5 +1,4 @@
 import React from "react";
-import {Button, Card, Form, Input} from "../../components/AuthForm";
 import data from "./data.json"
 import Popup from "reactjs-popup";
 
