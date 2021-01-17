@@ -1,11 +1,11 @@
 import React from "react";
-import data from "./data.json"
+import account from "../data/data.json"
 import Popup from "reactjs-popup";
 
 class Account extends React.Component {
     constructor(props) {
         super(props);
-        this.state = data;
+        this.state = account;
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
@@ -33,7 +33,7 @@ class Account extends React.Component {
                     <label className="custom-label">Pseudo</label>
                         <input
                             type="text"
-                            value={this.state.pseudo}
+                            value={this.state.account.pseudo}
                             onChange={this.handleInputChange}
                             placeholder="Pseudo"
                             name="pseudo"
@@ -43,7 +43,7 @@ class Account extends React.Component {
 <label className="custom-label">Changer adresse email</label>
                         <input
                             type="email"
-                            value={this.state.email}
+                            value={this.state.account.email}
                             onChange={this.handleInputChange}
                             placeholder="Email"
                             name="email"
@@ -54,7 +54,7 @@ class Account extends React.Component {
 
                         <input
                             type="password"
-                            value={this.state.password}
+                            value={this.state.account.password}
                             onChange={this.handleInputChange}
                             placeholder="Mot de passe"
                             name="password"

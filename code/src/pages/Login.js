@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // import axios from 'axios';
 // import logoImg from "../img/logo.jpg";
 //import { useAuth } from "../../context/auth";
-import data from "./data.json"
+import login from "../data/data.json"
 
 class Login extends React.Component {
     /* const [isLoggedIn, setLoggedIn] = useState(false);
@@ -15,7 +15,7 @@ class Login extends React.Component {
     const { authTokens } = useAuth();*/
     constructor(props) {
         super(props);
-        this.state = data;
+        this.state = login;
         this.isLoggedIn = false;
         this.setLoggedIn = false;
         this.isError = false;
@@ -54,7 +54,7 @@ class Login extends React.Component {
         }*/
 
     postLogin() {
-        if (this.state.email === data[0].email && this.state.password === data[0].password) {
+        if (this.state.email === login[0].email && this.state.password === login[0].password) {
             console.log("Logged")
         } else {
             console.log("Wrong authentication");

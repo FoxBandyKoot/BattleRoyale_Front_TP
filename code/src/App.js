@@ -2,22 +2,21 @@ import "./App.scss";
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { AuthContext } from "./context/auth";
-import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
-import Signup from "./pages/signup/Signup";
-import forgotPassword from "./pages/forgot-password/Forgot-password";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import forgotPassword from "./pages/Forgot-password";
 // import MofifyPassword from "./pages/modify-password/ModifyPassword";
-import CreateGame from "./pages/createGame/CreateGame";
+import CreateGame from "./pages/CreateGame";
 import Logout from "./components/Logout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "react-bootstrap/cjs/Navbar";
 import Nav from "react-bootstrap/cjs/Nav";
-import Account from "./pages/Account/Account";
-import ModifyPassword from "./pages/modify-password/ModifyPassword";
+import Account from "./pages/Account";
+import ModifyPassword from "./pages/ModifyPassword";
 import 'reactjs-popup/dist/index.css';
-import CurrentGames from "./pages/current-games/CurrentGames";
-import SearchGame from "./pages/search-game/SearchGame";
-import SearchGameStore from "./observer/SearchGameStore";
+import CurrentGames from "./pages/CurrentGames";
+import SearchGame from "./pages/SearchGame";
+import SearchGameStore from "./observers/SearchGameStore";
 
 
 export const token = localStorage.getItem("token")
@@ -61,7 +60,6 @@ function App() {
           </Nav>
           {authTokens ? <Logout></Logout> : ""}
         </Navbar>
-        <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/forgot-password" component={forgotPassword} />

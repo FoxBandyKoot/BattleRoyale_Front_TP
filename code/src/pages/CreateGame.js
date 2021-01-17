@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Observer } from 'mobx-react'
-import CreateGameStore from './CreateGameStore';
+import CreateGameStore from '../observers/CreateGameStore';
 
 export default class CreateGame extends Component {
 
@@ -53,15 +53,15 @@ export default class CreateGame extends Component {
     }
     
     return <>
-      {/********************** DISPLAY PAGE  **********************/}
+      {/********************** DISPLAY PAGE **********************/}
       <div className="div-form">
 
-        {/********************** TITLE  **********************/}
+        {/********************** TITLE **********************/}
         <h1 className="title-page">Créer une partie</h1>
 
         <form className="custom-form" ref={this.form} onChange={this.onChange}>
           
-          {/********************** GAME NAME  **********************/}
+          {/********************** GAME NAME **********************/}
           <label className="custom-label">Nom de la partie</label>
           <input
             className="custom-input"
@@ -69,7 +69,7 @@ export default class CreateGame extends Component {
             name="gameNameInput"
           />
           
-          {/********************** PLAYER NUMBER SELECTOR  **********************/}
+          {/********************** PLAYER NUMBER SELECTOR **********************/}
           <label className="custom-label">Nombre de joueurs sur la carte</label>
           <select className="custom-dropdown" name="playerNumberSelect">
             {
@@ -79,7 +79,7 @@ export default class CreateGame extends Component {
             }
           </select>
     
-          {/********************** PROPERTY SELECTOR  **********************/}
+          {/********************** PROPERTY SELECTOR **********************/}
           <label className="custom-label">Qui peut rejoindre la partie ?</label>
           <select className="custom-dropdown" name="propertySelect">
             {
@@ -89,7 +89,7 @@ export default class CreateGame extends Component {
             }
           </select>
 
-          {/********************** MAP SELECTOR  **********************/}
+          {/********************** MAP SELECTOR **********************/}
           <label className="custom-label">Sélectionner la carte</label>
           <select className="custom-dropdown" name="mapSelect">
             {
@@ -101,7 +101,7 @@ export default class CreateGame extends Component {
       
           <button id="mySubmit" className="custom-button" disabled>Create saloon</button>
 
-          {/********************** CREATE GAME BUTTON  **********************/}
+          {/********************** CREATE GAME BUTTON **********************/}
           <Observer>
             {
               () => <>

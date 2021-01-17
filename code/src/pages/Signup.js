@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import {Link, Redirect} from 'react-router-dom';
 // import logoImg from "../img/logo.jpg";
-// import {Card, Form, Error} from '../../components/AuthForm';
-import {useAuth} from "../../context/auth";
+import {useAuth} from "../context/auth";
 import axios from "axios";
 
 function Signup() {
