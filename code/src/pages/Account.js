@@ -40,7 +40,7 @@ class Account extends React.Component {
                             className="custom-input"
                         />
 
-<label className="custom-label">Changer adresse email</label>
+                    <label className="custom-label">Changer adresse email</label>
                         <input
                             type="email"
                             value={this.state.account.email}
@@ -50,7 +50,7 @@ class Account extends React.Component {
                             className="custom-input"
                         />
 
-<label className="custom-label">Changer le mot de passe</label>
+                    <label className="custom-label">Changer le mot de passe</label>
 
                         <input
                             type="password"
