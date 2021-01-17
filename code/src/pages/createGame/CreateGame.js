@@ -112,11 +112,6 @@ export default class CreateGame extends Component {
             }
           </Observer>
 
-          {/* <DropdownList
-            data={this.state.playerNumber}
-            placeholder={"Player number*"}
-            onChange={this.onChange}
-          /> */}
         </form>       
       </div>
     </>
