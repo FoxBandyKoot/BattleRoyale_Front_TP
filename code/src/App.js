@@ -7,7 +7,7 @@ import Signup from "./pages/Signup";
 import forgotPassword from "./pages/Forgot-password";
 // import MofifyPassword from "./pages/modify-password/ModifyPassword";
 import CreateGame from "./pages/CreateGame";
-import Logout from "./components/Logout";
+import Logout from "./pages/Logout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "react-bootstrap/cjs/Navbar";
 import Nav from "react-bootstrap/cjs/Nav";
