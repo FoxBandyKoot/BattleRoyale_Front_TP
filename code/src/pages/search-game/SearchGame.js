@@ -1,17 +1,35 @@
-import React, {useRef} from "react";
+import React, { useRef } from "react";
 import { observer } from "mobx-react-lite";
-import {DropdownList} from "react-widgets/lib";
+// import { DropdownList } from "react-widgets/lib";
 
 const SearchGame = observer(({ store }) => {
+
+    let properties = ['Publique', 'Privée']
+    let maps = ['Toutes', 'Verte', 'Blue', 'Rouge']
+
+    // this.state = {
+    //   gameName: " ",
+    //   playerNumber: playerNumbers,
+    //   property: properties,
+    //   map: maps
+    // }
+
     const form = useRef(null);
+
     const onChange = (e) => {
         const formData = new FormData(form.current);
         store.setFormData(formData);
     }
-    return <div className="searchGames">
+
+    return (
+        <div className="searchGames">
             <div className="main">
                 <div className="title-page">Rechercher une partie</div>
+
+                {/********************** REASEARCH FORM **********************/}
                 <form onChange={onChange} ref={form}>
+
+                    <label className="custom-label">Rerchercher par nom</label>
                     <input
                         type="search"
                         placeholder="Rechercher par nom/code"
@@ -19,42 +37,56 @@ const SearchGame = observer(({ store }) => {
                         className="custom-input"
                     />
                     <div className="display-search">{store.formData.get('search')}</div>
-                    <DropdownList
-                        data=""
-                        defaultValue={"Carte"}
-                        name="map"
-                    />
-                    <DropdownList
-                        data=""
-                        defaultValue={"Propriété"}
-                        name="props"
-                    />
+
+                    <label className="custom-label">Rechercher par carte</label>
+                    <select className="custom-dropdown" name="mapSelect">
+                        {
+                            maps.map((e, i) => <option key={i} value={e}>
+                                {e}
+                            </option>)
+                        }
+                    </select>
+
+                    <label className="custom-label">Rechercher par propriété</label>
+                    <select className="custom-dropdown" name="propertySelect">
+                        {
+                            properties.map((e, i) => <option key={i} value={e}>
+                                {e}
+                            </option>)
+                        }
+                    </select>
                 </form>
-                <table>
+
+                {/********************** RESULT TAB **********************/}
+                <table className="custom-table">
                     <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Date</th>
-                        <th></th>
-                    </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Date</th>
+                            <th>Carte</th>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {store.games.map((item, index) => {
-                        return (
-                            <tr key={index}>
-                                <td>{item.name}</td>
-                                <td>{item.date}</td>
-                                <td>
-                                    <button className="custom-button">Rejoindre</button>
-                                </td>
-                            </tr>
-                        )
-                    })}
+                        {store.games.map((item, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td>{item.name}</td>
+                                    <td>{item.date}</td>
+                                    <td>{item.map}</td>
+                                    <td>
+                                        <button className="custom-button">Rejoindre</button>
+                                    </td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </table>
+
             </div>
         </div>
-    }
+    )
+}
 );
 
 export default SearchGame;

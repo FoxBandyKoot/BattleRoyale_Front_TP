@@ -6,7 +6,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import forgotPassword from "./pages/forgot-password/Forgot-password";
-import MofifyPassword from "./pages/modify-password/ModifyPassword";
+// import MofifyPassword from "./pages/modify-password/ModifyPassword";
 import CreateGame from "./pages/createGame/CreateGame";
 import Logout from "./components/Logout";
 import "bootstrap/dist/css/bootstrap.min.css";
