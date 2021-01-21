@@ -15,6 +15,7 @@ import Account from "./pages/Account/Account";
 import 'reactjs-popup/dist/index.css';
 import CurrentGames from "./pages/CurrentGames";
 import { slide as Menu } from 'react-burger-menu';
+//import BurgerMenu from "./components/BurgerMenu";
 
 export const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).token : '';
 export const expires = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).expires : '';
@@ -41,14 +42,15 @@ function App() {
 
         <Menu pageWrapId= { "page-wrap" } outerContainerId = { "main" }>
           <main id = "page-wrap">
-            {!authTokens ? <a><Nav.Link href="/login">Connexion</Nav.Link></a> : ''}
-            {!authTokens ? <a><Nav.Link href="/signup">Inscription</Nav.Link></a> : ''}
-            {!authTokens ? <a><Nav.Link href="/createGame">Create game</Nav.Link></a> : ''}
-            {!authTokens ? <a><Nav.Link href="/currentGames">Parties en cours</Nav.Link></a> : ''}
-            {!authTokens ? <a><Nav.Link href="/account">Mon compte</Nav.Link></a> : ''}
-            {authTokens ? <Logout></Logout> : ''}
+              {!authTokens ? <button className="custom-button"><Nav.Link href="/login" className="custom-href-text">Connexion</Nav.Link></button> : ''}
+              {!authTokens ? <button className="custom-button"><Nav.Link href="/signup" className="custom-href-text">Inscription</Nav.Link></button> : ''}
+              {!authTokens ? <button className="custom-button"><Nav.Link href="/createGame" className="custom-href-text">Create game</Nav.Link></button> : ''}
+              {!authTokens ? <button className="custom-button"><Nav.Link href="/currentGames" className="custom-href-text">Parties en cours</Nav.Link></button> : ''}
+              {!authTokens ? <button className="custom-button"><Nav.Link href="/account" className="custom-href-text">Mon compte</Nav.Link></button> : ''}
+              {authTokens ? <Logout></Logout> : ''}
           </main>
         </Menu>
+
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
@@ -57,7 +59,7 @@ function App() {
         <Route path="/account" component={Account} />
         <Route path="/currentGames" component={CurrentGames} />
 
-        </Router>
+      </Router>
     </AuthContext.Provider>
   );
 
