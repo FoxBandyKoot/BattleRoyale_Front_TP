@@ -18,24 +18,21 @@
 
 // const Input = styled.input`
 //   padding: 1rem;
-//   margin: 10px;
 //   border: 1px solid #999;
 //   margin-bottom: 1rem;
 //   font-size: 0.8rem;
-//   border-radius: 35px
 // `;
 
 // const Button = styled.button`
 //   background-color: #F05029;
-//   border-radius: 35px;
-//   padding: 1rem;
+//   border-radius: 50px;
+//   padding: 10px;
 //   color: white;
 //   font-weight: 700;
-//   width: 100%;  
-//   margin-bottom: 1rem;
-//   font-size: 0.8rem;
+//   width: 100%;
+//   margin-bottom: 15px;
+//   font-size: 20px;
 // `;
-
 
 // const Logo = styled.img`
 //   width: 50%;
@@ -46,4 +43,4 @@
 //   background-color: red;
 // `;
 
-// export { Form, Logo, Card, Error };
+// export { Form, Input, Button, Logo, Card, Error };

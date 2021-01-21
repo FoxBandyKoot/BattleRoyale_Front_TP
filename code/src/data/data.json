@@ -1,0 +1,16 @@
+{
+  "account": {
+    "pseudo": "alexisbrh",
+    "email": "alexisbrohan68@gmail.com",
+    "password": "password"
+  },
+  "login": {
+    "id": 1,
+    "pseudo": "pseudo1",
+    "email": "pseudo1@gmail.com",
+    "password": "test"
+  },
+  "modify_password": {
+    "password": "test"
+  }
+}

@@ -4,7 +4,6 @@
 
 
 /***************** components *****************/
-// @import 'components/AuthForm';
 @import 'scss/inputs.scss';
 
 
@@ -12,9 +11,4 @@
 
 
 /***************** themes *****************/
-@import 'scss/classic.scss'
-
-h1 {
-  color: #FFF;
-}
-
+@import 'scss/classic.scss';
