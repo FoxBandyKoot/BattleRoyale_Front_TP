@@ -22,6 +22,8 @@ class Login extends React.Component {
         this.password = '';
         this.postLogin = this.postLogin.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+
+        this.signin = this.signin.bind(this);
     }
 
     handleInputChange(event) {
@@ -50,6 +52,45 @@ class Login extends React.Component {
             setIsError(true);
         });
     }*/
+
+    signin(e) {
+        e.preventDefault()
+        this.err  = false;
+        this.success = false;
+        
+        if(!this.state.email || !this.state.password){
+          this.err = 'Vous n\'avez pas remplis tous les champs'
+          console.log(this.err);
+          return;  
+        }
+         axios.post('http://localhost:8000/api/login',{
+         email : this.state.email,
+         password : this.state.password,
+         }).then(response => {
+                if (response.status === 200) {
+                        this.success = true;
+
+                        localStorage.setItem('token', response.data.token);
+
+                        axios.get('http://localhost:8000/api/current-user', {
+                            headers: {
+                                Authorization: 'Bearer ' + localStorage.getItem('token')
+                            }
+                        }).then(response => {
+                                localStorage.setItem('userId', response.data); 
+                        })
+                } //else if(response.status === 401){
+                  // this.err = 'Identifiant ou mot de passe incorrect, vous n"avez pas l" Authorization de vous connecter';
+   
+             //}
+            }).catch((err)=>{
+                console.log(err)
+                this.err = 'Une erreur est survenue lors de la connexion';
+                if(err.response.status === 401) {
+                this.err = "Identifiant ou mot de passe incorrect, vous n'avez pas l'Autorisation de vous connecter";
+                }
+            });
+       }
 
     postLogin() {
         if(this.state.email===data.email && this.state.password === data.password) {
@@ -85,7 +126,7 @@ class Login extends React.Component {
                         name="password"
                     />
                 </form>
-                <button className="custom-button" onClick={this.postLogin}>Se connecter</button>
+                <button className="custom-button" onClick={this.signin}>Se connecter</button>
                 <Link to="/forgot-password">Mot de passe oublié ?</Link>
                 <Link to="/signup">Je n'ai pas encore de compte ?</Link>
                 { this.state.isError &&<error>Utilisateur ou mot de passe incorrect</error> }
