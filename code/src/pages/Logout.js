@@ -1,7 +1,8 @@
 import React from 'react';
 import {useAuth} from "../context/auth";
-import {expires} from "../App";
 import Button from "react-bootstrap/cjs/Button";
+
+// TODO 
 
 function Logout() {
     const { setAuthTokens } = useAuth();
@@ -10,11 +11,12 @@ function Logout() {
         setAuthTokens();
     }
 
-    if(new Date().getTime() > parseInt(expires)) {
+    /*if(new Date().getTime() > parseInt(expires)) {
         logout();
-    }
+    }*/
 
-    return <Button variant="primary" onClick={logout}>Déconnexion</Button>
+    
+    return <button variant="primary" className="custom-button" onClick={logout}>Déconnexion</button>
 }
 
 export default Logout

@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
 //import { useAuth } from "../../context/auth";
-import data from "./data.json"
+import login from "../data/data.json"
 
 class Login extends React.Component {
     /* const [isLoggedIn, setLoggedIn] = useState(false);
@@ -13,7 +13,7 @@ class Login extends React.Component {
     const { authTokens } = useAuth();*/
     constructor(props) {
         super(props);
-        this.state = data;
+        this.state = login;
         this.isLoggedIn = false;
         this.setLoggedIn = false;
         this.isError = false;
@@ -77,9 +77,11 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="main">
+            <div className="div-form">
                 <h1 className="title-page">Bienvenue !</h1>
                 <form className="custom-form" onSubmit={this.signin}>
+
+                    <label className="custom-label">Adresse email</label>
                     <input
                         className="custom-input"
                         type="email"
@@ -88,6 +90,9 @@ class Login extends React.Component {
                         placeholder="email"
                         name="email"
                     />
+
+                    <label className="custom-label">Mot de passe</label>
+
                     <input
                         className="custom-input"
                         type="password"
@@ -101,7 +106,7 @@ class Login extends React.Component {
                 
                 <Link to="/forgot-password">Mot de passe oublié ?</Link>
                 <Link to="/signup">Je n'ai pas encore de compte ?</Link>
-                { this.state.isError &&<error>Utilisateur ou mot de passe incorrect</error> }
+                { this.state.isError && <error>Utilisateur ou mot de passe incorrect</error>}
             </div>
         );
     }
