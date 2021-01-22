@@ -17,16 +17,6 @@ import Saloon from "./pages/Saloon";
 import SaloonStore from "./observers/SaloonStore";
 import PrivateRoute from "./context/PrivateRoute";
 
-// export const token = localStorage.getItem("token")
-//   ? JSON.parse(localStorage.getItem("token")).token
-//   : "";
-// export const expires = localStorage.getItem("token")
-//   ? JSON.parse(localStorage.getItem("token")).expires
-//   : "";
-// export const userId = localStorage.getItem("token")
-//   ? JSON.parse(localStorage.getItem("token")).userId
-//   : "";
-
 function App() {
 
     initialize();

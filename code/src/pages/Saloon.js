@@ -47,7 +47,8 @@ const Saloon = observer(({ store }) => {
                 <button className="custom-button">Accéder à la partie</button>
 
             </div>
-        </div>)
+        </div>
+    )
 });
 
 export default Saloon;

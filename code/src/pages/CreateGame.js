@@ -5,6 +5,7 @@ import axios from "axios";
 
 export default class CreateGame extends Component {
 
+
   constructor(props) {
     super(props)
 
@@ -73,6 +74,11 @@ export default class CreateGame extends Component {
       });
   }
 
+  onSubmit = (form) => {  
+    form.preventDefault()
+    this.props.history.push("/saloon");
+  }
+  
   render = () => {
 
     // Enable or disable button of form validation
@@ -94,7 +100,6 @@ export default class CreateGame extends Component {
         <h1 className="title-page">Créer une partie</h1>
 
         <form className="custom-form" ref={this.form} onChange={this.onChange} onSubmit={this.onSubmit}>
-
           {/********************** GAME NAME **********************/}
           <label className="custom-label">Nom de la partie</label>
           <input
@@ -153,10 +158,10 @@ export default class CreateGame extends Component {
               </>
             }
           </Observer>
+          
+          <input type="submit" id="mySubmit" className="custom-button" disabled={true} value="Créer le salon"/>
 
           </footer> */}
     </>
-
-
   }
 }
