@@ -15,7 +15,7 @@ import Account from "./pages/Account/Account";
 import 'reactjs-popup/dist/index.css';
 import CurrentGames from "./pages/CurrentGames";
 import { slide as Menu } from 'react-burger-menu';
-//import BurgerMenu from "./components/BurgerMenu";
+import Hamburger from 'hamburger-react'
 
 export const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).token : '';
 export const expires = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).expires : '';
@@ -26,6 +26,7 @@ function App() {
   componentDidMount()
 
   const [authTokens, setAuthTokens] = useState(token);
+  const [isOpen, setOpen] = useState(false)
   const setTokens = (data) => {
     if(data === undefined) {
       localStorage.removeItem('token');
@@ -38,8 +39,9 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
-      <Router>
-
+      
+      <div id="outer-container">
+        <Hamburger toggled={isOpen} toggle={setOpen}/>
         <Menu pageWrapId= { "page-wrap" } outerContainerId = { "main" }>
           <main id = "page-wrap">
               {!authTokens ? <button className="custom-button"><Nav.Link href="/login" className="custom-href-text">Connexion</Nav.Link></button> : ''}
@@ -50,7 +52,9 @@ function App() {
               {authTokens ? <Logout></Logout> : ''}
           </main>
         </Menu>
+      </div>
 
+      <Router>
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
