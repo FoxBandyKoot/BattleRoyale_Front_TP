@@ -4,19 +4,20 @@ import { observer } from "mobx-react-lite";
 
 const SearchGame = observer(({ store }) => {
 
-    let properties = ['Publique', 'Privée']
-    let maps = ['Toutes', 'Verte', 'Blue', 'Rouge']
-
-    // this.state = {
-    //   gameName: " ",
-    //   playerNumber: playerNumbers,
-    //   property: properties,
-    //   map: maps
-    // }
+    const properties = {
+        public: 'Publique',
+        private: 'Privée'
+    };
+    const maps = {
+        all: 'Toutes',
+        green: 'Vertes',
+        blue: 'Bleues',
+        red: 'Rouges',
+    };
 
     const form = useRef(null);
 
-    const onChange = (e) => {
+    const onChange = () => {
         const formData = new FormData(form.current);
         store.setFormData(formData);
     }
@@ -32,17 +33,16 @@ const SearchGame = observer(({ store }) => {
                     <label className="custom-label">Rerchercher par nom</label>
                     <input
                         type="search"
-                        placeholder="Rechercher par nom/code"
+                        placeholder="Rechercher par nom"
                         name="search"
                         className="custom-input"
                     />
-                    <div className="display-search">{store.formData.get('search')}</div>
 
                     <label className="custom-label">Rechercher par carte</label>
                     <select className="custom-dropdown" name="mapSelect">
                         {
-                            maps.map((e, i) => <option key={i} value={e}>
-                                {e}
+                            Object.entries(maps).map((e, i) => <option key={i} value={e[0]}>
+                                {e[1]}
                             </option>)
                         }
                     </select>
@@ -50,8 +50,8 @@ const SearchGame = observer(({ store }) => {
                     <label className="custom-label">Rechercher par propriété</label>
                     <select className="custom-dropdown" name="propertySelect">
                         {
-                            properties.map((e, i) => <option key={i} value={e}>
-                                {e}
+                            Object.entries(properties).map((e, i) => <option key={i} value={e[0]}>
+                                {e[1]}
                             </option>)
                         }
                     </select>

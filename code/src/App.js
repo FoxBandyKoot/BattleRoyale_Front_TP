@@ -17,20 +17,19 @@ import 'reactjs-popup/dist/index.css';
 import CurrentGames from "./pages/CurrentGames";
 import SearchGame from "./pages/SearchGame";
 import SearchGameStore from "./observers/SearchGameStore";
+import PrivateRoute from "./context/PrivateRoute";
 
-
-export const token = localStorage.getItem("token")
-  ? JSON.parse(localStorage.getItem("token")).token
-  : "";
-export const expires = localStorage.getItem("token")
-  ? JSON.parse(localStorage.getItem("token")).expires
-  : "";
-export const userId = localStorage.getItem("token")
+/*export const userId = localStorage.getItem("token")
   ? JSON.parse(localStorage.getItem("token")).userId
-  : "";
+  : "";*/
 
 function App() {
+
   componentDidMount();
+
+  const token = localStorage.getItem("token")
+      ? localStorage.getItem("token")
+      : "a";
 
   const [authTokens, setAuthTokens] = useState(token);
   const setTokens = data => {
@@ -39,7 +38,7 @@ function App() {
       setAuthTokens(data);
       return;
     }
-    localStorage.setItem("token", JSON.stringify(data));
+    localStorage.setItem("token", data);
     setAuthTokens(data);
   };
 
@@ -52,27 +51,27 @@ function App() {
 
             {!authTokens ? <Nav.Link href="/login">Connexion</Nav.Link> : ''}
             {!authTokens ? <Nav.Link href="/signup">Inscription</Nav.Link> : ''}
-            {!authTokens ? <Nav.Link href="/createGame">Créer une partie</Nav.Link> : ''}
-            {!authTokens ? <Nav.Link href="/searchGame">Rechercher une partie</Nav.Link> : ''}
-            {!authTokens ? <Nav.Link href="/currentGames">Parties en cours</Nav.Link> : ''}
-            {!authTokens ? <Nav.Link href="/account">Mon compte</Nav.Link> : ''}
+            {authTokens ? <Nav.Link href="/createGame">Créer une partie</Nav.Link> : ''}
+            {authTokens ? <Nav.Link href="/searchGame">Rechercher une partie</Nav.Link> : ''}
+            {authTokens ? <Nav.Link href="/currentGames">Parties en cours</Nav.Link> : ''}
+            {authTokens ? <Nav.Link href="/account">Mon compte</Nav.Link> : ''}
 
           </Nav>
-          {authTokens ? <Logout></Logout> : ""}
+          {/*{authTokens ? <Logout></Logout> : ""}*/}
         </Navbar>
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/forgot-password" component={forgotPassword} />
-        <Route path="/createGame" component={CreateGame} />
-        <Route path="/account" component={Account} />
+        <PrivateRoute path="/forgot-password" component={forgotPassword} />
+        <PrivateRoute path="/createGame" component={CreateGame} />
+        <PrivateRoute path="/account" component={Account} />
         <Route path="/modify-password" component={ModifyPassword} />
-        <Route path="/currentGames" component={CurrentGames} />
-        <Route path="/searchGame" render={() => <SearchGame store={SearchGameStore} />} />
+        <PrivateRoute path="/currentGames" component={CurrentGames} />
+        <PrivateRoute path="/searchGame" render={() => <SearchGame store={SearchGameStore} />} />
 
         </Router>
 
-    </AuthContext.Provider>
-  );
+     </AuthContext.Provider>
+  )
 
   // init DOM, just after render() in component life cycle
   function componentDidMount() {
