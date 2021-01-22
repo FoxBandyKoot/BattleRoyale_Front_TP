@@ -7,10 +7,7 @@ import Signup from "./pages/Signup";
 import forgotPassword from "./pages/Forgot-password";
 // import MofifyPassword from "./pages/modify-password/ModifyPassword";
 import CreateGame from "./pages/CreateGame";
-import Logout from "./components/Logout";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "react-bootstrap/cjs/Navbar";
-import Nav from "react-bootstrap/cjs/Nav";
 import Account from "./pages/Account";
 import ModifyPassword from "./pages/ModifyPassword";
 import 'reactjs-popup/dist/index.css';
@@ -18,14 +15,13 @@ import CurrentGames from "./pages/CurrentGames";
 import SearchGame from "./pages/SearchGame";
 import SearchGameStore from "./observers/SearchGameStore";
 import PrivateRoute from "./context/PrivateRoute";
-import Menu from "./components/Menu";
 
 function App() {
 
-  initialize();
+    initialize();
 
   return (
-      <Router>
+    <Router>
         <Route path="/login" render={ (props) => <Login {...props}/> } />
         <Route path="/signup" component={Signup} />
         <PrivateRoute path="/forgot-password" component={forgotPassword} />
@@ -33,14 +29,13 @@ function App() {
         <PrivateRoute path="/account" component={Account} />
         <Route path="/modify-password" component={ModifyPassword} />
         <PrivateRoute path="/currentGames" component={CurrentGames} />
-        <PrivateRoute path="/searchGame" render={() => <SearchGame store={SearchGameStore} />} />
-
-        </Router>
+        <PrivateRoute path="/searchGame" component={() => <SearchGame store={SearchGameStore} />} />
+    </Router>
   )
 
-  // init DOM, just after render() in component life cycle
-  function initialize() {
-    document.body.style.backgroundColor = "#053244";
-  }
+    // init DOM, just after render() in component life cycle
+    function initialize() {
+        document.body.style.backgroundColor = "#053244";
+    }
 }
 export default App;
