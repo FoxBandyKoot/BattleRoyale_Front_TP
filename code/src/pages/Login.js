@@ -1,5 +1,5 @@
 import React from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import SearchGameStore from "../observers/SearchGameStore"
 import Menu from "../components/Menu"
@@ -17,7 +17,6 @@ class Login extends React.Component {
         this.password = '';
         this.handleInputChange = this.handleInputChange.bind(this);
         this.signin = this.signin.bind(this);
-
     }
 
     handleInputChange(event) {
@@ -68,7 +67,7 @@ class Login extends React.Component {
 
                     }).then(result => {
                         if (result.status === 200) {
-                            SearchGameStore.loadData(result.data)                            
+                            SearchGameStore.loadData(result.data)
                         } else {
                             console.log(result)
                         }
@@ -87,41 +86,39 @@ class Login extends React.Component {
     render() {
         return (
             <>
-        <Menu />
-            <div className="div-form">
-                <h1 className="title-page">Bienvenue !</h1>
-                <form className="custom-form">
+                <Menu />
+                <div className="div-form">
+                    <h1 className="title-page">Bienvenue !</h1>
+                    <form className="custom-form">
 
-                    <label className="custom-label">Adresse email</label>
-                    <input
-                        className="custom-input"
-                        type="email"
-                        value={this.state.email}
-                        onChange={this.handleInputChange}
-                        placeholder="email"
-                        name="email"
-                    />
+                        <label className="custom-label">Adresse email</label>
+                        <input
+                            className="custom-input"
+                            type="email"
+                            value={this.state.email}
+                            onChange={this.handleInputChange}
+                            placeholder="email"
+                            name="email"
+                        />
 
-                    <label className="custom-label">Mot de passe</label>
+                        <label className="custom-label">Mot de passe</label>
 
-                    <input
-                        className="custom-input"
-                        type="password"
-                        value={this.state.password}
-                        onChange={this.handleInputChange}
-                        placeholder="mot de passe"
-                        name="password"
-                    />
+                        <input
+                            className="custom-input"
+                            type="password"
+                            value={this.state.password}
+                            onChange={this.handleInputChange}
+                            placeholder="mot de passe"
+                            name="password"
+                        />
+                        <input type="submit" id="mySubmit" className="custom-button" onSubmit={this.signin} value="Se connecter" />
+                    </form>
 
-                    <input type="submit" id="mySubmit" className="custom-button" onSubmit={this.signin} value="Se connecter" />
-
-                </form>
-
-                <Link to="/forgot-password">Mot de passe oublié ?</Link>
-                <Link to="/signup">Je n'ai pas encore de compte ?</Link>
-                { this.state.isError && <error>Utilisateur ou mot de passe incorrect</error>}
-            </div>
-        </>
+                    <Link to="/forgot-password">Mot de passe oublié ?</Link>
+                    <Link to="/signup">Je n'ai pas encore de compte ?</Link>
+                    {this.state.isError && <error>Utilisateur ou mot de passe incorrect</error>}
+                </div>
+            </>
         );
     }
 }

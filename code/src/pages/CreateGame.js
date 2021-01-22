@@ -89,7 +89,6 @@ export default class CreateGame extends Component {
       this.buttonSubmit.disabled = true
     }
 
-
     return <>
       <Menu />
 

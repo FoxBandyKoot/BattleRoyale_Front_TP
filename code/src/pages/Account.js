@@ -1,13 +1,33 @@
 import React from "react";
-import account from "../data/data.json"
 import Popup from "reactjs-popup";
+import axios from "axios";
+import Menu from "../components/Menu";
 
 class Account extends React.Component {
     constructor(props) {
         super(props);
-        this.state = account;
+        this.state = {
+            pseudo: '',
+            email: '',
+            password: '',
+        };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then(res => {
+            this.setState({
+                email: res.data.email,
+                pseudo: res.data.pseudo ? res.data.pseudo : ''
+            });
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     handleInputChange(event) {
@@ -26,6 +46,7 @@ class Account extends React.Component {
 
     render() {
         return <>
+                <Menu />
                 <div className="main">
                     <div className="title-page">Compte</div>
                     <form className="custom-form">
@@ -33,28 +54,27 @@ class Account extends React.Component {
                     <label className="custom-label">Pseudo</label>
                         <input
                             type="text"
-                            value={this.state.account.pseudo}
+                            value={this.state.pseudo}
                             onChange={this.handleInputChange}
                             placeholder="Pseudo"
                             name="pseudo"
                             className="custom-input"
                         />
 
-                    <label className="custom-label">Changer adresse email</label>
+                        <label className="custom-label">Changer adresse email</label>
                         <input
                             type="email"
-                            value={this.state.account.email}
+                            value={this.state.email}
                             onChange={this.handleInputChange}
                             placeholder="Email"
                             name="email"
                             className="custom-input"
                         />
 
-                    <label className="custom-label">Changer le mot de passe</label>
-
+                        <label className="custom-label">Changer le mot de passe</label>
                         <input
                             type="password"
-                            value={this.state.account.password}
+                            value={this.state.password}
                             onChange={this.handleInputChange}
                             placeholder="Mot de passe"
                             name="password"
