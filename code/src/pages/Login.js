@@ -60,7 +60,7 @@ class Login extends React.Component {
                             }
                         }).then(response => {
                                 localStorage.setItem('userId', response.data);
-                                this.props.history.push("/createGame"); 
+                                this.props.history.push("/searchGame");
                         })
                         
                 }

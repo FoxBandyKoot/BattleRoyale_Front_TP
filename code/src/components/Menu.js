@@ -8,9 +8,8 @@ class Menu extends React.Component {
     render() {
         const token = localStorage.getItem('token');
         return <Navbar bg="dark" variant="dark" className="mb-3">
-            <Navbar.Brand href="/">Battle Royal</Navbar.Brand>
+            <Navbar.Brand href={token ? '/searchGame' : 'login'}>Battle Royal</Navbar.Brand>
             <Nav className="mr-auto">
-
                 {!token ? <Nav.Link href="/login">Connexion</Nav.Link> : ''}
                 {!token ? <Nav.Link href="/signup">Inscription</Nav.Link> : ''}
                 {token ? <Nav.Link href="/createGame">Créer une partie</Nav.Link> : ''}
