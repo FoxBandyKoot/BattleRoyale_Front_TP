@@ -33,7 +33,7 @@ const SearchGame = observer(({ store }) => {
                     <label className="custom-label">Rerchercher par nom</label>
                     <input
                         type="search"
-                        placeholder="Rechercher par nom/code"
+                        placeholder="Rechercher par nom"
                         name="search"
                         className="custom-input"
                     />
