@@ -20,9 +20,7 @@ class Login extends React.Component {
         this.setIsError = false;
         this.email = '';
         this.password = '';
-        this.postLogin = this.postLogin.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-
         this.signin = this.signin.bind(this);
     }
 
@@ -35,23 +33,6 @@ class Login extends React.Component {
             [name]: value
         });
     }
-
-/*
-    function postLogin() {
-        axios.post("http://localhost:8080/login", {
-            "email": email,
-            "password": password
-        }).then(result => {
-            if (result.status === 200) {
-                setAuthTokens(result.data);
-                setLoggedIn(true);
-            } else {
-                setIsError(true);
-            }
-        }).catch(e => {
-            setIsError(true);
-        });
-    }*/
 
     signin(e) {
         e.preventDefault()
@@ -79,10 +60,7 @@ class Login extends React.Component {
                         }).then(response => {
                                 localStorage.setItem('userId', response.data); 
                         })
-                } //else if(response.status === 401){
-                  // this.err = 'Identifiant ou mot de passe incorrect, vous n"avez pas l" Authorization de vous connecter';
-   
-             //}
+                }
             }).catch((err)=>{
                 console.log(err)
                 this.err = 'Une erreur est survenue lors de la connexion';
@@ -91,14 +69,6 @@ class Login extends React.Component {
                 }
             });
        }
-
-    postLogin() {
-        if(this.state.email===data.email && this.state.password === data.password) {
-            console.log("Logged")
-        } else {
-            console.log("Wrong authentication");
-        }
-    }
 
     /*if (isLoggedIn || authTokens) {
         return <Redirect to="/" />;
