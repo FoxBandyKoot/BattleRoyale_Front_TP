@@ -58,9 +58,10 @@ class Login extends React.Component {
                                 Authorization: 'Bearer ' + localStorage.getItem('token')
                             }
                         }).then(response => {
-                                localStorage.setItem('userId', response.data); 
+                                localStorage.setItem('userId', response.data);
+                                this.props.history.push("/createGame"); 
                         })
-                        this.props.history.push("/createGame");
+                        
                 }
             }).catch((err)=>{
                 console.log(err)
