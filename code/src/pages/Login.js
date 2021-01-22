@@ -66,9 +66,6 @@ class Login extends React.Component {
             }).catch((err)=>{
                 console.log(err)
                 this.err = 'Une erreur est survenue lors de la connexion';
-                if(err.response.status === 401) {
-                this.err = "Identifiant ou mot de passe incorrect, vous n'avez pas l'Autorisation de vous connecter";
-                }
             });
        }
 
