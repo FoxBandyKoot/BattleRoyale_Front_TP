@@ -48,8 +48,8 @@ function App() {
           {authTokens ? <Logout></Logout> : ''}
         </Navbar>
         <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login}  />
+        <Route path="/signup" component={Signup} render={ (props) => <Login {...props}/> } />
         <Route path="/forgot-password" component={forgotPassword} />
         <Route path="/createGame" component={CreateGame} />
         <Route path="/account" component={Account} />

@@ -60,6 +60,7 @@ class Login extends React.Component {
                         }).then(response => {
                                 localStorage.setItem('userId', response.data); 
                         })
+                        this.props.history.push("/createGame");
                 }
             }).catch((err)=>{
                 console.log(err)
@@ -78,7 +79,7 @@ class Login extends React.Component {
         return (
             <div className="main">
                 <h1 className="title-page">Bienvenue !</h1>
-                <form className="custom-form">
+                <form className="custom-form" onSubmit={this.signin}>
                     <input
                         className="custom-input"
                         type="email"
@@ -95,8 +96,9 @@ class Login extends React.Component {
                         placeholder="mot de passe"
                         name="password"
                     />
+                    <input type="submit" id="mySubmit" className="custom-button" onSubmit={this.signin} value="Se connecter"/>
                 </form>
-                <button className="custom-button" onClick={this.signin}>Se connecter</button>
+                
                 <Link to="/forgot-password">Mot de passe oublié ?</Link>
                 <Link to="/signup">Je n'ai pas encore de compte ?</Link>
                 { this.state.isError &&<error>Utilisateur ou mot de passe incorrect</error> }
