@@ -23,7 +23,7 @@ function App() {
   return (
     <Router>
         <Route path="/login" render={ (props) => <Login {...props}/> } />
-        <Route path="/signup" component={Signup} />
+        <Route path="/signup" render={ (props) => <Signup {...props}/> } />
         <PrivateRoute path="/forgot-password" component={forgotPassword} />
         <PrivateRoute path="/createGame" component={CreateGame} />
         <PrivateRoute path="/account" component={Account} />
