@@ -58,16 +58,14 @@ class Login extends React.Component {
                                 Authorization: 'Bearer ' + localStorage.getItem('token')
                             }
                         }).then(response => {
-                                localStorage.setItem('userId', response.data); 
+                                localStorage.setItem('userId', response.data);
+                                this.props.history.push("/createGame"); 
                         })
-                        this.props.history.push("/createGame");
+                        
                 }
             }).catch((err)=>{
                 console.log(err)
                 this.err = 'Une erreur est survenue lors de la connexion';
-                if(err.response.status === 401) {
-                this.err = "Identifiant ou mot de passe incorrect, vous n'avez pas l'Autorisation de vous connecter";
-                }
             });
        }
 
