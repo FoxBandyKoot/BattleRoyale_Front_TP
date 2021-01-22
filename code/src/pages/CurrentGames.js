@@ -2,6 +2,7 @@ import React from "react";
 import Popup from "reactjs-popup";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
+import Menu from "../components/Menu";
 
 class CurrentGames extends React.Component {
     constructor(props) {
@@ -39,51 +40,54 @@ class CurrentGames extends React.Component {
 
     render() {
         return (
-            <div className="createGames">
-                <div className="main">
-                    <div className="title-page">Vos parties en cours</div>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Statut</th>
-                            <th>Nombre de tours</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {this.state.games.map((item, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{item.name}</td>
-                                    <td>{item.status}</td>
-                                    <td>{item.number}</td>
-                                    <td className="exit-btn">
-                                        <Popup
-                                            trigger={<FontAwesomeIcon icon={faSignOutAlt} />}
-                                            modal
-                                            nested
-                                        >
-                                            {close => (
-                                                <>
-                                                    <button className="close" onClick={close}>
-                                                        &times;
-                                                    </button>
-                                                    <div className="content">
-                                                        <button className="custom-button" onClick={this.leaveGame.bind(this, index, close)}>Êtes-vous sûr de vouloir quitter la partie ?</button>
-                                                        <button className="custom-button" onClick={close}>Annuler</button>
-                                                    </div>
-                                                </>
-                                            )}
-                                        </Popup>
-                                    </td>
-                                </tr>
-                            )})}
-                        </tbody>
-                    </table>
-                    <button className="custom-button">Rafraichir</button>
+            <>
+                <Menu />
+                <div className="createGames">
+                    <div className="main">
+                        <div className="title-page">Vos parties en cours</div>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Statut</th>
+                                <th>Nombre de tours</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {this.state.games.map((item, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{item.name}</td>
+                                        <td>{item.status}</td>
+                                        <td>{item.number}</td>
+                                        <td className="exit-btn">
+                                            <Popup
+                                                trigger={<FontAwesomeIcon icon={faSignOutAlt} />}
+                                                modal
+                                                nested
+                                            >
+                                                {close => (
+                                                    <>
+                                                        <button className="close" onClick={close}>
+                                                            &times;
+                                                        </button>
+                                                        <div className="content">
+                                                            <button className="custom-button" onClick={this.leaveGame.bind(this, index, close)}>Êtes-vous sûr de vouloir quitter la partie ?</button>
+                                                            <button className="custom-button" onClick={close}>Annuler</button>
+                                                        </div>
+                                                    </>
+                                                )}
+                                            </Popup>
+                                        </td>
+                                    </tr>
+                                )})}
+                            </tbody>
+                        </table>
+                        <button className="custom-button">Rafraichir</button>
+                    </div>
                 </div>
-            </div>
+            </>
         )
     }
 }

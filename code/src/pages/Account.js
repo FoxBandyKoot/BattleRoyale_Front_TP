@@ -1,14 +1,34 @@
 import React from "react";
-import {Button, Card, Form, Input} from "../../components/AuthForm";
-import data from "./data.json"
 import Popup from "reactjs-popup";
+import axios from "axios";
+import {Redirect} from "react-router-dom";
+import Menu from "../components/Menu";
 
 class Account extends React.Component {
     constructor(props) {
         super(props);
-        this.state = data;
+        this.state = {
+            pseudo: '',
+            email: '',
+            password: '',
+        };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then(res => {
+            this.setState({
+                email: res.data.email,
+                pseudo: res.data.pseudo ? res.data.pseudo : ''
+            });
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     handleInputChange(event) {
@@ -27,9 +47,12 @@ class Account extends React.Component {
 
     render() {
         return <>
+                <Menu />
                 <div className="main">
                     <div className="title-page">Compte</div>
                     <form className="custom-form">
+
+                    <label className="custom-label">Pseudo</label>
                         <input
                             type="text"
                             value={this.state.pseudo}
@@ -38,6 +61,8 @@ class Account extends React.Component {
                             name="pseudo"
                             className="custom-input"
                         />
+
+                        <label className="custom-label">Changer adresse email</label>
                         <input
                             type="email"
                             value={this.state.email}
@@ -46,6 +71,8 @@ class Account extends React.Component {
                             name="email"
                             className="custom-input"
                         />
+
+                        <label className="custom-label">Changer le mot de passe</label>
                         <input
                             type="password"
                             value={this.state.password}

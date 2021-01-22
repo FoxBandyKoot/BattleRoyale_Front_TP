@@ -1,16 +1,15 @@
-body{
-    background-color:#053244;
-  }
-  
-.title-page{
+body {
+  background-color: #053244;
+}
+
+.title-page {
   color: white;
   margin-top: 2rem;
   margin-bottom: 3rem;
   font-size: 1.75rem;
 }
 
-
-.logo{
+.logo {
   width: 50%;
   margin-bottom: 1rem;
 }
@@ -19,7 +18,9 @@ body{
   background-color: red;
 }
 
-.main { // OLD CARD class/tag
+.div-form,
+.main,
+.global {
   box-sizing: border-box;
   max-width: 410px;
   margin: 0 auto;
@@ -29,12 +30,15 @@ body{
   align-items: center;
 }
 
-.custom-form{
+.custom-form {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
+.custom-p{
+  color: white;
+}
 table {
   color: #FFF;
 
@@ -46,4 +50,13 @@ table {
     padding: 10px;
     text-align: center;
   }
+}
+
+.display-search {
+  color: #FFF;
+}
+
+.custom-table{
+  width: 100%;
+  margin-top: 2rem;
 }

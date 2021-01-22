@@ -1,20 +1,15 @@
 import React from 'react';
-import {useAuth} from "../context/auth";
-import {expires} from "../App";
-import Button from "react-bootstrap/cjs/Button";
+import { withRouter } from 'react-router'
 
-function Logout() {
-    const { setAuthTokens } = useAuth();
+function Logout(props) {
 
     function logout() {
-        setAuthTokens();
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        props.history.push('/login')
     }
 
-    if(new Date().getTime() > parseInt(expires)) {
-        logout();
-    }
-
-    return <Button variant="primary" onClick={logout}>Déconnexion</Button>
+    return <button variant="primary" className="custom-button" onClick={logout}>Déconnexion</button>
 }
 
-export default Logout
+export default withRouter(Logout)
