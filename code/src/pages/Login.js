@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
 //import { useAuth } from "../../context/auth";
 import login from "../data/data.json"
+import Menu from "../components/Menu";
 
 class Login extends React.Component {
     /* const [isLoggedIn, setLoggedIn] = useState(false);
@@ -75,37 +76,40 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="div-form">
-                <h1 className="title-page">Bienvenue !</h1>
-                <form className="custom-form" onSubmit={this.signin}>
+            <>
+                <Menu />
+                <div className="div-form">
+                    <h1 className="title-page">Bienvenue !</h1>
+                    <form className="custom-form" onSubmit={this.signin}>
 
-                    <label className="custom-label">Adresse email</label>
-                    <input
-                        className="custom-input"
-                        type="email"
-                        value={this.state.email}
-                        onChange={this.handleInputChange}
-                        placeholder="email"
-                        name="email"
-                    />
+                        <label className="custom-label">Adresse email</label>
+                        <input
+                            className="custom-input"
+                            type="email"
+                            value={this.state.email}
+                            onChange={this.handleInputChange}
+                            placeholder="email"
+                            name="email"
+                        />
 
-                    <label className="custom-label">Mot de passe</label>
+                        <label className="custom-label">Mot de passe</label>
 
-                    <input
-                        className="custom-input"
-                        type="password"
-                        value={this.state.password}
-                        onChange={this.handleInputChange}
-                        placeholder="mot de passe"
-                        name="password"
-                    />
-                    <input type="submit" id="mySubmit" className="custom-button" onSubmit={this.signin} value="Se connecter"/>
-                </form>
-                
-                <Link to="/forgot-password">Mot de passe oublié ?</Link>
-                <Link to="/signup">Je n'ai pas encore de compte ?</Link>
-                { this.state.isError && <error>Utilisateur ou mot de passe incorrect</error>}
-            </div>
+                        <input
+                            className="custom-input"
+                            type="password"
+                            value={this.state.password}
+                            onChange={this.handleInputChange}
+                            placeholder="mot de passe"
+                            name="password"
+                        />
+                        <input type="submit" id="mySubmit" className="custom-button" onSubmit={this.signin} value="Se connecter"/>
+                    </form>
+
+                    <Link to="/forgot-password">Mot de passe oublié ?</Link>
+                    <Link to="/signup">Je n'ai pas encore de compte ?</Link>
+                    { this.state.isError && <error>Utilisateur ou mot de passe incorrect</error>}
+                </div>
+            </>
         );
     }
 }

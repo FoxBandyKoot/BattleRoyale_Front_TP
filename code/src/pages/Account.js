@@ -2,6 +2,7 @@ import React from "react";
 import Popup from "reactjs-popup";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
+import Menu from "../components/Menu";
 
 class Account extends React.Component {
     constructor(props) {
@@ -46,6 +47,7 @@ class Account extends React.Component {
 
     render() {
         return <>
+                <Menu />
                 <div className="main">
                     <div className="title-page">Compte</div>
                     <form className="custom-form">

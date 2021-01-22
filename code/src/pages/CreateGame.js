@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Observer } from 'mobx-react'
 import CreateGameStore from '../observers/CreateGameStore';
+import Menu from "../components/Menu";
 
 export default class CreateGame extends Component {
 
@@ -51,8 +52,11 @@ export default class CreateGame extends Component {
     } else if(this.buttonSubmit && !this.formIsValid){
       this.buttonSubmit.disabled = true
     }
+
     
     return <>
+      <Menu />
+
       {/********************** DISPLAY PAGE **********************/}
       <div className="div-form">
 
