@@ -74,10 +74,38 @@ export default class CreateGame extends Component {
       });
   }
 
-  onSubmit = (form) => {  
+  onSubmit = (form) => {
     form.preventDefault()
-    this.props.history.push("/saloon");
+    this.createGame()
   }
+
+  createGame = () => {
+    this.props.history.push("/saloon")
+
+    axios.post('http://localhost:8000/api/games/', {
+      
+    //   headers: {
+    //     Authorization: 'Bearer ' + localStorage.getItem('token')
+    // },
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+        name: "Party1",
+        code: "private",
+        round: 0,
+        players: ["me"],
+        owner: "me",
+        map: "string",
+        date: "2021-01-22T21:06:03.229Z"
+      }).then(result => {
+        if (result.status === 200) {
+          this.props.history.push("/saloon")
+        } else {
+          console.log(result)
+      }
+    }).catch(e => {
+      console.log(e)
+    });
+  }
+
   
   render = () => {
 
