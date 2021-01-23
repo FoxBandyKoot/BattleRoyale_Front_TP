@@ -3,8 +3,10 @@ import { Observer } from 'mobx-react'
 import CreateGameStore from '../observers/CreateGameStore';
 import Menu from "../components/Menu";
 // import Map from "../maps/Map";
+import axios from "axios";
 
 export default class CreateGame extends Component {
+
 
   constructor(props) {
     super(props)
@@ -21,13 +23,12 @@ export default class CreateGame extends Component {
       property: properties,
       map: maps
     }
-  }
 
+  }
 
   onChange = (e) => {
     const formData = new FormData((this.form.current))
     CreateGameStore.setFormData(formData)
-    this.buttonSubmit = document.getElementById("mySubmit")
 
     this.currentGameName = CreateGameStore.createGameFormData.get('gameNameInput')
     this.currentPlayerNumber = CreateGameStore.createGameFormData.get('playerNumberSelect')
@@ -42,12 +43,45 @@ export default class CreateGame extends Component {
       this.currentMap !== ""
 
       this.render()
-  };
+  }
 
-  render = () => {
+  onSubmit = (form) => {
+    form.preventDefault()
+    this.createGame()
+  }
+
+  createGame = () => {
+    this.props.history.push("/saloon")
+
+    axios.post('http://localhost:8000/api/games/', {
+      
+    //   headers: {
+    //     Authorization: 'Bearer ' + localStorage.getItem('token')
+    // },
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+        name: "Party1",
+        code: "private",
+        round: 0,
+        players: ["me"],
+        owner: "me",
+        map: "string",
+        date: "2021-01-22T21:06:03.229Z"
+      }).then(result => {
+        if (result.status === 200) {
+          this.props.history.push("/saloon")
+        } else {
+          console.log(result)
+      }
+    }).catch(e => {
+      console.log(e)
+    });
+  }
+
   
-    // {/* // Regarder Login/js -> Balise "redirect" */}         
-    
+  render = () => {
+
+    // Enable or disable button of form validation
+    this.buttonSubmit = document.getElementById("mySubmit")
     if(this.buttonSubmit && this.formIsValid){
       this.buttonSubmit.disabled = false
     } else if(this.buttonSubmit && !this.formIsValid){
@@ -64,7 +98,7 @@ export default class CreateGame extends Component {
         {/********************** TITLE **********************/}
         <h1 className="title-page">Créer une partie</h1>
 
-        <form className="custom-form" ref={this.form} onChange={this.onChange}>
+        <form className="custom-form" ref={this.form} onChange={this.onChange} onSubmit={this.onSubmit}>
           
           {/********************** GAME NAME **********************/}
           <label className="custom-label">Nom de la partie</label>
@@ -102,10 +136,8 @@ export default class CreateGame extends Component {
                 {e}
               </option>)
             }
-          </select>
-      
-          <button id="mySubmit" className="custom-button" disabled>Create saloon</button>
-
+          </select>      
+          
           {/********************** CREATE GAME BUTTON **********************/}
           <Observer>
             {
@@ -116,9 +148,14 @@ export default class CreateGame extends Component {
               </>
             }
           </Observer>
+          
+          <input type="submit" id="mySubmit" className="custom-button" disabled={true} value="Créer le salon"/>
 
-        </form>       
+        </form>    
+   
       </div>
     </>
+    
+
   }
 }

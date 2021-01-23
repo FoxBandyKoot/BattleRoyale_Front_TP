@@ -1,7 +1,6 @@
 import React from "react";
 import Popup from "reactjs-popup";
 import axios from "axios";
-import {Redirect} from "react-router-dom";
 import Menu from "../components/Menu";
 import { withRouter } from 'react-router'
 
@@ -17,6 +16,21 @@ class Account extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDeleteAccount = this.handleDeleteAccount.bind(this);
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then(res => {
+            this.setState({
+                email: res.data.email,
+                pseudo: res.data.pseudo ? res.data.pseudo : ''
+            });
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     componentDidMount() {
