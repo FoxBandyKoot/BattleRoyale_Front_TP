@@ -30,20 +30,24 @@ class Signup extends React.Component {
         this.err = false;
         this.success = false;
 
+        console.log("hi signup")
+
         if(!this.state.email || !this.state.password){
             this.err = 'Vous n\'avez pas remplis tous les champs'
             console.log(this.err);
             return;  
         }
-        axios.post("http://localhost:8080/api/sign-up", {
+        axios.post("http://localhost:8000/api/sign-up", {
             email: this.state.email,
             pseudo: this.state.pseudo,
             password: this.state.password
         }).then(response => {
             if (response.status === 200) {
                 this.props.history.push("/login");
+                console.log("created");
             } 
         }).catch((err) => {
+            console.log("error here");
             this.err = 'Une erreur est survenue lors de l\'inscription';
             console.log(err) 
         });
