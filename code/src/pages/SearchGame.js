@@ -39,7 +39,7 @@ const SearchGame = observer(({ store }) => {
             }
         }).then(res => {
             if(res.status === 201) {
-                history.push('/saloon')
+                history.push('/saloon/' + id)
             }
         }).catch(err => {
             console.log(err);
