@@ -2,21 +2,13 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
 //import { useAuth } from "../../context/auth";
-import login from "../data/data.json"
 import Menu from "../components/Menu";
 
 class Login extends React.Component {
-    /* const [isLoggedIn, setLoggedIn] = useState(false);
-    const [isError, setIsError] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const { setAuthTokens } = useAuth();
-    const { authTokens } = useAuth();*/
+
     constructor(props) {
         super(props);
-        this.state = login;
-        this.isLoggedIn = false;
-        this.setLoggedIn = false;
+        this.state = [];
         this.isError = false;
         this.setIsError = false;
         this.email = '';
@@ -37,7 +29,7 @@ class Login extends React.Component {
 
     signin(e) {
         e.preventDefault()
-        this.err  = false;
+        this.err = false;
         this.success = false;
         
         if(!this.state.email || !this.state.password){
@@ -45,10 +37,10 @@ class Login extends React.Component {
           console.log(this.err);
           return;  
         }
-         axios.post('http://localhost:8000/api/login',{
-         email : this.state.email,
-         password : this.state.password,
-         }).then(response => {
+        axios.post('http://localhost:8000/api/login',{
+            email : this.state.email,
+            password : this.state.password,
+        }).then(response => {
                 if (response.status === 200) {
                         this.success = true;
 
@@ -68,7 +60,7 @@ class Login extends React.Component {
                 console.log(err)
                 this.err = 'Une erreur est survenue lors de la connexion';
             });
-       }
+        }
 
     /*if (isLoggedIn || authTokens) {
         return <Redirect to="/" />;
