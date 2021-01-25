@@ -1,19 +1,23 @@
 import React, { useRef } from "react";
 import { observer } from "mobx-react-lite";
 import Menu from "../components/Menu";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 // import { DropdownList } from "react-widgets/lib";
 
 const SearchGame = observer(({ store }) => {
+
+    const history = useHistory();
 
     const properties = {
         public: 'Publique',
         private: 'Privée'
     };
     const maps = {
-        all: 'Toutes',
-        green: 'Vertes',
-        blue: 'Bleues',
-        red: 'Rouges',
+        all: 'Tout',
+        green: 'Verte',
+        blue: 'Bleue',
+        red: 'Rouge',
     };
 
     const form = useRef(null);
@@ -21,6 +25,25 @@ const SearchGame = observer(({ store }) => {
     const onChange = () => {
         const formData = new FormData(form.current);
         store.setFormData(formData);
+    }
+
+    const joinGame = (id) => {
+        axios.post('http://localhost:8000/api/players', {
+            round: 1,
+            life: 3,
+            game: '/api/games/' + id,
+            user: '/api/users/' + localStorage.getItem('userId')
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then(res => {
+            if(res.status === 201) {
+                history.push('/saloon')
+            }
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     return (
@@ -71,14 +94,14 @@ const SearchGame = observer(({ store }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {store.games.map((item, index) => {
+                            {store.games.map((item) => {
                                 return (
-                                    <tr key={index}>
+                                    <tr key={item.id}>
                                         <td>{item.name}</td>
                                         <td>{item.date}</td>
-                                        <td>{item.map}</td>
+                                        <td>{maps[item.map]}</td>
                                         <td>
-                                            <button className="custom-button">Rejoindre</button>
+                                            <button className="custom-button" onClick={() => joinGame(item.id)}>Rejoindre</button>
                                         </td>
                                     </tr>
                                 )

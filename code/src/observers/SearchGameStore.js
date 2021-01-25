@@ -1,29 +1,33 @@
 // import React from "react"
 import { makeAutoObservable } from "mobx"
+import axios from "axios";
 
 class SearchGameStore {
-    games = [
-        {
-            name: 'Partie 1',
-            date: "15/01/21"
-        },
-        {
-            name: 'Partie 2',
-            date: "16/01/21"
-        },
-        {
-            name: 'Partie 3',
-            date: "17/01/21"
-        },
-    ];
+
+    games = [];
     formData = new FormData(undefined);
 
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this);
+        this.getGames();
     }
 
     setFormData(data) {
         this.formData = data;
+    }
+
+    getGames() {
+        axios.get('http://localhost:8000/api/games', {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then(res => {
+            if(res.status === 200) {
+                this.games = res.data['hydra:member'];
+            }
+        }).catch(err => {
+            console.log(err);
+        })
     }
 }
 
