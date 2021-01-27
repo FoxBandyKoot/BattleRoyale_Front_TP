@@ -1,11 +1,9 @@
 import "./App.scss";
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { AuthContext } from "./context/auth";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import forgotPassword from "./pages/Forgot-password";
-// import MofifyPassword from "./pages/modify-password/ModifyPassword";
 import CreateGame from "./pages/CreateGame";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Account from "./pages/Account";
@@ -14,6 +12,7 @@ import 'reactjs-popup/dist/index.css';
 import CurrentGames from "./pages/CurrentGames";
 import SearchGame from "./pages/SearchGame";
 import SearchGameStore from "./observers/SearchGameStore";
+
 import PrivateRoute from "./context/PrivateRoute";
 
 function App() {

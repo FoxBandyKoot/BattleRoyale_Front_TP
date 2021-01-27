@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Observer } from 'mobx-react'
 import CreateGameStore from '../observers/CreateGameStore';
 import Menu from "../components/Menu";
+// import Map from "../maps/Map";
 
 export default class CreateGame extends Component {
 
