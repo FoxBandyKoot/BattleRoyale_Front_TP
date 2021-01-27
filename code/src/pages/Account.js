@@ -1,7 +1,6 @@
 import React from "react";
 import Popup from "reactjs-popup";
 import axios from "axios";
-import {Redirect} from "react-router-dom";
 import Menu from "../components/Menu";
 import { withRouter } from 'react-router'
 

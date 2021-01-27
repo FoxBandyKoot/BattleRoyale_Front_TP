@@ -115,3 +115,6 @@ const SearchGame = observer(({ store }) => {
 );
 
 export default SearchGame;
+
+
+
