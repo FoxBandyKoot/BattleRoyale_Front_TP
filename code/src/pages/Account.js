@@ -33,21 +33,6 @@ class Account extends React.Component {
         })
     }
 
-    componentDidMount() {
-        axios.get('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            }
-        }).then(res => {
-            this.setState({
-                email: res.data.email,
-                pseudo: res.data.pseudo ? res.data.pseudo : ''
-            });
-        }).catch(err => {
-            console.log(err);
-        })
-    }
-
     handleInputChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;

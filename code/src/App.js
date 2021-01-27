@@ -11,6 +11,8 @@ import ForgotPassword from "./pages/Forgot-password";
 import ModifyPassword from "./pages/ModifyPassword";
 import Account from "./pages/Account";
 import CurrentGames from "./pages/CurrentGames";
+import Map1 from "./maps/Map1";
+
 import SearchGame from "./pages/SearchGame";
 import SearchGameStore from "./observers/SearchGameStore";
 import Saloon from "./pages/Saloon";
@@ -27,6 +29,7 @@ function App() {
         <Route path="/signup" render={ (props) => <Signup {...props}/> } />
         <Route path="/modify-password" component={ModifyPassword} />
         <PrivateRoute path="/forgot-password" component={ForgotPassword} />
+        <PrivateRoute path="/map1" component={Map1} />
         <PrivateRoute path="/createGame" component={CreateGame} />
         <PrivateRoute path="/account" component={Account} />
         {/* <PrivateRoute path="/saloon" render={ (props) => <Saloon {...props} store={SaloonStore}/> } /> */}
