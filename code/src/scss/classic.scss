@@ -4,8 +4,8 @@ body {
 
 .title-page {
   color: white;
-  margin-top: 2rem;
-  margin-bottom: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   font-size: 1.75rem;
 }
 
@@ -23,7 +23,7 @@ body {
 .global {
   box-sizing: border-box;
   max-width: 410px;
-  margin: 0 auto;
+  margin: 100px auto 0 auto;
   padding: 0 2rem;
   display: flex;
   flex-direction: column;
