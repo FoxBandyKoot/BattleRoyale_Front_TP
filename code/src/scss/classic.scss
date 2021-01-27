@@ -67,3 +67,20 @@ table {
   border-radius: 5px;
   background-color: green;
 }
+
+.menu-btn {
+  background-color: #f05029;
+  border-radius: 35px;
+  border: 0;
+  padding: 0.5rem;
+  margin: 2rem 0;
+  color: white;
+  font-weight: 400;
+  width: 100%;
+  text-align: center;
+
+   &:hover {
+     color: #FFF;
+     text-decoration: none;
+   }
+}
