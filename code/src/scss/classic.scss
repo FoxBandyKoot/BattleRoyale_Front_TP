@@ -39,6 +39,7 @@ body {
 .custom-p{
   color: white;
 }
+
 table {
   color: #FFF;
 
@@ -50,7 +51,7 @@ table {
     padding: 10px;
     text-align: center;
   }
-}
+
 
 .display-search {
   color: #FFF;
@@ -68,6 +69,15 @@ table {
   background-color: green;
 }
 
+.custom-header{
+  margin-top: 3rem;
+}
+
+.custom-footer{
+  color: #FFF;
+  text-align: center;
+}
+
 .menu-btn {
   background-color: #f05029;
   border-radius: 35px;
@@ -78,9 +88,10 @@ table {
   font-weight: 400;
   width: 100%;
   text-align: center;
-
-   &:hover {
-     color: #FFF;
-     text-decoration: none;
-   }
 }
+
+&:hover {
+  color: #FFF;
+  text-decoration: none;
+}
+
