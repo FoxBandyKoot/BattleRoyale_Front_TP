@@ -3,30 +3,22 @@ import { observable, computed, makeObservable, action } from 'mobx';
 /**
  * Make the form of create game page an observable
  */
-class CurrentsGamesStore {
+class CreateGameStore {
 
     formData = new FormData(undefined);
     constructor(){
-        this.state = {
-            resultGet: ""
-        }
+
         makeObservable(this, {
             setFormData:action,
             loadData:action,
 
             formData: observable, 
-            currentsGameFormData: computed,
-            getResultGet: action
-
+            createGameFormData: computed,
         })
     }
        
-    get currentsGameFormData() {
+    get createGameFormData() {
         return this.formData;
-    };
-
-    getResultGet() {
-        return this.state.resultGet;
     };
 
     setFormData = (data) => {
@@ -38,4 +30,4 @@ class CurrentsGamesStore {
     }   
 }
 
-export default new CurrentsGamesStore();
+export default new CreateGameStore();

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import CreateGameStore from '../observers/MyGamesStore';
 import Menu from "../components/Menu";
 import axios from "axios";
+import CreateGameStore from "../observers/CreateGameStore";
 
 export default class CreateGame extends Component {
-
 
   constructor(props) {
     super(props)
@@ -24,8 +23,8 @@ export default class CreateGame extends Component {
   }
 
   onChange = (e) => {
-    const formData = new FormData((this.form.current))
-    CreateGameStore.setFormData(formData)
+    // const formData = new FormData((this.form.current))
+    // CreateGameStore.setFormData(formData)
 
     this.currentGameName = CreateGameStore.createGameFormData.get('gameNameInput')
     this.currentPlayerNumber = CreateGameStore.createGameFormData.get('playerNumberSelect')
@@ -47,9 +46,14 @@ export default class CreateGame extends Component {
     this.createGame()
   }
 
+  onSubmit = (form) => {
+    form.preventDefault()
+    this.createGame()
+  }
+
   createGame = () => {
 
-    axios.post('http://localhost:8000/api/games', {
+    axios.post('http://localhost:8000/api/games/', {
 
       name: "Party1",
       code: "private",
@@ -57,15 +61,13 @@ export default class CreateGame extends Component {
       owner: "/api/users/" + localStorage.getItem('userId'),
       map: "string",
       date: "2021-01-22T21:06:03.229Z"
-    },
-      {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-
+    }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      },
       }).then(result => {
-        if (result.status === 200) {
-          this.props.history.push("/saloon")
+        if (result.status === 20) {
+          this.props.history.push('/saloon')
         } else {
           console.log(result)
         }
@@ -74,39 +76,7 @@ export default class CreateGame extends Component {
       });
   }
 
-  onSubmit = (form) => {
-    form.preventDefault()
-    this.createGame()
-  }
 
-  createGame = () => {
-    this.props.history.push("/saloon")
-
-    axios.post('http://localhost:8000/api/games/', {
-      
-    //   headers: {
-    //     Authorization: 'Bearer ' + localStorage.getItem('token')
-    // },
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-        name: "Party1",
-        code: "private",
-        round: 0,
-        players: ["me"],
-        owner: "me",
-        map: "string",
-        date: "2021-01-22T21:06:03.229Z"
-      }).then(result => {
-        if (result.status === 200) {
-          this.props.history.push("/saloon")
-        } else {
-          console.log(result)
-      }
-    }).catch(e => {
-      console.log(e)
-    });
-  }
-
-  
   render = () => {
 
     // Enable or disable button of form validation
@@ -134,7 +104,7 @@ export default class CreateGame extends Component {
             type="text"
             name="gameNameInput"
           />
-          
+
           {/********************** PLAYER NUMBER SELECTOR **********************/}
           <label className="custom-label">Nombre de joueurs sur la carte</label>
           <select className="custom-dropdown" name="playerNumberSelect">
@@ -145,7 +115,7 @@ export default class CreateGame extends Component {
             }
           </select>
 
-    
+
           {/********************** PROPERTY SELECTOR **********************/}
           <label className="custom-label">Qui peut rejoindre la partie ?</label>
           <select className="custom-dropdown" name="propertySelect">
