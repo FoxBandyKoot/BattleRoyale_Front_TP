@@ -88,7 +88,6 @@ const SearchGame = observer(({ store }) => {
                         <thead>
                             <tr>
                                 <th>Nom</th>
-                                <th>Date</th>
                                 <th>Carte</th>
                                 <th>Action</th>
                                 <th></th>
@@ -99,7 +98,6 @@ const SearchGame = observer(({ store }) => {
                                 return (
                                     <tr key={item.id}>
                                         <td>{item.name}</td>
-                                        <td>{item.date}</td>
                                         <td>{maps[item.map]}</td>
                                         <td>
                                             <button className="custom-button" onClick={() => joinGame(item.id)}>Rejoindre</button>
