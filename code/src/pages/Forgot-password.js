@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import Menu from "../components/Menu";
 
 function ForgotPassword() {
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
+  const [email] = useState("");
 
   return <>
     <Menu />

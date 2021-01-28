@@ -4,8 +4,8 @@ body {
 
 .title-page {
   color: white;
-  margin-top: 2rem;
-  margin-bottom: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   font-size: 1.75rem;
 }
 
@@ -39,6 +39,7 @@ body {
 .custom-p{
   color: white;
 }
+
 table {
   color: #FFF;
 
@@ -59,4 +60,37 @@ table {
 .custom-table{
   width: 100%;
   margin-top: 2rem;
+}
+
+.alert {
+  color: #FFF;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: green;
+}
+
+.custom-header{
+  margin-top: 3rem;
+}
+
+.custom-footer{
+  color: #FFF;
+  text-align: center;
+}
+
+.menu-btn {
+  background-color: #f05029;
+  border-radius: 35px;
+  border: 0;
+  padding: 0.5rem;
+  margin: 2rem 0;
+  color: white;
+  font-weight: 400;
+  width: 100%;
+  text-align: center;
+
+   &:hover {
+     color: #FFF;
+     text-decoration: none;
+   }
 }
