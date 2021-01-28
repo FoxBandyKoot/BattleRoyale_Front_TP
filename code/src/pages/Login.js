@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import SearchGameStore from "../observers/SearchGameStore"
 import Menu from "../components/Menu"
 
 class Login extends React.Component {
@@ -55,21 +54,6 @@ class Login extends React.Component {
                     localStorage.setItem('userId', response.data);
                     this.props.history.push("/searchGame");
                 })
-
-                // Get games of user
-                axios.get('http://localhost:8000/api/games', {
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    }
-                }).then(result => {
-                    if (result.status === 200) {
-                        SearchGameStore.loadData(result.data)
-                    } else {
-                        console.log(result)
-                    }
-                }).catch(e => {
-                    console.log(e)
-                });
             }
         }).catch((err) => {
             console.log(err)
