@@ -2,6 +2,7 @@ import React from "react";
 import Popup from "reactjs-popup";
 import axios from "axios";
 import Menu from "../components/Menu";
+import { withRouter } from 'react-router'
 
 class Account extends React.Component {
     constructor(props) {
@@ -10,9 +11,11 @@ class Account extends React.Component {
             pseudo: '',
             email: '',
             password: '',
+            alert: ''
         };
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDeleteAccount = this.handleDeleteAccount.bind(this);
     }
 
     componentDidMount() {
@@ -40,71 +43,120 @@ class Account extends React.Component {
         });
     }
 
-    handleClick() {
+    handleSubmit() {
+        if(this.state.password) {
+            axios.put('http://localhost:8000/api/update-password/' + localStorage.getItem('userId'), {
+                password: this.state.password,
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }).then(res => {
+                if(res.status === 200) {
 
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+
+        axios.put('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
+            email: this.state.email,
+            pseudo: this.state.pseudo,
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then(res => {
+            if(res.status === 200) {
+                this.setState({alert: 'Les modifications ont été enregistrées.'})
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    handleDeleteAccount() {
+        axios.delete('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then(res => {
+            if(res.status === 204) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('userId');
+                this.props.history.push('/login');
+            }
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     render() {
         return <>
-                <Menu />
-                <div className="main">
-                    <div className="title-page">Compte</div>
-                    <form className="custom-form">
+            <Menu />
+            <div className="main">
+                <div className="title-page">Compte</div>
+                {this.state.alert &&
+                <div className="alert">{this.state.alert}</div>
+                }
+
+                <form className="custom-form">
 
                     <label className="custom-label">Pseudo</label>
-                        <input
-                            type="text"
-                            value={this.state.pseudo}
-                            onChange={this.handleInputChange}
-                            placeholder="Pseudo"
-                            name="pseudo"
-                            className="custom-input"
-                        />
+                    <input
+                        type="text"
+                        value={this.state.pseudo}
+                        onChange={this.handleInputChange}
+                        placeholder="Pseudo"
+                        name="pseudo"
+                        className="custom-input"
+                    />
 
-                        <label className="custom-label">Changer adresse email</label>
-                        <input
-                            type="email"
-                            value={this.state.email}
-                            onChange={this.handleInputChange}
-                            placeholder="Email"
-                            name="email"
-                            className="custom-input"
-                        />
+                    <label className="custom-label">Changer adresse email</label>
+                    <input
+                        type="email"
+                        value={this.state.email}
+                        onChange={this.handleInputChange}
+                        placeholder="Email"
+                        name="email"
+                        className="custom-input"
+                    />
 
-                        <label className="custom-label">Changer le mot de passe</label>
-                        <input
-                            type="password"
-                            value={this.state.password}
-                            onChange={this.handleInputChange}
-                            placeholder="Mot de passe"
-                            name="password"
-                            className="custom-input"
-                        />
-                    </form>
-                    <button className="custom-button" onClick={this.handleClick}>Sauvegarder</button>
+                    <label className="custom-label">Changer le mot de passe</label>
+                    <input
+                        type="password"
+                        value={this.state.password}
+                        onChange={this.handleInputChange}
+                        placeholder="Mot de passe"
+                        name="password"
+                        className="custom-input"
+                    />
+                </form>
+                <button className="custom-button" onClick={this.handleSubmit}>Sauvegarder</button>
 
-                    <Popup
-                        trigger={<button className="custom-button">Supprimer le compte</button>}
-                        modal
-                        nested
-                    >
-                        {close => (
-                            <>
-                                <button className="close" onClick={close}>
-                                    &times;
-                                </button>
-                                <div className="content">
-                                    <button className="custom-button">Confirmer la suppression du compte</button>
-                                    <button className="custom-button" onClick={close}>Annuler</button>
-                                </div>
-                            </>
-                        )}
-                    </Popup>
+                <Popup
+                    trigger={<button className="custom-button">Supprimer le compte</button>}
+                    modal
+                    nested
+                >
+                    {(close) => (
+                        <>
+                            <button className="close" onClick={close}>
+                                &times;
+                            </button>
+                            <div className="content">
+                                <button className="custom-button" onClick={this.handleDeleteAccount}>Confirmer la suppression du compte</button>
+                                <button className="custom-button" onClick={close}>Annuler</button>
+                            </div>
+                        </>
+                    )}
+                </Popup>
 
-                    <button className="custom-button">Crédits</button>
-                </div>
+                <button className="custom-button">Crédits</button>
+            </div>
         </>;
     }
 }
 
-export default Account;
+export default withRouter(Account);

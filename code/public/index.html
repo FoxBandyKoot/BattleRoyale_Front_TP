@@ -39,15 +39,55 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <script>
+        const urlBase64ToUint8Array = (base64String) => {
+            const padding = '='.repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding)
+                .replace(/\-/g, '+')
+                .replace(/_/g, '/');
+
+            const rawData = window.atob(base64);
+            const outputArray = new Uint8Array(rawData.length);
+
+            for (var i = 0; i < rawData.length; ++i) {
+                outputArray[i] = rawData.charCodeAt(i);
+            }
+            return outputArray;
+        }
+
         if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("/sw.js", {
-                    scope: "./"
-                }).then((regObject) => {
-                    console.log("Registration done", regObject);
-                })
-                .catch((error) => {
-                    console.error("Could not register service worker", error);
-                });
+            navigator.serviceWorker.register("/sw.js").then((regObject) => {
+
+            Notification.requestPermission(function(status) {
+                if(status === 'granted') {
+                    regObject.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: urlBase64ToUint8Array('BJRMRf9TvqTUBe_vfLODm7rcgUmYRoPN7rfkBwZBAA8nE4OuMNIueaVvXHEGWpwjEo4HxpuZQE834fOU0L9dO5k')
+                    }).then(function(sub) {
+                        fetch('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
+                            method: 'PATCH',
+                            headers: new Headers({
+                                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                                'Content-Type': 'application/merge-patch+json'
+                            }),
+                            body: JSON.stringify({pushEndpoint: sub.endpoint})
+                        })
+                        .then(function(response) {
+
+                        });
+                    }).catch(function(e) {
+                        if (Notification.permission === 'denied') {
+                            console.warn('Permission for notifications was denied');
+                        } else {
+                            console.error('Unable to subscribe to push', e);
+                        }
+                    });
+                }
+            });
+
+        })
+        .catch((error) => {
+            console.error("Could not register service worker", error);
+        });
         }
     </script>
 

@@ -31,13 +31,7 @@ const cacheFiles = async() => {
     await fileCache.addAll(appShell);
 };
 const getResponse = async(req) => {
-    if (!navigator.onLine && req.url === "http://localhost:3000/login") {
-        const responseBody = { status: "success" };
-        return new Response(JSON.stringify(responseBody));
-    }
     const response = await caches.match(req);
-    console.log(response);
-    console.log("offline")
     if (response) {
         return response;
     } else {
@@ -70,8 +64,20 @@ self.addEventListener("activate", (event) => {
 })
 
 self.addEventListener('fetch', function(event) {
-    console.log(event.request.url);
-    event.respondWith(caches.match(event.request).then(function(response) { return response || fetch(event.request); }));
+    // event.respondWith(caches.match(event.request).then(function(response) { return response || fetch(event.request); }));
+    event.respondWith(getResponse(event.request));
+});
 
-
+self.addEventListener('push', function(e) {
+    var options = {
+        body: 'It\'s your turn !',
+        vibrate: [100, 50, 100],
+        data: {
+            dateOfArrival: Date.now(),
+            primaryKey: '2'
+        },
+    };
+    e.waitUntil(
+        self.registration.showNotification('Battle-royal', options)
+    );
 });
