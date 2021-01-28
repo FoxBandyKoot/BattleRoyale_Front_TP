@@ -100,7 +100,7 @@ class CurrentGames extends React.Component {
                                 )})}
                             </tbody>
                         </table>
-                        {/*<button className="custom-button">Rafraichir</button>*/}
+                        <button className="custom-button">Rafraichir</button>
                     </div>
                 </div>
             </>

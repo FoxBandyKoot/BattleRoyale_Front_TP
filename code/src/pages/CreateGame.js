@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-// import { Observer } from 'mobx-react'
-import CreateGameStore from '../observers/MyGamesStore';
 import Menu from "../components/Menu";
 import axios from "axios";
+import CreateGameStore from "../observers/CreateGameStore";
 
 export default class CreateGame extends Component {
 
@@ -24,8 +23,8 @@ export default class CreateGame extends Component {
   }
 
   onChange = (e) => {
-    const formData = new FormData((this.form.current))
-    CreateGameStore.setFormData(formData)
+    // const formData = new FormData((this.form.current))
+    // CreateGameStore.setFormData(formData)
 
     this.currentGameName = CreateGameStore.createGameFormData.get('gameNameInput')
     this.currentPlayerNumber = CreateGameStore.createGameFormData.get('playerNumberSelect')
@@ -47,9 +46,14 @@ export default class CreateGame extends Component {
     this.createGame()
   }
 
+  onSubmit = (form) => {
+    form.preventDefault()
+    this.createGame()
+  }
+
   createGame = () => {
 
-    axios.post('http://localhost:8000/api/games', {
+    axios.post('http://localhost:8000/api/games/', {
 
       name: "Party1",
       code: "private",
@@ -57,15 +61,13 @@ export default class CreateGame extends Component {
       owner: "/api/users/" + localStorage.getItem('userId'),
       map: "string",
       date: "2021-01-22T21:06:03.229Z"
-    },
-      {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-
+    }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      },
       }).then(result => {
-        if (result.status === 200) {
-          this.props.history.push("/saloon")
+        if (result.status === 20) {
+          this.props.history.push('/saloon')
         } else {
           console.log(result)
         }
@@ -73,6 +75,7 @@ export default class CreateGame extends Component {
         console.log(e)
       });
   }
+
 
   render = () => {
 
@@ -84,7 +87,6 @@ export default class CreateGame extends Component {
       this.buttonSubmit.disabled = true
     }
 
-
     return <>
       <Menu />
 
@@ -95,7 +97,6 @@ export default class CreateGame extends Component {
         <h1 className="title-page">Créer une partie</h1>
 
         <form className="custom-form" ref={this.form} onChange={this.onChange} onSubmit={this.onSubmit}>
-
           {/********************** GAME NAME **********************/}
           <label className="custom-label">Nom de la partie</label>
           <input
@@ -103,8 +104,6 @@ export default class CreateGame extends Component {
             type="text"
             name="gameNameInput"
           />
-
-          <p className="custom-p" name="resultGet" value={this.state.resultGetAfterLoad}>{this.state.resultGetAfterLoad}</p>
 
           {/********************** PLAYER NUMBER SELECTOR **********************/}
           <label className="custom-label">Nombre de joueurs sur la carte</label>
@@ -115,6 +114,7 @@ export default class CreateGame extends Component {
               </option>)
             }
           </select>
+
 
           {/********************** PROPERTY SELECTOR **********************/}
           <label className="custom-label">Qui peut rejoindre la partie ?</label>
@@ -155,10 +155,10 @@ export default class CreateGame extends Component {
               </>
             }
           </Observer>
+          
+          <input type="submit" id="mySubmit" className="custom-button" disabled={true} value="Créer le salon"/>
 
           </footer> */}
     </>
-
-
   }
 }

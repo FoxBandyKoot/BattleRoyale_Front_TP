@@ -3,7 +3,6 @@ import { observer } from "mobx-react-lite";
 import Menu from "../components/Menu";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-// import { DropdownList } from "react-widgets/lib";
 
 const SearchGame = observer(({ store }) => {
 
@@ -14,10 +13,10 @@ const SearchGame = observer(({ store }) => {
         private: 'Privée'
     };
     const maps = {
-        all: 'Tout',
-        green: 'Verte',
-        blue: 'Bleue',
-        red: 'Rouge',
+        all: 'Toutes',
+        green: 'Vertes',
+        blue: 'Bleues',
+        red: 'Rouges',
     };
 
     const form = useRef(null);
@@ -45,6 +44,7 @@ const SearchGame = observer(({ store }) => {
             console.log(err);
         })
     }
+
 
     return (
         <>
@@ -90,6 +90,8 @@ const SearchGame = observer(({ store }) => {
                                 <th>Nom</th>
                                 <th>Carte</th>
                                 <th>Action</th>
+                                <th></th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -115,6 +117,3 @@ const SearchGame = observer(({ store }) => {
 );
 
 export default SearchGame;
-
-
-

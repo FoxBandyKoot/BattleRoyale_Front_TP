@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import Menu from "../components/Menu";
 
 const Saloon = observer(({ store }) => {
-    
+
     const form = useRef(null);
 
     const onChange = (e) => {
