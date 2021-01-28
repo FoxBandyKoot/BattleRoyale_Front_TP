@@ -12,13 +12,15 @@
     "axios": "^0.21.1",
     "babel-preset-mobx": "^2.0.0",
     "bootstrap": "^4.5.3",
+    "hamburger-react": "^2.4.0",
     "customize-cra": "^1.0.0",
-    "mobx-react": "^7.0.5",
     "mobx": "^6.0.4",
+    "mobx-react": "^7.0.5",
     "mobx-react-lite": "^3.1.6",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
+    "react-burger-menu": "^3.0.3",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
@@ -30,7 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && workbox generateSW ./workbox-config.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -53,6 +55,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-decorators": "^7.12.12"
+    "@babel/plugin-proposal-decorators": "^7.12.12",
+    "workbox-cli": "^6.0.2"
   }
 }

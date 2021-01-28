@@ -1,5 +1,6 @@
 // import React, { useState } from "react";
 import React from "react";
+import Menu from "../components/Menu";
 class ModifyPassword extends React.Component {
   constructor(props) {
     super(props);
@@ -28,31 +29,34 @@ class ModifyPassword extends React.Component {
 
   render() {
     return (
-      <div className="global">
-        <h4 className="title-page">Modifiez votre mot de passe</h4>
+        <>
+          <Menu />
+          <div className="global">
+            <h4 className="title-page">Modifiez votre mot de passe</h4>
 
-        <form>
-          <input
-            className="double-password-input"
-            type="text"
-            value={this.password.value}
-            placeholder="mot de passe"
-            onChange={this.handleChange}
-            name="password"
-          />
-          <input
-            className="double-passwordConfirm-input"
-            type="text"
-            value={this.passwordConfirm.value}
-            placeholder="confirmer votre mot de passe"
-            onChange={this.handleChange}
-            name="password-confirm"
-          />
-          <button className="continous" onClick={this.handleSubmit}>
-            Continuer
-          </button>
-        </form>
-      </div>
+            <form>
+              <input
+                className="double-password-input"
+                type="text"
+                value={this.password.value}
+                placeholder="mot de passe"
+                onChange={this.handleChange}
+                name="password"
+              />
+              <input
+                className="double-passwordConfirm-input"
+                type="text"
+                value={this.passwordConfirm.value}
+                placeholder="confirmer votre mot de passe"
+                onChange={this.handleChange}
+                name="password-confirm"
+              />
+              <button className="continous" onClick={this.handleSubmit}>
+                Continuer
+              </button>
+            </form>
+          </div>
+        </>
     );
   }
 }

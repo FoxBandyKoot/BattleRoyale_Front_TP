@@ -55,11 +55,11 @@ input:hover {
   width: 100%;
 }
 
-button:hover {
+#mySubmit:hover#mySubmit:enabled{
   background-color: coral;
 }
 
-button:disabled {
+input:disabled {
   background-color: gray;
 }
 
@@ -71,4 +71,6 @@ button:disabled {
 .exit-btn {
   background-color: #F05029;
 }
+
+
 

@@ -2,11 +2,14 @@ import React, { useState } from "react";
 // import { Card, Form, Input, Button } from "../components/ForgotPasswordForm";
 // import { Link, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Menu from "../components/Menu";
 
 function ForgotPassword() {
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
+  const [email] = useState("");
 
   return <>
+    <Menu />
     {/********************** DISPLAY PAGE **********************/}
     <div className="div-form">
       {/********************** TITLE **********************/}

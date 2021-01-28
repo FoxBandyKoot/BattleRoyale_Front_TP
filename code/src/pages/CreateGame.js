@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Observer } from 'mobx-react'
-import CreateGameStore from '../observers/CreateGameStore';
+// import { Observer } from 'mobx-react'
+import CreateGameStore from '../observers/MyGamesStore';
+import Menu from "../components/Menu";
+import axios from "axios";
 
 export default class CreateGame extends Component {
 
@@ -17,15 +19,13 @@ export default class CreateGame extends Component {
       gameName: " ",
       playerNumber: playerNumbers,
       property: properties,
-      map: maps
+      map: maps,
     }
   }
-
 
   onChange = (e) => {
     const formData = new FormData((this.form.current))
     CreateGameStore.setFormData(formData)
-    this.buttonSubmit = document.getElementById("mySubmit")
 
     this.currentGameName = CreateGameStore.createGameFormData.get('gameNameInput')
     this.currentPlayerNumber = CreateGameStore.createGameFormData.get('playerNumberSelect')
@@ -33,34 +33,69 @@ export default class CreateGame extends Component {
     this.currentMap = CreateGameStore.createGameFormData.get('mapSelect')
 
     // Enable or disable button of form validation
-    this.formIsValid = 
-      this.currentGameName !== "" && 
-      this.currentPlayerNumber !== 0 && 
-      this.currentProperty !== "" && 
+    this.formIsValid =
+      this.currentGameName !== "" &&
+      this.currentPlayerNumber !== 0 &&
+      this.currentProperty !== "" &&
       this.currentMap !== ""
 
-      this.render()
-  };
+    this.render()
+  }
+
+  onSubmit = (form) => {
+    form.preventDefault()
+    this.createGame()
+  }
+
+  createGame = () => {
+
+    axios.post('http://localhost:8000/api/games', {
+
+      name: "Party1",
+      code: "private",
+      round: 0,
+      owner: "/api/users/" + localStorage.getItem('userId'),
+      map: "string",
+      date: "2021-01-22T21:06:03.229Z"
+    },
+      {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+
+      }).then(result => {
+        if (result.status === 200) {
+          this.props.history.push("/saloon")
+        } else {
+          console.log(result)
+        }
+      }).catch(e => {
+        console.log(e)
+      });
+  }
 
   render = () => {
-  
-    // {/* // Regarder Login/js -> Balise "redirect" */}         
-    
-    if(this.buttonSubmit && this.formIsValid){
+
+    // Enable or disable button of form validation
+    this.buttonSubmit = document.getElementById("mySubmit")
+    if (this.buttonSubmit && this.formIsValid) {
       this.buttonSubmit.disabled = false
-    } else if(this.buttonSubmit && !this.formIsValid){
+    } else if (this.buttonSubmit && !this.formIsValid) {
       this.buttonSubmit.disabled = true
     }
-    
+
+
     return <>
+      <Menu />
+
       {/********************** DISPLAY PAGE **********************/}
       <div className="div-form">
 
         {/********************** TITLE **********************/}
         <h1 className="title-page">Créer une partie</h1>
 
-        <form className="custom-form" ref={this.form} onChange={this.onChange}>
-          
+        <form className="custom-form" ref={this.form} onChange={this.onChange} onSubmit={this.onSubmit}>
+
           {/********************** GAME NAME **********************/}
           <label className="custom-label">Nom de la partie</label>
           <input
@@ -68,7 +103,9 @@ export default class CreateGame extends Component {
             type="text"
             name="gameNameInput"
           />
-          
+
+          <p className="custom-p" name="resultGet" value={this.state.resultGetAfterLoad}>{this.state.resultGetAfterLoad}</p>
+
           {/********************** PLAYER NUMBER SELECTOR **********************/}
           <label className="custom-label">Nombre de joueurs sur la carte</label>
           <select className="custom-dropdown" name="playerNumberSelect">
@@ -78,7 +115,7 @@ export default class CreateGame extends Component {
               </option>)
             }
           </select>
-    
+
           {/********************** PROPERTY SELECTOR **********************/}
           <label className="custom-label">Qui peut rejoindre la partie ?</label>
           <select className="custom-dropdown" name="propertySelect">
@@ -98,22 +135,30 @@ export default class CreateGame extends Component {
               </option>)
             }
           </select>
-      
-          <button id="mySubmit" className="custom-button" disabled>Create saloon</button>
 
           {/********************** CREATE GAME BUTTON **********************/}
-          <Observer>
+          <input type="submit" id="mySubmit" className="custom-button" disabled={true} value="Créer le salon" />
+
+        </form>
+
+      </div>
+
+      {/* <footer className="custom-footer">
+      <Observer>
             {
               () => <>
-                {/* WILL BE USE FOR OTHERS FUNCTIONNALITIES */}
-                {/* {CreateGameStore.createGameFormData.get('gameNameInput')} */}
-                {/* {JSON.stringify(CreateGameStore.createGameFormData.keys())} */}
+                {/* WILL BE USE FOR OTHERS FUNCTIONNALITIES 
+                {/* {CreateGameStore.createGameFormData.get('gameNameInput')} 
+                {/* {JSON.stringify(CreateGameStore.createGameFormData.keys())} 
+                {this.resultGetAfterLoad}
+                {CreateGameStore.getResultGet('resultGet')}
               </>
             }
           </Observer>
 
-        </form>       
-      </div>
+          </footer> */}
     </>
+
+
   }
 }
