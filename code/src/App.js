@@ -2,7 +2,7 @@ import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'reactjs-popup/dist/index.css';
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import CreateGame from "./pages/CreateGame";
@@ -21,25 +21,28 @@ function App() {
 
     initialize();
 
-  return (
-    <Router>
-        <Route path="/login" render={ (props) => <Login {...props}/> } />
-        <Route path="/signup" render={ (props) => <Signup {...props}/> } />
-        <Route path="/modify-password" component={ModifyPassword} />
-        <PrivateRoute path="/forgot-password" component={ForgotPassword} />
-        <PrivateRoute path="/map1" component={Map1} />
-        <PrivateRoute path="/createGame" component={CreateGame} />
-        <PrivateRoute path="/account" component={Account} />
-        {/* <PrivateRoute path="/saloon" render={ (props) => <Saloon {...props} store={SaloonStore}/> } /> */}
-        <PrivateRoute path="/saloon" component={() => <Saloon store={SaloonStore} /> } />
-        <PrivateRoute path="/currentGames" component={CurrentGames} />
-        <PrivateRoute path="/searchGame" component={() => <SearchGame store={SearchGameStore} />} />
-    </Router>
-  )
+    return (
+      <Router>
+          <Route exact path="/" render={ (props) => <Login {...props}/> } />
+          <Route path="/login" render={ (props) => <Login {...props}/> } />
+          <Route path="/signup" render={ (props) => <Signup {...props}/> } />
+          <Route path="/modify-password" component={ModifyPassword} />
+          <PrivateRoute path="/forgot-password" component={ForgotPassword} />
+          <PrivateRoute path="/map1" component={Map1} />
+          <PrivateRoute path="/createGame" component={CreateGame} />
+          <PrivateRoute path="/account" component={Account} />
+          {/* <PrivateRoute path="/saloon" render={ (props) => <Saloon {...props} store={SaloonStore}/> } /> */}
+          <PrivateRoute path="/saloon" component={() => <Saloon store={SaloonStore} /> } />
+          <PrivateRoute path="/currentGames" component={CurrentGames} />
+          <PrivateRoute path="/searchGame" component={() => <SearchGame store={SearchGameStore} />} />
+      </Router>
+    
+    )
 
     // init DOM, just after render() in component life cycle
     function initialize() {
         document.body.style.backgroundColor = "#053244";
     }
+  
 }
 export default App;
