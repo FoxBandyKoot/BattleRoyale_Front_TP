@@ -9,8 +9,6 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = [];
-        this.isLoggedIn = false;
-        this.setLoggedIn = false;
         this.isError = false;
         this.setIsError = false;
         this.email = '';
@@ -44,8 +42,8 @@ class Login extends React.Component {
             password: this.state.password,
         }).then(response => {
             if (response.status === 200) {
-                this.success = true;
 
+                this.success = true;
                 localStorage.setItem('token', response.data.token);
 
                 // Get informations on user account
@@ -59,23 +57,19 @@ class Login extends React.Component {
                 })
 
                 // Get games of user
-                axios.get('http://localhost:8000/api/games',
-                    {
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem('token')
-                        }
-
-                    }).then(result => {
-                        if (result.status === 200) {
-                            SearchGameStore.loadData(result.data)
-                        } else {
-                            console.log(result)
-                        }
-                    }).catch(e => {
-                        console.log(e)
-                    });
-
-
+                axios.get('http://localhost:8000/api/games', {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                }).then(result => {
+                    if (result.status === 200) {
+                        SearchGameStore.loadData(result.data)
+                    } else {
+                        console.log(result)
+                    }
+                }).catch(e => {
+                    console.log(e)
+                });
             }
         }).catch((err) => {
             console.log(err)
@@ -89,7 +83,7 @@ class Login extends React.Component {
                 <Menu />
                 <div className="div-form">
                     <h1 className="title-page">Bienvenue !</h1>
-                    <form className="custom-form">
+                    <form className="custom-form" onSubmit={this.signin}>
 
                         <label className="custom-label">Adresse email</label>
                         <input
@@ -111,7 +105,7 @@ class Login extends React.Component {
                             placeholder="mot de passe"
                             name="password"
                         />
-                        <input type="submit" id="mySubmit" className="custom-button" onSubmit={this.signin} value="Se connecter" />
+                        <input type="submit" id="mySubmit" className="custom-button" value="Se connecter" />
                     </form>
 
                     <Link to="/forgot-password">Mot de passe oublié ?</Link>
