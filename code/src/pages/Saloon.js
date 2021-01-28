@@ -35,7 +35,7 @@ const Saloon = observer(({ store }) => {
                         </thead>
 
                         <tbody>
-                            {store.currentGame.players.map((item, index) => {
+                             {store.currentGame.players.map((item, index) => {
                                 return (
                                     <tr key={index}>
                                         <td value={item.avatar}>{item.avatar}</td>

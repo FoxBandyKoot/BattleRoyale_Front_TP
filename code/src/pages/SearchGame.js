@@ -91,6 +91,7 @@ const SearchGame = observer(({ store }) => {
                                 <th>Carte</th>
                                 <th>Action</th>
                                 <th></th>
+
                             </tr>
                         </thead>
                         <tbody>
