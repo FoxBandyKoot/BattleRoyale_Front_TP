@@ -84,8 +84,8 @@ export default class SearchGame extends Component {
                             <label className="custom-label">Rechercher par carte</label>
                             <select className="custom-dropdown" name="mapSelect">
                                 {
-                                    this.state.maps.map((e, i) => <option key={i} value={e[0]}>
-                                        {e[1]}
+                                    this.state.maps.map((e, i) => <option key={i} value={e}>
+                                        {e}
                                     </option>)
                                 }
                             </select>
@@ -93,8 +93,8 @@ export default class SearchGame extends Component {
                             <label className="custom-label">Rechercher par propriété</label>
                             <select className="custom-dropdown" name="propertySelect">
                                 {
-                                    this.state.properties.map((e, i) => <option key={i} value={e[0]}>
-                                        {e[1]}
+                                    this.state.properties.map((e, i) => <option key={i} value={e}>
+                                        {e}
                                     </option>)
                                 }
                             </select>
@@ -116,7 +116,7 @@ export default class SearchGame extends Component {
                                     return (
                                         <tr key={item.id}>
                                             <td>{item.name}</td>
-                                            <td>{this.state.maps[item.map]}</td>
+                                            <td>{item.map}</td>
                                             <td>
                                                 <button className="custom-button" onClick={() => this.joinGame(item.id)}>Rejoindre</button>
                                             </td>
