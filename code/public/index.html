@@ -22,7 +22,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Battle Royale game</title>
 </head>
 
 <body>
@@ -57,37 +57,39 @@
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("/sw.js").then((regObject) => {
 
-            Notification.requestPermission(function(status) {
-                if(status === 'granted') {
-                    regObject.pushManager.subscribe({
-                        userVisibleOnly: true,
-                        applicationServerKey: urlBase64ToUint8Array('BJRMRf9TvqTUBe_vfLODm7rcgUmYRoPN7rfkBwZBAA8nE4OuMNIueaVvXHEGWpwjEo4HxpuZQE834fOU0L9dO5k')
-                    }).then(function(sub) {
-                        fetch('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
-                            method: 'PATCH',
-                            headers: new Headers({
-                                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                                'Content-Type': 'application/merge-patch+json'
-                            }),
-                            body: JSON.stringify({pushEndpoint: sub.endpoint})
-                        })
-                        .then(function(response) {
+                    Notification.requestPermission(function(status) {
+                        if (status === 'granted') {
+                            regObject.pushManager.subscribe({
+                                userVisibleOnly: true,
+                                applicationServerKey: urlBase64ToUint8Array('BJRMRf9TvqTUBe_vfLODm7rcgUmYRoPN7rfkBwZBAA8nE4OuMNIueaVvXHEGWpwjEo4HxpuZQE834fOU0L9dO5k')
+                            }).then(function(sub) {
+                                fetch('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
+                                        method: 'PATCH',
+                                        headers: new Headers({
+                                            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                                            'Content-Type': 'application/merge-patch+json'
+                                        }),
+                                        body: JSON.stringify({
+                                            pushEndpoint: sub.endpoint
+                                        })
+                                    })
+                                    .then(function(response) {
 
-                        });
-                    }).catch(function(e) {
-                        if (Notification.permission === 'denied') {
-                            console.warn('Permission for notifications was denied');
-                        } else {
-                            console.error('Unable to subscribe to push', e);
+                                    });
+                            }).catch(function(e) {
+                                if (Notification.permission === 'denied') {
+                                    console.warn('Permission for notifications was denied');
+                                } else {
+                                    console.error('Unable to subscribe to push', e);
+                                }
+                            });
                         }
                     });
-                }
-            });
 
-        })
-        .catch((error) => {
-            console.error("Could not register service worker", error);
-        });
+                })
+                .catch((error) => {
+                    console.error("Could not register service worker", error);
+                });
         }
     </script>
 
