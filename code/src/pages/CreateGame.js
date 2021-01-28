@@ -46,27 +46,21 @@ export default class CreateGame extends Component {
     this.createGame()
   }
 
-  onSubmit = (form) => {
-    form.preventDefault()
-    this.createGame()
-  }
-
   createGame = () => {
 
-    axios.post('http://localhost:8000/api/games/', {
-
+    axios.post('http://localhost:8000/api/games', {
       name: "Party1",
       code: "private",
       round: 0,
-      owner: "/api/users/" + localStorage.getItem('userId'),
-      map: "string",
-      date: "2021-01-22T21:06:03.229Z"
+      owner_id: "/api/users/" + localStorage.getItem('userId'),
+      map: "Bleu",
+      date: "2021-01-28T13:49:18.218Z"
     }, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token')
       },
       }).then(result => {
-        if (result.status === 20) {
+        if (result.status === 200) {
           this.props.history.push('/saloon')
         } else {
           console.log(result)

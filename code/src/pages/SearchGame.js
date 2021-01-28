@@ -1,9 +1,7 @@
-import React, { useRef, Component } from "react";
-import { observer } from "mobx-react-lite";
+import React, { Component } from "react";
 import Menu from "../components/Menu";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
-import SearchGameStore from "../observers/SearchGameStore";
 
 class SearchGame extends Component {
 
@@ -20,10 +18,6 @@ class SearchGame extends Component {
         }
     }
 
-    onChange = (e) => {
-       // const formData = new FormData(form.current);
-        //store.setFormData(formData);
-    }
 
     joinGame = (id) => {
         axios.post('http://localhost:8000/api/players', {
@@ -71,7 +65,7 @@ class SearchGame extends Component {
                         <div className="title-page">Rechercher une partie</div>
     
                         {/********************** REASEARCH FORM **********************/}
-                        <form onChange={this.onChange} ref={this.form}>
+                        <form    ref={this.form}>
     
                             <label className="custom-label">Rerchercher par nom</label>
                             <input
