@@ -1,11 +1,13 @@
 import React, { useRef } from "react";
 import { observer } from "mobx-react-lite";
 import Menu from "../components/Menu";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const Saloon = observer(({ store }) => {
 
     const form = useRef(null);
+    const history = useHistory();
+    const params = useParams();
 
     const onChange = (e) => {
         const formData = new FormData(form.current);
@@ -13,8 +15,7 @@ const Saloon = observer(({ store }) => {
     }
 
     const accessGame = () => {
-        let history = useHistory();
-        history.push('/map/');
+        history.push('/map/game/' + params.gameId + '/player/' + params.playerId);
     }
 
     return (
