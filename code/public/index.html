@@ -63,13 +63,13 @@
                         userVisibleOnly: true,
                         applicationServerKey: urlBase64ToUint8Array('BJRMRf9TvqTUBe_vfLODm7rcgUmYRoPN7rfkBwZBAA8nE4OuMNIueaVvXHEGWpwjEo4HxpuZQE834fOU0L9dO5k')
                     }).then(function(sub) {
-                        fetch('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
-                            method: 'PATCH',
+                        fetch('http://localhost:8000/api/push_endpoints', {
+                            method: 'POST',
                             headers: new Headers({
                                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                                'Content-Type': 'application/merge-patch+json'
+                                'Content-Type': 'application/json'
                             }),
-                            body: JSON.stringify({pushEndpoint: sub.endpoint})
+                            body: JSON.stringify({path: sub.endpoint, user: '/api/users/' + localStorage.getItem('userId')})
                         })
                         .then(function(response) {
 

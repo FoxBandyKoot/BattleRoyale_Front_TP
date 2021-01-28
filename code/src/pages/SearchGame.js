@@ -2,10 +2,10 @@ import React, { useRef, Component } from "react";
 import { observer } from "mobx-react-lite";
 import Menu from "../components/Menu";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import SearchGameStore from "../observers/SearchGameStore";
 
-export default class SearchGame extends Component {
+class SearchGame extends Component {
 
     constructor(props) {
         super(props);
@@ -37,7 +37,7 @@ export default class SearchGame extends Component {
             }
         }).then(res => {
             if(res.status === 201) {
-                this.props.history.push('/saloon/' + id)
+                this.props.history.push('/saloon/game/' + id + '/player/' + res.data.id);
             }
         }).catch(err => {
             console.log(err);
@@ -132,6 +132,8 @@ export default class SearchGame extends Component {
         )
     }
 }
+
+export default withRouter(SearchGame);
 
 
 

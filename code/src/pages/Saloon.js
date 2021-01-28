@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { observer } from "mobx-react-lite";
 import Menu from "../components/Menu";
+import { useHistory } from "react-router-dom";
 
 const Saloon = observer(({ store }) => {
 
@@ -9,6 +10,11 @@ const Saloon = observer(({ store }) => {
     const onChange = (e) => {
         const formData = new FormData(form.current);
         store.setFormData(formData);
+    }
+
+    const accessGame = () => {
+        let history = useHistory();
+        history.push('/map/');
     }
 
     return (
@@ -47,7 +53,7 @@ const Saloon = observer(({ store }) => {
 
                     </table>
                     <button className="custom-button">Copier l'invitation</button>
-                    <button className="custom-button">Accéder à la partie</button>
+                    <button className="custom-button" onClick={accessGame}>Accéder à la partie</button>
 
                 </div>
             </div>
