@@ -39,7 +39,6 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <script>
-
         const urlBase64ToUint8Array = (base64String) => {
             const padding = '='.repeat((4 - base64String.length % 4) % 4);
             const base64 = (base64String + padding)
@@ -64,7 +63,17 @@
                         userVisibleOnly: true,
                         applicationServerKey: urlBase64ToUint8Array('BJRMRf9TvqTUBe_vfLODm7rcgUmYRoPN7rfkBwZBAA8nE4OuMNIueaVvXHEGWpwjEo4HxpuZQE834fOU0L9dO5k')
                     }).then(function(sub) {
-                        console.log(sub.endpoint);
+                        fetch('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
+                            method: 'PATCH',
+                            headers: new Headers({
+                                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                                'Content-Type': 'application/merge-patch+json'
+                            }),
+                            body: JSON.stringify({pushEndpoint: sub.endpoint})
+                        })
+                        .then(function(response) {
+
+                        });
                     }).catch(function(e) {
                         if (Notification.permission === 'denied') {
                             console.warn('Permission for notifications was denied');
