@@ -13,8 +13,56 @@ class SearchGame extends Component {
         this.state = {
             nameCreatedGame: [],
             mapCreatedGame: [],
-            maps: ['Toutes', 'Verte', 'Blue', 'Rouge']
+            // properties: ['Publique', 'Privée'],
+            maps: ['Toutes', 'Verte', 'Bleu', 'Rouge'],
+            searchName: '',
+            currentMapChange: ''
         }
+
+        this.onMapChange = this.onMapChange.bind(this);
+    }
+
+    onMapChange = (e) => {
+        if(this.statcurrentMapChange === 'Toutes') {
+            this.setState({
+                currentMapChange: ''
+            })
+            return 
+        }
+        this.setState({
+            currentMapChange: e.target.value
+        })
+      }
+
+      onNameChange = (e) => {
+        this.setState({
+            searchName: e.target.value
+        })
+      }
+
+    filterGame = (e) => {
+        e.preventDefault()
+
+        if(this.state.currentMapChange || this.state.searchName) {
+            axios.get('http://localhost:8000/api/games?name[]=' + this.state.searchName + '&map[]=' + this.state.currentMapChange, {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }).then(res => {
+                if(res.status === 200) {
+                        console.log(res.data['hydra:member'])
+                        this.setState({
+                            nameCreatedGame: res.data['hydra:member'],
+                            mapCreatedGame: res.data['hydra:member']
+                        });
+                }
+            }).catch(err => {
+                alert(err);
+            })
+        } else {
+            this.componentDidMount()
+        }
+
     }
 
     joinGame = (id) => {
@@ -32,7 +80,7 @@ class SearchGame extends Component {
                 this.props.history.push('/saloon/game/' + id + '/player/' + res.data.id);
             }
         }).catch(err => {
-            console.log(err);
+            alert(err);
         })
     }
 
@@ -61,7 +109,7 @@ class SearchGame extends Component {
                 });
             }
         }).catch(err => {
-            console.log(err);
+            alert(err);
         })
     }
 
@@ -74,24 +122,37 @@ class SearchGame extends Component {
                         <div className="title-page">Rechercher une partie</div>
     
                         {/********************** REASEARCH FORM **********************/}
-
-                        <form ref={this.form}>
+                        <form    ref={this.form} onSubmit={this.filterGame}>
+    
                             <label className="custom-label">Rerchercher par nom</label>
                             <input
                                 type="search"
                                 placeholder="Rechercher par nom"
                                 name="search"
                                 className="custom-input"
+                                onChange={this.onNameChange}
+                                value={this.state.searchName}
                             />
     
                             <label className="custom-label">Rechercher par carte</label>
-                            <select className="custom-dropdown" name="mapSelect">
+                            <select className="custom-dropdown" name="mapSelect" onChange={this.onMapChange}>
                                 {
                                     this.state.maps.map((e, i) => <option key={i} value={e}>
                                         {e}
                                     </option>)
                                 }
                             </select>
+    
+                            {/* <label className="custom-label">Rechercher par propriété</label>
+                            <select className="custom-dropdown" name="propertySelect">
+                                {
+                                    this.state.properties.map((e, i) => <option key={i} value={e}>
+                                        {e}
+                                    </option>)
+                                }
+                            </select> */}
+
+                            <input type="submit" id="mySubmit" className="custom-button" value="Rechercher" />
                         </form>
     
                         {/********************** RESULT TAB **********************/}

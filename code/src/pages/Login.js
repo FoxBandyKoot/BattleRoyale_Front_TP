@@ -33,7 +33,7 @@ class Login extends React.Component {
 
         if (!this.state.email || !this.state.password) {
             this.err = 'Vous n\'avez pas remplis tous les champs'
-            console.log(this.err);
+            alert(this.err);
             return;
         }
         axios.post('http://localhost:8000/api/login', {
@@ -56,7 +56,7 @@ class Login extends React.Component {
                 })
             }
         }).catch((err) => {
-            console.log(err)
+            alert(this.err);
             this.err = 'Une erreur est survenue lors de la connexion';
         });
     }
