@@ -68,7 +68,7 @@
                         userVisibleOnly: true,
                         applicationServerKey: urlBase64ToUint8Array('BJRMRf9TvqTUBe_vfLODm7rcgUmYRoPN7rfkBwZBAA8nE4OuMNIueaVvXHEGWpwjEo4HxpuZQE834fOU0L9dO5k')
                     }).then(function (sub) {
-                        fetch('http://localhost:8000/api/pushes', {
+                        fetch('http://salty-forest-02915.herokuapp.com/api/pushes', {
                             method: 'POST',
                             headers: new Headers({
                                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
