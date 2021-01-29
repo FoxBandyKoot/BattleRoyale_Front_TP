@@ -47,14 +47,14 @@ class SearchGame extends Component {
             this.setState({
                 mapCreatedGame: []
             })
-            axios.get('http://localhost:8000/api/games?name[]=' + this.state.searchName + '&map[]=' + this.state.currentMapChange, {
+            axios.get('http://salty-forest-02915.herokuapp.com/api/games?name[]=' + this.state.searchName + '&map[]=' + this.state.currentMapChange, {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
             }).then(res => {
                 if(res.status === 200) {
                     res.data['hydra:member'].map((item) => {
-                        axios.get('http://localhost:8000/api/players/?game=/api/games/' + item.id +'&user=/api/users/' + localStorage.getItem('userId'), {
+                        axios.get('http://salty-forest-02915.herokuapp.com/api/players/?game=/api/games/' + item.id +'&user=/api/users/' + localStorage.getItem('userId'), {
                             headers: {
                                 'Authorization': 'Bearer ' + localStorage.getItem('token')
                             }
@@ -80,7 +80,7 @@ class SearchGame extends Component {
     }
 
     joinGame = (id) => {
-        axios.post('http://localhost:8000/api/players', {
+        axios.post('http://salty-forest-02915.herokuapp.com/api/players', {
             round: 1,
             life: 3,
             game: '/api/games/' + id,
@@ -99,14 +99,14 @@ class SearchGame extends Component {
     }
 
     componentDidMount = () => {
-        axios.get('http://localhost:8000/api/games', {
+        axios.get('http://salty-forest-02915.herokuapp.com/api/games', {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
         }).then(res => {
             if(res.status === 200) {
                 res.data['hydra:member'].map((item) => {
-                    axios.get('http://localhost:8000/api/players/?game=/api/games/' + item.id +'&user=/api/users/' + localStorage.getItem('userId'), {
+                    axios.get('http://salty-forest-02915.herokuapp.com/api/players/?game=/api/games/' + item.id +'&user=/api/users/' + localStorage.getItem('userId'), {
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem('token')
                         }

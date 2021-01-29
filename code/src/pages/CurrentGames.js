@@ -14,7 +14,7 @@ class CurrentGames extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/api/games?players.user=/api/users/' + localStorage.getItem('userId'), {
+        axios.get('http://salty-forest-02915.herokuapp.com/api/games?players.user=/api/users/' + localStorage.getItem('userId'), {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
@@ -28,13 +28,13 @@ class CurrentGames extends React.Component {
     }
 
     leaveGame(index, gameId, close) {
-        axios.get('http://localhost:8000/api/player-from-game/' + gameId, {
+        axios.get('http://salty-forest-02915.herokuapp.com/api/player-from-game/' + gameId, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
         }).then(res => {
             if(res.status === 200) {
-                axios.delete('http://localhost:8000/api/players/' + res.data, {
+                axios.delete('http://salty-forest-02915.herokuapp.com/api/players/' + res.data, {
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }

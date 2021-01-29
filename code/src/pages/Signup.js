@@ -31,7 +31,7 @@ class Signup extends React.Component {
             return;  
         }
 
-        axios.post("http://localhost:8000/api/sign-up", {
+        axios.post("http://salty-forest-02915.herokuapp.com/api/sign-up", {
             email: this.state.email,
             password: this.state.password,
             pseudo: this.state.pseudo
