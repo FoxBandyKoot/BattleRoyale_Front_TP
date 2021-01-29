@@ -9,16 +9,13 @@ export default class CreateGame extends Component {
     super(props)
 
     this.form = React.createRef();
-
-    let playerNumbers = [1, 2, 3, 4]
-    // let properties = ['Publique', 'Privée']
-    let maps = ['Verte', 'Blue', 'Rouge']
+    this.playerCreateForTheGame = -1;
 
     this.state = {
       gameName: " ",
-      playerNumber: playerNumbers,
-      // property: properties,
-      map: maps,
+      playerNumbers: [1, 2, 3, 4],
+      // properties: 'Publique', 'Privée'],
+      maps: ['Verte', 'Blue', 'Rouge']
     }
   }
 
@@ -51,7 +48,7 @@ export default class CreateGame extends Component {
       owner: "/api/users/" + localStorage.getItem('userId'),  
       name: this.currentGameName,
       code: "N/A",
-      round: 0,
+      round: 1,
       map: this.currentMap,
       date: "2021-01-29"
     }, {
@@ -60,15 +57,46 @@ export default class CreateGame extends Component {
       },
       }).then(result => {
         if (result.status === 200 || result.status === 201) {
-          this.props.history.push('/saloon')
-        } else {
-          console.log(result)
-          alert(result)
-        }
+          
+          // If game is create, create the player and join the game
+          this.createPlayer(result.data.id)
+          // if (err){
+          //   alert("La partie n'a pu être créée, se renseigner dans la console")
+          // }
+          
+        } 
+        
       }).catch(e => {
         console.log(e)
         alert(e)
       });
+  }
+
+  createPlayer = (id) => {
+    axios.post('http://localhost:8000/api/players', {
+        round: 1,
+        life: 3,
+        game: '/api/games/' + id,
+        user: '/api/users/' + localStorage.getItem('userId')
+    }, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    }).then(res => {
+        if(res.status === 201) {
+          if (res.data.id !== -1){
+            console.log("Creation du joueur réussie, récupération de son identifiant pour rejoindre la nouvelle partie");
+            this.joinSaloon(id, res.data.id)
+          }
+        }
+    }).catch(err => {
+        console.log("Echec de la creation du joueur")
+        console.log(err);
+    })
+  }
+
+  joinSaloon(idGame, idPlayer){
+    this.props.history.push('/saloon/game/' + idGame + "/player/" + idPlayer)
   }
 
 
@@ -125,7 +153,7 @@ export default class CreateGame extends Component {
           <label className="custom-label">Sélectionner la carte</label>
           <select className="custom-dropdown" name="mapSelect">
             {
-              this.state.map.map((e, i) => <option key={i} value={e}>
+              this.state.maps.map((e, i) => <option key={i} value={e}>
                 {e}
               </option>)
             }

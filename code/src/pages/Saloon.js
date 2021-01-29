@@ -53,7 +53,7 @@ const Saloon = observer(({ store }) => {
                         </tbody>
 
                     </table>
-                    <button className="custom-button">Copier l'invitation</button>
+                    {/*<button className="custom-button">Copier l'invitation</button>*/}
                     <button className="custom-button" onClick={accessGame}>Accéder à la partie</button>
 
                 </div>
