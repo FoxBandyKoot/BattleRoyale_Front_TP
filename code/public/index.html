@@ -57,37 +57,42 @@
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("/sw.js").then((regObject) => {
 
-            Notification.requestPermission(function(status) {
-                if(status === 'granted') {
-                    regObject.pushManager.subscribe({
+                Notification.requestPermission()
+
+            })
+            .catch((error) => {
+                console.error("Could not register service worker", error);
+            });
+
+            if(Notification.permission === 'granted') {
+                navigator.serviceWorker.ready.then(reg => {
+                    reg.pushManager.subscribe({
                         userVisibleOnly: true,
                         applicationServerKey: urlBase64ToUint8Array('BJRMRf9TvqTUBe_vfLODm7rcgUmYRoPN7rfkBwZBAA8nE4OuMNIueaVvXHEGWpwjEo4HxpuZQE834fOU0L9dO5k')
-                    }).then(function(sub) {
-                        fetch('http://localhost:8000/api/push_endpoints', {
+                    }).then(function (sub) {
+                        fetch('http://localhost:8000/api/pushes', {
                             method: 'POST',
                             headers: new Headers({
                                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
                                 'Content-Type': 'application/json'
                             }),
-                            body: JSON.stringify({path: sub.endpoint, user: '/api/users/' + localStorage.getItem('userId')})
+                            body: JSON.stringify({
+                                endpoint: sub.endpoint,
+                                user: '/api/users/' + localStorage.getItem('userId')
+                            })
                         })
-                        .then(function(response) {
+                            .then(function (response) {
 
-                        });
-                    }).catch(function(e) {
+                            });
+                    }).catch(function (e) {
                         if (Notification.permission === 'denied') {
                             console.warn('Permission for notifications was denied');
                         } else {
                             console.error('Unable to subscribe to push', e);
                         }
                     });
-                }
-            });
-
-        })
-        .catch((error) => {
-            console.error("Could not register service worker", error);
-        });
+                })
+            }
         }
     </script>
 

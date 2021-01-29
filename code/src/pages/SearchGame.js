@@ -15,14 +15,8 @@ class SearchGame extends Component {
         this.state = {
             nameCreatedGame: [],
             mapCreatedGame: [],
-            properties: ['Publique', 'Privée'],
             maps: ['Toutes', 'Verte', 'Blue', 'Rouge']
         }
-    }
-
-    onChange = (e) => {
-       // const formData = new FormData(form.current);
-        //store.setFormData(formData);
     }
 
     joinGame = (id) => {
@@ -52,9 +46,22 @@ class SearchGame extends Component {
         }).then(res => {
             if(res.status === 200) {
                 //this.games = res.data['hydra:member'];
-                this.setState({
-                    nameCreatedGame: res.data['hydra:member'],
-                    mapCreatedGame: res.data['hydra:member']
+
+                res.data['hydra:member'].map((item) => {
+                    axios.get('http://localhost:8000/api/players/?game=/api/games/' + item.id +'&user=/api/users/' + localStorage.getItem('userId'), {
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        }
+                    }).then((res) => {
+                        if(res.data['hydra:totalItems'] === 0) {
+                            const games = this.state.mapCreatedGame;
+                            games.push(item)
+                            this.setState({
+                                mapCreatedGame: games
+                            });
+                        }
+                    })
+                    return '';
                 });
             }
         }).catch(err => {
@@ -72,7 +79,7 @@ class SearchGame extends Component {
     
                         {/********************** REASEARCH FORM **********************/}
                         <form onChange={this.onChange} ref={this.form}>
-    
+
                             <label className="custom-label">Rerchercher par nom</label>
                             <input
                                 type="search"
@@ -89,15 +96,7 @@ class SearchGame extends Component {
                                     </option>)
                                 }
                             </select>
-    
-                            <label className="custom-label">Rechercher par propriété</label>
-                            <select className="custom-dropdown" name="propertySelect">
-                                {
-                                    this.state.properties.map((e, i) => <option key={i} value={e}>
-                                        {e}
-                                    </option>)
-                                }
-                            </select>
+
                         </form>
     
                         {/********************** RESULT TAB **********************/}

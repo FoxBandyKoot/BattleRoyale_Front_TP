@@ -54,7 +54,6 @@ export default class CreateGame extends Component {
   createGame = () => {
 
     axios.post('http://localhost:8000/api/games/', {
-
       name: "Party1",
       code: "private",
       round: 0,
