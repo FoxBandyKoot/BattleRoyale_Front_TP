@@ -35,6 +35,10 @@ utiliser la route /api/sign-up pour s'inscrire
 
 utiliser la route /api/login pour se logger et obtenir un bearer token
 
+utiliser la route /push/send-notification/user_id pour déclencher une push notif
+
+Le endpoint de l'user doit être renseigner dans la table "Push" de la base de données
+
 Liens vers le front :
 https://battle-royale-fil-rouge-i7ws26e5k.vercel.app/
   
