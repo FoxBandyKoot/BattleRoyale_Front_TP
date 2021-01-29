@@ -19,15 +19,22 @@ Le patron d’architecture choisi pour le CSS est le 7-1 (github.com/HugoGiraude
 
 Les fichiers SCSS ont été préféré car plus modernes
 
-NodeJS et ExpressJS ont été choisi pour le back-end (pas encore commencé)
+Symfony (et api platforme) été choisi à la place de NodeJs et ExpressJs pour le back-end (pas encore commencé). Nous avons changé de technologie en raison du manque de temps. Nous avons donc choisis une technologie que nous connaissions mieux
 
+MySQL a été choisi pour la base de données car c’est une technologie connue des membres du groupe et également très utilisée dans le monde
 
+Heroku a été choisi pour le déploiement du back. Car c'est un outil gratuit qui permettait de déployer un back end Symfony.
+Vercel a été choisi pour le deploiement du client car son utilisation a l’air simple, et nous a été conseillé par l’un des enseignants. Malheureusement, nous avons eu des soucis pour le relier au back (problème de CORS http-https)
 
-MySQL a été choisi pour la base de données (pas encore commencé) car c’est une technologie connue des membres du groupe et également très utilisée dans le monde
+Liens vers le back : 
+http://salty-forest-02915.herokuapp.com/
 
-Vercel a été choisi pour la production (pas encore commencé) car son utilisation a l’air simple, et nous a été conseillé par l’un des enseignants.
+utiliser la route /api/docs pour l'utiliser avec Postman
+
+Liens vers le front :
+https://battle-royale-fil-rouge-i7ws26e5k.vercel.app/
   
-# Lancement du projet en local
+# Lancement du projet front en local 
 
 Cloner le projet
 $git clone le projet
@@ -40,5 +47,19 @@ $npm install
 
 Lancer le projet
 $npm start
+
+# Lancement du projet back en local 
+
+Cloner le projet
+$git clone le projet
+
+Se positionner sur la branche develop
+$git checkout develop 
+
+Setup le projet
+$composer install
+
+Lancer le projet
+$php -S 127.0.0.1:8000 -t public
 
 Project made by Namdegone Japhet, Brohan Alexis, Hamelin Nicolas, Lerenard Charly
