@@ -44,7 +44,7 @@ export default class CreateGame extends Component {
   }
 
   createGame = () => {
-    axios.post('http://localhost:8000/api/games', {
+    axios.post('http://salty-forest-02915.herokuapp.com/api/games', {
       owner: "/api/users/" + localStorage.getItem('userId'),  
       name: this.currentGameName,
       code: "N/A",
@@ -73,7 +73,7 @@ export default class CreateGame extends Component {
   }
 
   createPlayer = (id) => {
-    axios.post('http://localhost:8000/api/players', {
+    axios.post('http://salty-forest-02915.herokuapp.com/api/players', {
         round: 1,
         life: 3,
         game: '/api/games/' + id,

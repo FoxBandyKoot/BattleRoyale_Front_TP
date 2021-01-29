@@ -36,7 +36,7 @@ class Login extends React.Component {
             alert(this.err);
             return;
         }
-        axios.post('http://localhost:8000/api/login', {
+        axios.post('http://salty-forest-02915.herokuapp.com/api/login', {
             email: this.state.email,
             password: this.state.password,
         }).then(response => {
@@ -46,7 +46,7 @@ class Login extends React.Component {
                 localStorage.setItem('token', response.data.token);
 
                 // Get informations on user account
-                axios.get('http://localhost:8000/api/current-user', {
+                axios.get('http://salty-forest-02915.herokuapp.com/api/current-user', {
                     headers: {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                     }

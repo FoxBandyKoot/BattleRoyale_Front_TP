@@ -19,7 +19,7 @@ class Account extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
+        axios.get('http://salty-forest-02915.herokuapp.com/api/users/' + localStorage.getItem('userId'), {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
@@ -45,7 +45,7 @@ class Account extends React.Component {
 
     handleSubmit() {
         if(this.state.password) {
-            axios.put('http://localhost:8000/api/update-password/' + localStorage.getItem('userId'), {
+            axios.put('http://salty-forest-02915.herokuapp.com/api/update-password/' + localStorage.getItem('userId'), {
                 password: this.state.password,
             }, {
                 headers: {
@@ -60,7 +60,7 @@ class Account extends React.Component {
             })
         }
 
-        axios.put('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
+        axios.put('http://salty-forest-02915.herokuapp.com/api/users/' + localStorage.getItem('userId'), {
             email: this.state.email,
             pseudo: this.state.pseudo,
         }, {
@@ -77,7 +77,7 @@ class Account extends React.Component {
     }
 
     handleDeleteAccount() {
-        axios.delete('http://localhost:8000/api/users/' + localStorage.getItem('userId'), {
+        axios.delete('http://salty-forest-02915.herokuapp.com/api/users/' + localStorage.getItem('userId'), {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
