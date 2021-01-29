@@ -9,7 +9,7 @@ export default class CreateGame extends Component {
     super(props)
 
     this.form = React.createRef();
-    this.playerCreateForTheGame = 0;
+    this.playerCreateForTheGame = -1;
 
     this.state = {
       gameName: " ",
@@ -59,11 +59,11 @@ export default class CreateGame extends Component {
       }).then(result => {
         if (result.status === 200 || result.status === 201) {
           
-          // If game is create, create the player for join the game
+          // If game is create, create the player and join the game
           this.createPlayer(result.data.id)
-          if (this.playerCreateForTheGame !== 0){
-            this.props.history.push('/saloon/game/' + result.data.id + "/player/" + this.playerCreateForTheGame)
-          }
+          // if (err){
+          //   alert("La partie n'a pu être créée, se renseigner dans la console")
+          // }
           
         } 
         
@@ -85,14 +85,20 @@ export default class CreateGame extends Component {
         }
     }).then(res => {
         if(res.status === 201) {
-          console.log("Creation du joueur réussie, récupération de son identifiant pour rejoindre la nouvelle partie");
-          this.playerCreateForTheGame = res.data.id;
+          if (res.data.id !== -1){
+            console.log("Creation du joueur réussie, récupération de son identifiant pour rejoindre la nouvelle partie");
+            this.joinSaloon(id, res.data.id)
+          }
         }
     }).catch(err => {
         console.log("Echec de la creation du joueur")
         console.log(err);
     })
-}
+  }
+
+  joinSaloon(idGame, idPlayer){
+    this.props.history.push('/saloon/game/' + idGame + "/player/" + idPlayer)
+  }
 
 
   render = () => {
