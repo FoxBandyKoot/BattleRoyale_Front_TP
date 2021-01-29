@@ -90,4 +90,10 @@ $php bin/console doctrine:schema:update --force
 6 - Lancer le projet
 $php -S 127.0.0.1:8000 -t public
 
+# Étapes réalisées depuis la soutenance
+
+1 - Déploiement du front sur Vercel
+2 - Déploiement du back sur Heroku
+3 - Clean code & some fixes
+
 Project made by Namdegone Japhet, Brohan Alexis, Hamelin Nicolas, Lerenard Charly
