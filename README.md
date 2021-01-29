@@ -7,7 +7,9 @@ certains membres ont des connaissance sur React,
 les enseignants sont également à l’aise avec la technologie
 La maquette a été réalisé avec Adobe XD car plusieurs membres du groupe ont des connaissances sur l’outil
 
-poolors.com a été pour le choix des couleurs
+draw.io a été utilisé pour le schéma de la base de donnée ainsi que pour le schéma des vues
+
+poolors.com a été utilisé pour le choix des couleurs
 
 L’approche « mobile-first » a été privilégié
 
@@ -41,6 +43,7 @@ Le endpoint de l'user doit être renseigner dans la table "Push" de la base de d
 
 Liens vers le front :
 https://battle-royale-fil-rouge-i7ws26e5k.vercel.app/
+
   
 # Lancement du projet front en local 
 
