@@ -56,8 +56,17 @@ $git clone le projet
 Se positionner sur la branche develop
 $git checkout develop 
 
+Préparer les token JWT
+$ mkdir -p config/jwt
+$ openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
+$ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
+
 Setup le projet
 $composer install
+
+Créer la base de donnée
+$php bin/console doctrine:database:create
+$php bin/console doctrine:schema:update --force
 
 Lancer le projet
 $php -S 127.0.0.1:8000 -t public
