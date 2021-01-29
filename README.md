@@ -51,7 +51,7 @@ https://battle-royale-fil-rouge-i7ws26e5k.vercel.app/
 1 - Cloner le projet
 $git clone le projet
 
-2 - Se positionner sur la branche main
+2 - Se positionner sur la branche develop
 $git checkout develop 
 
 3 - Setup le projet
@@ -65,7 +65,7 @@ $npm start
 1 - Cloner le projet
 $git clone le projet
 
-2 - Se positionner sur la branche main
+2 - Se positionner sur la branche develop
 $git checkout develop 
 
 3 - Préparer les token JWT
