@@ -37,7 +37,7 @@ class Map1 extends React.Component {
 
     onFinish() {
         console.log(this.props)
-        axios.patch('http://localhost:8000/api/games/' + this.props.match.params.gameId, {
+        axios.patch('http://salty-forest-02915.herokuapp.com/api/games/' + this.props.match.params.gameId, {
             lastPlayer: '/api/players/' + this.props.match.params.playerId
         }, {
             headers: {
@@ -46,13 +46,13 @@ class Map1 extends React.Component {
             }
         }).then(res => {
             if(res.status === 200) {
-                axios.get('http://localhost:8000/api/current-player-game/' + this.props.match.params.gameId, {
+                axios.get('http://salty-forest-02915.herokuapp.com/api/current-player-game/' + this.props.match.params.gameId, {
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }
                 }).then(res => {
                     if(res.status === 200) {
-                        axios.get('http://localhost:8000/push/send-notification/' + res.data, {
+                        axios.get('http://salty-forest-02915.herokuapp.com/push/send-notification/' + res.data, {
                             headers: {
                                 'Authorization': 'Bearer ' + localStorage.getItem('token')
                             }
