@@ -57,7 +57,7 @@ class CurrentGames extends React.Component {
             })
         }
         joinMyPart(gameId, playerId) {
-            this.props.history.push('/saloon/game/' + gameId + '/player/' + playerId);
+            this.props.history.push('/map/game/' + gameId + '/player/' + playerId);
             console.log(gameId, playerId)
         }
 
