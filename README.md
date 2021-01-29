@@ -11,19 +11,21 @@ draw.io a été utilisé pour le schéma de la base de donnée ainsi que pour le
 
 poolors.com a été utilisé pour le choix des couleurs
 
-L’approche « mobile-first » a été privilégié
+L’approche responsive « mobile-first » a été privilégié
 
-Les IDE utilisés sont Visual Studio Code (VSC)
+Librairies react-router-dom pour le routing, react-burger-menu pour le menu burger, react-popup pour les modals du front
+
+Les IDE utilisés sont Visual Studio Code (VSC) et PHPStorm
 
 L’extension Git Graph sur VSC a été utilisé pour faciliter le travail sur Git
 
-Le patron d’architecture choisi pour le CSS est le 7-1 (github.com/HugoGiraudel/sass-boilerplate)
-
 Les fichiers SCSS ont été préféré car plus modernes
 
-Symfony (et api platforme) été choisi à la place de NodeJs et ExpressJs pour le back-end (pas encore commencé). Nous avons changé de technologie en raison du manque de temps. Nous avons donc choisis une technologie que nous connaissions mieux
+Symfony (et API-platform) été choisi à la place de NodeJs et ExpressJs pour le back-end (pas encore commencé). Nous avons changé de technologie en raison du manque de temps. Nous avons donc choisis une technologie que nous connaissions mieux
 
 MySQL a été choisi pour la base de données car c’est une technologie connue des membres du groupe et également très utilisée dans le monde
+
+JWT authentication a été choisie pour la sécurisation de l'API
 
 Heroku a été choisi pour le déploiement du back. Car c'est un outil gratuit qui permettait de déployer un back end Symfony.
 Vercel a été choisi pour le deploiement du client car son utilisation a l’air simple, et nous a été conseillé par l’un des enseignants. Malheureusement, nous avons eu des soucis pour le relier au back (problème de CORS http-https)
@@ -33,12 +35,11 @@ http://salty-forest-02915.herokuapp.com/
 
 utiliser la route /api/docs pour voir les routes à utiliser avec Postman
 
-utiliser la route /api/sign-up pour s'inscrire
+utiliser la route /api/sign-up pour s'inscrire (POST, body JSON avec email et password)
 
-utiliser la route /api/login pour se logger et obtenir un bearer token
+utiliser la route /api/login pour se logger (POST, body JSON avec email et password) et obtenir un bearer token
 
 utiliser la route /push/send-notification/user_id pour déclencher une push notif
-
 Le endpoint de l'user doit être renseigner dans la table "Push" de la base de données
 
 Liens vers le front :
