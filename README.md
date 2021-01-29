@@ -29,7 +29,11 @@ Vercel a été choisi pour le deploiement du client car son utilisation a l’ai
 Liens vers le back : 
 http://salty-forest-02915.herokuapp.com/
 
-utiliser la route /api/docs pour l'utiliser avec Postman
+utiliser la route /api/docs pour voir les routes à utiliser avec Postman
+
+utiliser la route /api/sign-up pour s'inscrire
+
+utiliser la route /api/login pour se logger et obtenir un bearer token
 
 Liens vers le front :
 https://battle-royale-fil-rouge-i7ws26e5k.vercel.app/
