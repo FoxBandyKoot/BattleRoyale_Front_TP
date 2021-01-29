@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/BattleRoyale_Front_TP/static/css/main.82f381bb.chunk.css",
+    "main.js": "/BattleRoyale_Front_TP/static/js/main.5af0591c.chunk.js",
+    "main.js.map": "/BattleRoyale_Front_TP/static/js/main.5af0591c.chunk.js.map",
+    "runtime-main.js": "/BattleRoyale_Front_TP/static/js/runtime-main.02cc3544.js",
+    "runtime-main.js.map": "/BattleRoyale_Front_TP/static/js/runtime-main.02cc3544.js.map",
+    "static/css/2.3613e071.chunk.css": "/BattleRoyale_Front_TP/static/css/2.3613e071.chunk.css",
+    "static/js/2.9474503b.chunk.js": "/BattleRoyale_Front_TP/static/js/2.9474503b.chunk.js",
+    "static/js/2.9474503b.chunk.js.map": "/BattleRoyale_Front_TP/static/js/2.9474503b.chunk.js.map",
+    "index.html": "/BattleRoyale_Front_TP/index.html",
+    "static/css/2.3613e071.chunk.css.map": "/BattleRoyale_Front_TP/static/css/2.3613e071.chunk.css.map",
+    "static/css/main.82f381bb.chunk.css.map": "/BattleRoyale_Front_TP/static/css/main.82f381bb.chunk.css.map",
+    "static/js/2.9474503b.chunk.js.LICENSE.txt": "/BattleRoyale_Front_TP/static/js/2.9474503b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.02cc3544.js",
+    "static/css/2.3613e071.chunk.css",
+    "static/js/2.9474503b.chunk.js",
+    "static/css/main.82f381bb.chunk.css",
+    "static/js/main.5af0591c.chunk.js"
+  ]
+}
