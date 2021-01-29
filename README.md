@@ -36,42 +36,46 @@ https://battle-royale-fil-rouge-i7ws26e5k.vercel.app/
   
 # Lancement du projet front en local 
 
-Cloner le projet
+1 - Cloner le projet
 $git clone le projet
 
-Se positionner sur la branche develop
+2 - Se positionner sur la branche develop
 $git checkout develop 
 
-Setup le projet
+3 - Setup le projet
 $npm install
 
-Lancer le projet
+4 - Lancer le projet
 $npm start
 
 # Lancement du projet back en local 
 
-Cloner le projet
+1 - Cloner le projet
 $git clone le projet
 
-Se positionner sur la branche develop
+2 - Se positionner sur la branche develop
 $git checkout develop 
 
-Préparer les token JWT
+3 - Préparer les token JWT
 $ mkdir -p config/jwt
 $ openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
 $ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 
-Setup le projet
+4 - Setup le projet
+
+Copier le .env dans le .env.local puis l'adapter à son environnement
+
+Configurer DATABASE_URL et JWT_PASSPHRASE (passphrase choisi lors de la création des jwt tokens) dans le .env.local
 
 $composer install
 
-Créer la base de donnée
+5 - Créer la base de donnée
 
 $php bin/console doctrine:database:create
 
 $php bin/console doctrine:schema:update --force
 
-Lancer le projet
+6 - Lancer le projet
 $php -S 127.0.0.1:8000 -t public
 
 Project made by Namdegone Japhet, Brohan Alexis, Hamelin Nicolas, Lerenard Charly
