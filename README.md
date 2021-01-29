@@ -21,6 +21,8 @@ L’extension Git Graph sur VSC a été utilisé pour faciliter le travail sur G
 
 Les fichiers SCSS ont été préféré car plus modernes
 
+Symfony pour le back-end car :
+
 Symfony (et API-platform) été choisi à la place de NodeJs et ExpressJs pour le back-end (pas encore commencé). Nous avons changé de technologie en raison du manque de temps. Nous avons donc choisis une technologie que nous connaissions mieux
 
 MySQL a été choisi pour la base de données car c’est une technologie connue des membres du groupe et également très utilisée dans le monde
