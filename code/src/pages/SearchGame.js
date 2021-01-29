@@ -14,10 +14,56 @@ class SearchGame extends Component {
             nameCreatedGame: [],
             mapCreatedGame: [],
             // properties: ['Publique', 'Privée'],
-            maps: ['Toutes', 'Verte', 'Blue', 'Rouge']
+            maps: ['Toutes', 'Verte', 'Bleue', 'Rouge'],
+            searchName: '',
+            currentMapChange: ''
         }
+
+        this.onMapChange = this.onMapChange.bind(this);
     }
 
+    onMapChange = (e) => {
+        if(this.statcurrentMapChange === 'Toutes') {
+            this.setState({
+                currentMapChange: ''
+            })
+            return 
+        }
+        this.setState({
+            currentMapChange: e.target.value
+        })
+      }
+
+      onNameChange = (e) => {
+        this.setState({
+            searchName: e.target.value
+        })
+      }
+
+    filterGame = (e) => {
+        e.preventDefault()
+
+        if(this.state.currentMapChange || this.state.searchName) {
+            axios.get('http://localhost:8000/api/games?name[]=' + this.state.searchName + '&map[]=' + this.state.currentMapChange, {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }).then(res => {
+                if(res.status === 200) {
+                        console.log(res.data['hydra:member'])
+                        this.setState({
+                            nameCreatedGame: res.data['hydra:member'],
+                            mapCreatedGame: res.data['hydra:member']
+                        });
+                }
+            }).catch(err => {
+                alert(err);
+            })
+        } else {
+            this.componentDidMount()
+        }
+
+    }
 
     joinGame = (id) => {
         axios.post('http://localhost:8000/api/players', {
@@ -34,7 +80,7 @@ class SearchGame extends Component {
                 this.props.history.push('/saloon/game/' + id + '/player/' + res.data.id);
             }
         }).catch(err => {
-            console.log(err);
+            alert(err);
         })
     }
 
@@ -45,14 +91,13 @@ class SearchGame extends Component {
             }
         }).then(res => {
             if(res.status === 200) {
-                //this.games = res.data['hydra:member'];
                 this.setState({
                     nameCreatedGame: res.data['hydra:member'],
                     mapCreatedGame: res.data['hydra:member']
                 });
             }
         }).catch(err => {
-            console.log(err);
+            alert(err);
         })
     }
 
@@ -65,7 +110,7 @@ class SearchGame extends Component {
                         <div className="title-page">Rechercher une partie</div>
     
                         {/********************** REASEARCH FORM **********************/}
-                        <form    ref={this.form}>
+                        <form    ref={this.form} onSubmit={this.filterGame}>
     
                             <label className="custom-label">Rerchercher par nom</label>
                             <input
@@ -73,10 +118,12 @@ class SearchGame extends Component {
                                 placeholder="Rechercher par nom"
                                 name="search"
                                 className="custom-input"
+                                onChange={this.onNameChange}
+                                value={this.state.searchName}
                             />
     
                             <label className="custom-label">Rechercher par carte</label>
-                            <select className="custom-dropdown" name="mapSelect">
+                            <select className="custom-dropdown" name="mapSelect" onChange={this.onMapChange}>
                                 {
                                     this.state.maps.map((e, i) => <option key={i} value={e}>
                                         {e}
@@ -92,6 +139,8 @@ class SearchGame extends Component {
                                     </option>)
                                 }
                             </select> */}
+
+                            <input type="submit" id="mySubmit" className="custom-button" value="Rechercher" />
                         </form>
     
                         {/********************** RESULT TAB **********************/}
