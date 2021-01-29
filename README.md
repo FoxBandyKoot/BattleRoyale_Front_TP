@@ -62,10 +62,13 @@ $ openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rs
 $ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 
 Setup le projet
+
 $composer install
 
 Créer la base de donnée
+
 $php bin/console doctrine:database:create
+
 $php bin/console doctrine:schema:update --force
 
 Lancer le projet
