@@ -1,4 +1,4 @@
-# BattleRoyale_Front_TP
+# BattleRoyale
 
 React pour le front-end car :
 
