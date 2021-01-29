@@ -1,6 +1,7 @@
 import React from "react";
-import axios from "axios";
 import { withRouter } from 'react-router-dom';
+import Menu from "../components/Menu";
+import axios from "axios";
 
 class Map1 extends React.Component {
 
@@ -16,22 +17,11 @@ class Map1 extends React.Component {
 
         this.handleAddSecondInput = this.handleAddSecondInput.bind(this)           
         this.onFinish = this.onFinish.bind(this)
-
     }
 
-    /**** PROF VERSION *****/
-    test() {
-        // const cells = Array.from({ length: 100 }, () => ({}));
 
+    generateMap() {
         this.myMap = Array.from({ length: 100 }, () => ({}));
-        // this.myMap = document.getElementsByClassName('.map');
-
-        // cells.map((item, index) => {
-        //     this.myMap.dangerouslySetInnerHTML += 
-        //     <div className="square">
-        //         <div className='cell'></div>
-        //     </div>;
-        // })
     }
 
     handleAddSecondInput() {
@@ -40,6 +30,8 @@ class Map1 extends React.Component {
             inputLinkClicked: true
         })  
     }
+
+
 
     setPosition(){}
 
@@ -83,11 +75,12 @@ class Map1 extends React.Component {
 
     render() {
 
-        this.test();
-        console.log(this.myMap);
+        this.generateMap();
 
-        /**** PROF VERSION *****/
-        return (<>
+        return (
+        <>
+        <Menu/>
+        <div className="div-form">
             <div className="map" onClick={this.handleAddSecondInput}>
 
                 {this.myMap.map((item, index) => {
@@ -98,7 +91,9 @@ class Map1 extends React.Component {
                 })}
             </div>
             <button className="custom-button" onClick={this.onFinish}>Finish turn</button>
-        </>)
+        </div>
+        </>
+        )
     }
 }
 export default withRouter(Map1);

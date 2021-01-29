@@ -2,7 +2,7 @@ import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'reactjs-popup/dist/index.css';
 import React from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import CreateGame from "./pages/CreateGame";
@@ -43,6 +43,5 @@ function App() {
     function initialize() {
         document.body.style.backgroundColor = "#053244";
     }
-  
 }
 export default App;

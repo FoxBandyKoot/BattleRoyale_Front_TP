@@ -1,68 +1,112 @@
-import React, {useState} from "react";
-import {Link, Redirect} from 'react-router-dom';
+import React from "react";
+import {Link} from 'react-router-dom';
 import axios from "axios";
 import Menu from "../components/Menu";
 
-function Signup() {
-    const [isError, setIsError] = useState(false);
-    const [isCreated, setCreated] = useState(false);
-    const [userName, setUserName] = useState("");
-    const [password, setPassword] = useState("");
+class Signup extends React.Component {
+    
+    constructor(props){
+        super(props)
+        this.state = {
+            isError: false,
+        }
+            
+        this.email = '';
+        this.password = '';
+        this.pseudo = '';
 
-    function postSignUp() {
-        axios.post("http://localhost:8080/api/sign-up", {
-            "username": userName,
-            "password": password
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.postSignUp = this.postSignUp.bind(this);
+
+    }
+
+    postSignUp(e) {
+        e.preventDefault()
+    
+
+        if(!this.state.email || !this.state.password){
+            this.err = 'Vous n\'avez pas remplis tous les champs'
+            alert(this.err);
+            return;  
+        }
+
+        axios.post("http://localhost:8000/api/sign-up", {
+
+            email: this.state.email,
+            password: this.state.password,
+            pseudo: this.state.pseudo
         }).then(result => {
             if (result.status === 200) {
-                setCreated(true);
+                this.props.history.push("/login");
+
             } else {
-                setIsError(true);
+                this.setState({isError: true})
             }
         }).catch(e => {
-            setIsError(true);
+            this.setState({isError: true})
+        });
+
+    }
+
+    handleInputChange(event) {
+        console.log(event.target.name)
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
         });
     }
 
-    if(isCreated) {
-        return <Redirect to="/login" />
+    render(){
+        return (
+            <>
+                <Menu />
+                <div className="div-form">
+                    <h1 className="title-page">Inscription</h1>
+                    <form className="custom-form" onSubmit={this.postSignUp}>
+    
+                    <label className="custom-label">Adresse email</label>
+                        <input
+                            className="custom-input"
+                            type = "email"
+                            name = "email"
+                            value = {this.state.email}
+                            onChange = {this.handleInputChange}
+                            placeholder = "Email"
+                        />
+    
+                        <label className="custom-label">Mot de passe </label>
+                        <input
+                            className="custom-input"
+                            type="password"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.handleInputChange}
+                            placeholder="Mot de passe"
+                        />
+
+                        <label className="custom-label">Pseudo </label>
+                        <input
+                            className="custom-input"
+                            type="text"
+                            name="pseudo"
+                            value={this.state.pseudo}
+                            onChange={this.handleInputChange}
+                            placeholder="Pseudonyme"
+                        />
+                        <button className="custom-button">Sign Up</button>
+                    
+                    </form>
+                    
+                    <Link to="/login">Déjà un compte ?</Link>
+                    { this.state.isError ? 'Erreur lors de la création de l\'utilisateur' : ''}
+                </div>
+                </>
+            );
     }
-
-    return (
-        <>
-            <Menu />
-            <div className="div-form">
-                <h1 className="title-page">Inscription</h1>
-                <form className="custom-form">
-
-                <label className="custom-label">Adresse email</label>
-                    <input
-                        className="custom-input"
-                        type="username"
-                        value={userName}
-                        onChange={e => {
-                            setUserName(e.target.value);
-                        }}
-                        placeholder="Email"
-                    />
-
-                    <label className="custom-label">Mot de passe </label>
-                    <input
-                        className="custom-input"
-                        type="password"
-                        value={password}
-                        onChange={e => {
-                            setPassword(e.target.value);
-                        }}
-                        placeholder="Mot de passe"
-                    />
-                    <button className="custom-button" onClick={postSignUp}>Sign Up</button>
-                </form>
-                <Link to="/login">Déjà un compte ?</Link>
-                { isError ? 'Erreur lors de la création de l\'utilisateur' : ''}
-            </div>
-            </>
-        );
+    
 }
 
 export default Signup;

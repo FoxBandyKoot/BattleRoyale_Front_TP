@@ -1,5 +1,4 @@
 import { makeAutoObservable } from "mobx"
-import axios from "axios";
 
 class SearchGameStore {
     games = [];
@@ -8,7 +7,6 @@ class SearchGameStore {
 
     constructor() {
         makeAutoObservable(this)
-        //this.getGames(); 
     }
 
     setFormData(data) {

@@ -153,7 +153,6 @@ class Account extends React.Component {
                     )}
                 </Popup>
 
-                <button className="custom-button">Crédits</button>
             </div>
         </>;
     }
