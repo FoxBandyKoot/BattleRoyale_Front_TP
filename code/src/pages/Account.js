@@ -29,7 +29,7 @@ class Account extends React.Component {
                 pseudo: res.data.pseudo ? res.data.pseudo : ''
             });
         }).catch(err => {
-            console.log(err);
+            alert(err);
         })
     }
 
@@ -56,7 +56,7 @@ class Account extends React.Component {
 
                 }
             }).catch(err => {
-                console.log(err);
+                alert(err);
             })
         }
 
@@ -72,7 +72,7 @@ class Account extends React.Component {
                 this.setState({alert: 'Les modifications ont été enregistrées.'})
             }
         }).catch(err => {
-            console.log(err);
+            alert(err);
         })
     }
 
@@ -88,7 +88,7 @@ class Account extends React.Component {
                 this.props.history.push('/login');
             }
         }).catch(err => {
-            console.log(err);
+            alert(err);
         })
     }
 
