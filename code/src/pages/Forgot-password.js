@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-// import { Card, Form, Input, Button } from "../components/ForgotPasswordForm";
-// import { Link, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Menu from "../components/Menu";
 

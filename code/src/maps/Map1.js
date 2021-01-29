@@ -1,5 +1,7 @@
-
 import React from "react";
+import { withRouter } from 'react-router-dom';
+import Menu from "../components/Menu";
+import axios from "axios";
 
 class Map1 extends React.Component {
 
@@ -14,22 +16,12 @@ class Map1 extends React.Component {
         }
 
         this.handleAddSecondInput = this.handleAddSecondInput.bind(this)           
-
+        this.onFinish = this.onFinish.bind(this)
     }
 
-    /**** PROF VERSION *****/
-    test() {
-        // const cells = Array.from({ length: 100 }, () => ({}));
 
+    generateMap() {
         this.myMap = Array.from({ length: 100 }, () => ({}));
-        // this.myMap = document.getElementsByClassName('.map');
-
-        // cells.map((item, index) => {
-        //     this.myMap.dangerouslySetInnerHTML += 
-        //     <div className="square">
-        //         <div className='cell'></div>
-        //     </div>;
-        // })
     }
 
     handleAddSecondInput() {
@@ -39,15 +31,56 @@ class Map1 extends React.Component {
         })  
     }
 
+
+
     setPosition(){}
+
+    onFinish() {
+        console.log(this.props)
+        axios.patch('http://localhost:8000/api/games/' + this.props.match.params.gameId, {
+            lastPlayer: '/api/players/' + this.props.match.params.playerId
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/merge-patch+json'
+            }
+        }).then(res => {
+            if(res.status === 200) {
+                axios.get('http://localhost:8000/api/current-player-game/' + this.props.match.params.gameId, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                }).then(res => {
+                    if(res.status === 200) {
+                        axios.get('http://localhost:8000/push/send-notification/' + res.data, {
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                            }
+                        }).then(res => {
+                            if(res.status === 200) {
+                                this.props.history.push('/currentGames')
+                            }
+                        }).catch(err => {
+                            console.log(err);
+                        })
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+    }
 
     render() {
 
-        this.test();
-        console.log(this.myMap);
+        this.generateMap();
 
-        /**** PROF VERSION *****/
-        return (<>
+        return (
+        <>
+        <Menu/>
+        <div className="div-form">
             <div className="map" onClick={this.handleAddSecondInput}>
 
                 {this.myMap.map((item, index) => {
@@ -57,7 +90,10 @@ class Map1 extends React.Component {
                     
                 })}
             </div>
-        </>)
+            <button className="custom-button" onClick={this.onFinish}>Finish turn</button>
+        </div>
+        </>
+        )
     }
 }
-export default Map1;
+export default withRouter(Map1);

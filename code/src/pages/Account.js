@@ -29,7 +29,7 @@ class Account extends React.Component {
                 pseudo: res.data.pseudo ? res.data.pseudo : ''
             });
         }).catch(err => {
-            console.log(err);
+            alert(err);
         })
     }
 
@@ -56,7 +56,7 @@ class Account extends React.Component {
 
                 }
             }).catch(err => {
-                console.log(err);
+                alert(err);
             })
         }
 
@@ -72,7 +72,7 @@ class Account extends React.Component {
                 this.setState({alert: 'Les modifications ont été enregistrées.'})
             }
         }).catch(err => {
-            console.log(err);
+            alert(err);
         })
     }
 
@@ -88,73 +88,72 @@ class Account extends React.Component {
                 this.props.history.push('/login');
             }
         }).catch(err => {
-            console.log(err);
+            alert(err);
         })
     }
 
     render() {
         return <>
-                <Menu />
-                <div className="main">
-                    <div className="title-page">Compte</div>
-                    {this.state.alert &&
-                        <div className="alert">{this.state.alert}</div>
-                    }
+            <Menu />
+            <div className="main">
+                <div className="title-page">Compte</div>
+                {this.state.alert &&
+                <div className="alert">{this.state.alert}</div>
+                }
 
-                    <form className="custom-form">
+                <form className="custom-form">
 
                     <label className="custom-label">Pseudo</label>
-                        <input
-                            type="text"
-                            value={this.state.pseudo}
-                            onChange={this.handleInputChange}
-                            placeholder="Pseudo"
-                            name="pseudo"
-                            className="custom-input"
-                        />
+                    <input
+                        type="text"
+                        value={this.state.pseudo}
+                        onChange={this.handleInputChange}
+                        placeholder="Pseudo"
+                        name="pseudo"
+                        className="custom-input"
+                    />
 
-                        <label className="custom-label">Changer adresse email</label>
-                        <input
-                            type="email"
-                            value={this.state.email}
-                            onChange={this.handleInputChange}
-                            placeholder="Email"
-                            name="email"
-                            className="custom-input"
-                        />
+                    <label className="custom-label">Changer adresse email</label>
+                    <input
+                        type="email"
+                        value={this.state.email}
+                        onChange={this.handleInputChange}
+                        placeholder="Email"
+                        name="email"
+                        className="custom-input"
+                    />
 
-                        <label className="custom-label">Changer le mot de passe</label>
-                        <input
-                            type="password"
-                            value={this.state.password}
-                            onChange={this.handleInputChange}
-                            placeholder="Mot de passe"
-                            name="password"
-                            className="custom-input"
-                        />
-                    </form>
-                    <button className="custom-button" onClick={this.handleSubmit}>Sauvegarder</button>
+                    <label className="custom-label">Changer le mot de passe</label>
+                    <input
+                        type="password"
+                        value={this.state.password}
+                        onChange={this.handleInputChange}
+                        placeholder="Mot de passe"
+                        name="password"
+                        className="custom-input"
+                    />
+                </form>
+                <button className="custom-button" onClick={this.handleSubmit}>Sauvegarder</button>
 
-                    <Popup
-                        trigger={<button className="custom-button">Supprimer le compte</button>}
-                        modal
-                        nested
-                    >
-                        {(close) => (
-                            <>
-                                <button className="close" onClick={close}>
-                                    &times;
-                                </button>
-                                <div className="content">
-                                    <button className="custom-button" onClick={this.handleDeleteAccount}>Confirmer la suppression du compte</button>
-                                    <button className="custom-button" onClick={close}>Annuler</button>
-                                </div>
-                            </>
-                        )}
-                    </Popup>
+                <Popup
+                    trigger={<button className="custom-button">Supprimer le compte</button>}
+                    modal
+                    nested
+                >
+                    {(close) => (
+                        <>
+                            <button className="close" onClick={close}>
+                                &times;
+                            </button>
+                            <div className="content">
+                                <button className="custom-button" onClick={this.handleDeleteAccount}>Confirmer la suppression du compte</button>
+                                <button className="custom-button" onClick={close}>Annuler</button>
+                            </div>
+                        </>
+                    )}
+                </Popup>
 
-                    <button className="custom-button">Crédits</button>
-                </div>
+            </div>
         </>;
     }
 }

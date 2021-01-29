@@ -1,14 +1,21 @@
 import React, { useRef } from "react";
 import { observer } from "mobx-react-lite";
 import Menu from "../components/Menu";
+import { useHistory, useParams } from "react-router-dom";
 
 const Saloon = observer(({ store }) => {
-    
+
     const form = useRef(null);
+    const history = useHistory();
+    const params = useParams();
 
     const onChange = (e) => {
         const formData = new FormData(form.current);
         store.setFormData(formData);
+    }
+
+    const accessGame = () => {
+        history.push('/map/game/' + params.gameId + '/player/' + params.playerId);
     }
 
     return (
@@ -46,8 +53,8 @@ const Saloon = observer(({ store }) => {
                         </tbody>
 
                     </table>
-                    <button className="custom-button">Copier l'invitation</button>
-                    <button className="custom-button">Accéder à la partie</button>
+                    {/*<button className="custom-button">Copier l'invitation</button>*/}
+                    <button className="custom-button" onClick={accessGame}>Accéder à la partie</button>
 
                 </div>
             </div>

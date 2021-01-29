@@ -1,12 +1,7 @@
 import React from "react";
-// import { Link, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-//import { useAuth } from "../../context/auth";
-import Menu from "../components/Menu";
-
-// import MyGamesStore from '../observers/MyGamesStore';
-import SearchGameStore from "../observers/SearchGameStore";
+import Menu from "../components/Menu"
 
 class Login extends React.Component {
 
@@ -38,7 +33,7 @@ class Login extends React.Component {
 
         if (!this.state.email || !this.state.password) {
             this.err = 'Vous n\'avez pas remplis tous les champs'
-            console.log(this.err);
+            alert(this.err);
             return;
         }
         axios.post('http://localhost:8000/api/login', {
@@ -46,8 +41,8 @@ class Login extends React.Component {
             password: this.state.password,
         }).then(response => {
             if (response.status === 200) {
-                this.success = true;
 
+                this.success = true;
                 localStorage.setItem('token', response.data.token);
 
                 // Get informations on user account
@@ -59,35 +54,12 @@ class Login extends React.Component {
                     localStorage.setItem('userId', response.data);
                     this.props.history.push("/searchGame");
                 })
-
-                // Get games of user
-                axios.get('http://localhost:8000/api/games',
-                    {
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem('token')
-                        }
-
-                    }).then(result => {
-                        if (result.status === 200) {
-                            SearchGameStore.loadData(result.data)                            
-                        } else {
-                            console.log(result)
-                        }
-                    }).catch(e => {
-                        console.log(e)
-                    });
-
-
             }
         }).catch((err) => {
-            console.log(err)
+            alert(this.err);
             this.err = 'Une erreur est survenue lors de la connexion';
         });
     }
-
-    /*if (isLoggedIn || authTokens) {
-        return <Redirect to="/" />;
-    }*/
 
     render() {
         return (
@@ -117,7 +89,7 @@ class Login extends React.Component {
                             placeholder="mot de passe"
                             name="password"
                         />
-                        <input type="submit" id="mySubmit" className="custom-button" onSubmit={this.signin} value="Se connecter" />
+                        <input type="submit" id="mySubmit" className="custom-button" value="Se connecter" />
                     </form>
 
                     <Link to="/forgot-password">Mot de passe oublié ?</Link>

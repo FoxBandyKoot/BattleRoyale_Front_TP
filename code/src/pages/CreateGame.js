@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-// import { Observer } from 'mobx-react'
-import CreateGameStore from '../observers/MyGamesStore';
 import Menu from "../components/Menu";
 import axios from "axios";
+import CreateGameStore from "../observers/CreateGameStore";
 
 export default class CreateGame extends Component {
 
@@ -10,16 +9,13 @@ export default class CreateGame extends Component {
     super(props)
 
     this.form = React.createRef();
-
-    let playerNumbers = [1, 2, 3, 4]
-    let properties = ['Publique', 'Privée']
-    let maps = ['Verte', 'Blue', 'Rouge']
+    this.playerCreateForTheGame = -1;
 
     this.state = {
       gameName: " ",
-      playerNumber: playerNumbers,
-      property: properties,
-      map: maps,
+      playerNumbers: [1, 2, 3, 4],
+      // properties: 'Publique', 'Privée'],
+      maps: ['Verte', 'Blue', 'Rouge']
     }
   }
 
@@ -29,14 +25,14 @@ export default class CreateGame extends Component {
 
     this.currentGameName = CreateGameStore.createGameFormData.get('gameNameInput')
     this.currentPlayerNumber = CreateGameStore.createGameFormData.get('playerNumberSelect')
-    this.currentProperty = CreateGameStore.createGameFormData.get('propertySelect')
+    // this.currentProperty = CreateGameStore.createGameFormData.get('propertySelect')
     this.currentMap = CreateGameStore.createGameFormData.get('mapSelect')
 
     // Enable or disable button of form validation
     this.formIsValid =
       this.currentGameName !== "" &&
       this.currentPlayerNumber !== 0 &&
-      this.currentProperty !== "" &&
+      // this.currentProperty !== "" &&
       this.currentMap !== ""
 
     this.render()
@@ -48,31 +44,61 @@ export default class CreateGame extends Component {
   }
 
   createGame = () => {
-
     axios.post('http://localhost:8000/api/games', {
-
-      name: "Party1",
-      code: "private",
-      round: 0,
-      owner: "/api/users/" + localStorage.getItem('userId'),
-      map: "string",
-      date: "2021-01-22T21:06:03.229Z"
-    },
-      {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-
+      owner: "/api/users/" + localStorage.getItem('userId'),  
+      name: this.currentGameName,
+      code: "N/A",
+      round: 1,
+      map: this.currentMap,
+      date: "2021-01-29"
+    }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      },
       }).then(result => {
-        if (result.status === 200) {
-          this.props.history.push("/saloon")
-        } else {
-          console.log(result)
-        }
+        if (result.status === 200 || result.status === 201) {
+          
+          // If game is create, create the player and join the game
+          this.createPlayer(result.data.id)
+          // if (err){
+          //   alert("La partie n'a pu être créée, se renseigner dans la console")
+          // }
+          
+        } 
+        
       }).catch(e => {
         console.log(e)
+        alert(e)
       });
   }
+
+  createPlayer = (id) => {
+    axios.post('http://localhost:8000/api/players', {
+        round: 1,
+        life: 3,
+        game: '/api/games/' + id,
+        user: '/api/users/' + localStorage.getItem('userId')
+    }, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    }).then(res => {
+        if(res.status === 201) {
+          if (res.data.id !== -1){
+            console.log("Creation du joueur réussie, récupération de son identifiant pour rejoindre la nouvelle partie");
+            this.joinSaloon(id, res.data.id)
+          }
+        }
+    }).catch(err => {
+        console.log("Echec de la creation du joueur")
+        console.log(err);
+    })
+  }
+
+  joinSaloon(idGame, idPlayer){
+    this.props.history.push('/saloon/game/' + idGame + "/player/" + idPlayer)
+  }
+
 
   render = () => {
 
@@ -84,7 +110,6 @@ export default class CreateGame extends Component {
       this.buttonSubmit.disabled = true
     }
 
-
     return <>
       <Menu />
 
@@ -95,7 +120,6 @@ export default class CreateGame extends Component {
         <h1 className="title-page">Créer une partie</h1>
 
         <form className="custom-form" ref={this.form} onChange={this.onChange} onSubmit={this.onSubmit}>
-
           {/********************** GAME NAME **********************/}
           <label className="custom-label">Nom de la partie</label>
           <input
@@ -104,33 +128,32 @@ export default class CreateGame extends Component {
             name="gameNameInput"
           />
 
-          <p className="custom-p" name="resultGet" value={this.state.resultGetAfterLoad}>{this.state.resultGetAfterLoad}</p>
-
           {/********************** PLAYER NUMBER SELECTOR **********************/}
-          <label className="custom-label">Nombre de joueurs sur la carte</label>
+          {/* <label className="custom-label">Nombre de joueurs sur la carte</label>
           <select className="custom-dropdown" name="playerNumberSelect">
             {
               this.state.playerNumber.map((e, i) => <option key={i} value={e}>
                 {e}
               </option>)
             }
-          </select>
+          </select> */}
+
 
           {/********************** PROPERTY SELECTOR **********************/}
-          <label className="custom-label">Qui peut rejoindre la partie ?</label>
+          {/* <label className="custom-label">Qui peut rejoindre la partie ?</label>
           <select className="custom-dropdown" name="propertySelect">
             {
               this.state.property.map((e, i) => <option key={i} value={e}>
                 {e}
               </option>)
             }
-          </select>
+          </select> */}
 
           {/********************** MAP SELECTOR **********************/}
           <label className="custom-label">Sélectionner la carte</label>
           <select className="custom-dropdown" name="mapSelect">
             {
-              this.state.map.map((e, i) => <option key={i} value={e}>
+              this.state.maps.map((e, i) => <option key={i} value={e}>
                 {e}
               </option>)
             }
@@ -142,23 +165,6 @@ export default class CreateGame extends Component {
         </form>
 
       </div>
-
-      {/* <footer className="custom-footer">
-      <Observer>
-            {
-              () => <>
-                {/* WILL BE USE FOR OTHERS FUNCTIONNALITIES 
-                {/* {CreateGameStore.createGameFormData.get('gameNameInput')} 
-                {/* {JSON.stringify(CreateGameStore.createGameFormData.keys())} 
-                {this.resultGetAfterLoad}
-                {CreateGameStore.getResultGet('resultGet')}
-              </>
-            }
-          </Observer>
-
-          </footer> */}
     </>
-
-
   }
 }
