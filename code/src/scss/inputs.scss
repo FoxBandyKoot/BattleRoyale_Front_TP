@@ -1,76 +1,82 @@
 // lib component
 .rw-widget-picker {
-  border-radius: 35px;
-  text-align: center;
-  margin-top: 2rem;
+    border-radius: 35px;
+    text-align: center;
+    margin-top: 2rem;
 }
 
 .rw-widget-picker:hover {
-  background-color: rgb(192, 247, 247);
+    background-color: rgb(192, 247, 247);
 }
 
-.custom-dropdown{
-  border-radius: 35px;
-  padding: 0.5rem;
-  width: 100%;
+.custom-dropdown {
+    border-radius: 35px;
+    padding: 0.5rem;
+    width: 100%;
 }
 
-.custom-dropdown:hover{
-  background-color: rgb(192, 247, 247);
+.custom-dropdown:hover {
+    background-color: rgb(192, 247, 247);
 }
 
 .custom-input {
-  padding: 0.5rem;
-  text-align: center;
-  border-radius: 35px;
-  border: 0;
-  width: 100%;
+    padding: 0.5rem;
+    text-align: center;
+    border-radius: 35px;
+    border: 0;
+    width: 100%;
 }
 
 .double-password-input,
 .double-passwordConfirm-input {
-  width: 346px;
-  height: 24;
-  padding: 0.5rem;
-  text-align: center;
-  margin-top: 2rem;
-  border-radius: 35px;
-  border: 0;
+    width: 346px;
+    height: 24;
+    padding: 0.5rem;
+    text-align: center;
+    margin-top: 2rem;
+    border-radius: 35px;
+    border: 0;
 }
 
 input:hover {
-  background-color: rgb(192, 247, 247);
+    background-color: rgb(192, 247, 247);
 }
 
 .custom-button,
 .continous {
-  background-color: #f05029;
-  border-radius: 35px;
-  border: 0;
-  padding: 0.5rem;
-  margin-bottom: 2rem; 
-  margin-top: 2rem;
-  color: white;
-  font-weight: 400;
-  width: 100%;
+    background-color: #f05029;
+    border-radius: 35px;
+    border: 0;
+    padding: 0.5rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    color: white;
+    font-weight: 400;
+    width: 100%;
 }
 
-#mySubmit:hover#mySubmit:enabled{
-  background-color: coral;
+#mySubmit:hover#mySubmit:enabled {
+    background-color: coral;
 }
 
 input:disabled {
-  background-color: gray;
+    background-color: gray;
 }
 
-.custom-label{
-  color: white;
-  margin-top: 2rem;
-  width: 100%;
+.custom-label {
+    color: white;
+    margin-top: 2rem;
+    width: 100%;
 }
+
 .exit-btn {
-  background-color: #F05029;
+    background-color: #F05029;
 }
 
-
-
+.join-btn {
+    background-color: #4e29f0;
+    &:hover {
+        color: #F05029;
+        text-decoration: none;
+    }
+}
