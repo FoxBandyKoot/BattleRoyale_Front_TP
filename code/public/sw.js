@@ -2,6 +2,7 @@ const FILE_CACHE_NAME = "files";
 const FILE_CACHE_VERSION = "3";
 const FILE_CACHE_HANDLE = `${FILE_CACHE_NAME}-${FILE_CACHE_VERSION}`;
 const appShell = [
+    /*
     '/',
     '/index.html',
     '/icons/maskable_icon_x1.png',
@@ -38,21 +39,20 @@ const appShell = [
     '../src/maps/masse.jpg',
     '../src/maps/Map1.js',
     //models
-    '../src/models/Game.js',
+    '../src/models/Game.js',*/
+    '/static/js/bundle.js',
+    '/static/js/0.chunk.js',
+    '/static/js/main.chunk.js ',
+    //'/manifest.webmanifest',
+    //'/manifest.webmanifest',
+    '/maskable_icon_x1.png',
+
 ];
 const cacheFiles = async() => {
     const fileCache = await caches.open(FILE_CACHE_HANDLE);
     await fileCache.addAll(appShell);
 };
-/*
-const getResponse = async(req) => {
-    const response = await caches.match(req);
-    if (response) {
-        return response;
-    } else {
-        return fetch(req);
-    }
-}*/
+
 const clearUnusedCaches = async() => {
     const keys = await caches.keys();
     const promises = [];
@@ -75,8 +75,15 @@ self.addEventListener("activate", (event) => {
 })
 
 self.addEventListener('fetch', function(event) {
+
     event.respondWith(caches.match(event.request).then(function(response) {
-        return response || fetch(event.request).catch(error => caches.match("OFFLINE_PAGE_URL"));
+        if (response) {
+            return response;
+        }
+        if (navigator.onLine) {
+            return fetch(event.request).catch(error => caches.match("OFFLINE_PAGE_URL"));
+        }
+        return "OK";
     }));
 
 });
