@@ -9,27 +9,47 @@ const appShell = [
     '../src/index.css',
     '../src/App.js',
     '../src/App.scss',
-    '../src/pages/login.js',
+    //pages
     '../src/pages/Account.js',
     '../src/pages/CreateGames.js',
+    '../src/pages/CurrentGames.js',
     '../src/pages/Forgot-password.js',
+    '../src/pages/login.js',
     '../src/pages/ModifyPassword.js',
+    '../src/pages/Saloon.js',
     '../src/pages/SeachGame.js',
     '../src/pages/Signup.js',
+
+    //scss
     '../src/scss/classic.scss',
     '../src/scss/inputs.scss',
+    //components
     '../src/components/Logout.js',
     '../src/components/Menu.js',
+    //context
     '../src/context/auth.js',
     '../src/context/PrivateRoute.js',
+    //observers
     '../src/observers/CreateGameStore.js',
+    '../src/observers/MyGamesStore.js',
+    '../src/observers/SaloonStore.js',
     '../src/observers/SearchGameStore.js',
+    //maps
+    '../src/maps/masse.jpg',
+    '../src/maps/Map1.js',
+    //models
+    '../src/models/Game.js',
+
+
+
+
 
 ];
 const cacheFiles = async() => {
     const fileCache = await caches.open(FILE_CACHE_HANDLE);
     await fileCache.addAll(appShell);
 };
+/*
 const getResponse = async(req) => {
     const response = await caches.match(req);
     if (response) {
@@ -37,7 +57,7 @@ const getResponse = async(req) => {
     } else {
         return fetch(req);
     }
-}
+}*/
 const clearUnusedCaches = async() => {
     const keys = await caches.keys();
     const promises = [];
@@ -65,7 +85,11 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener('fetch', function(event) {
     // event.respondWith(caches.match(event.request).then(function(response) { return response || fetch(event.request); }));
-    event.respondWith(getResponse(event.request));
+    //event.respondWith(getResponse(event.request));
+    event.respondWith(caches.match(event.request).then(function(response) {
+        return response || fetch(event.request).catch(error => caches.match("OFFLINE_PAGE_URL"));
+    }));
+
 });
 
 self.addEventListener('push', function(e) {
