@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import Menu from "../components/Menu";
+import { withRouter } from 'react-router-dom';
 
 class Signup extends React.Component {
     
@@ -31,14 +32,12 @@ class Signup extends React.Component {
         }
 
         axios.post("http://localhost:8000/api/sign-up", {
-
             email: this.state.email,
             password: this.state.password,
             pseudo: this.state.pseudo
         }).then(result => {
             if (result.status === 200) {
                 this.props.history.push("/login");
-
             } else {
                 this.setState({isError: true})
             }
@@ -49,7 +48,6 @@ class Signup extends React.Component {
     }
 
     handleInputChange(event) {
-        console.log(event.target.name)
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -109,4 +107,4 @@ class Signup extends React.Component {
     
 }
 
-export default Signup;
+export default withRouter(Signup);

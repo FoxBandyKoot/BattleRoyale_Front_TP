@@ -11,7 +11,7 @@ class SearchGame extends Component {
         this.form = React.createRef();
 
         this.state = {
-            nameCreatedGame: [],
+            // nameCreatedGame: [],
             mapCreatedGame: [],
             // properties: ['Publique', 'Privée'],
             maps: ['Toutes', 'Verte', 'Bleu', 'Rouge'],
@@ -44,17 +44,31 @@ class SearchGame extends Component {
         e.preventDefault()
 
         if(this.state.currentMapChange || this.state.searchName) {
+            this.setState({
+                mapCreatedGame: []
+            })
             axios.get('http://localhost:8000/api/games?name[]=' + this.state.searchName + '&map[]=' + this.state.currentMapChange, {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
             }).then(res => {
                 if(res.status === 200) {
-                        console.log(res.data['hydra:member'])
-                        this.setState({
-                            nameCreatedGame: res.data['hydra:member'],
-                            mapCreatedGame: res.data['hydra:member']
-                        });
+                    res.data['hydra:member'].map((item) => {
+                        axios.get('http://localhost:8000/api/players/?game=/api/games/' + item.id +'&user=/api/users/' + localStorage.getItem('userId'), {
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                            }
+                        }).then((res) => {
+                            if(res.data['hydra:totalItems'] === 0) {
+                                const games = this.state.mapCreatedGame;
+                                games.push(item)
+                                this.setState({
+                                    mapCreatedGame: games
+                                });
+                            }
+                        })
+                        return '';
+                    });
                 }
             }).catch(err => {
                 alert(err);

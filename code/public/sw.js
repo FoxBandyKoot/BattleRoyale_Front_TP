@@ -39,11 +39,6 @@ const appShell = [
     '../src/maps/Map1.js',
     //models
     '../src/models/Game.js',
-
-
-
-
-
 ];
 const cacheFiles = async() => {
     const fileCache = await caches.open(FILE_CACHE_HANDLE);
@@ -69,23 +64,17 @@ const clearUnusedCaches = async() => {
     }
     await Promise.all(promises);
 };
-/*self.addEventListener('Installing', function(e) {
-    e.waitUntil(caches.open('BattleRoyale')
-        .then(function(cache) {
-            return cache.addAll(appShell);
-        }));
-});
-*/
+
+
 self.addEventListener("install", (event) => {
     event.waitUntil(cacheFiles())
 });
+
 self.addEventListener("activate", (event) => {
     event.waitUntil(clearUnusedCaches());
 })
 
 self.addEventListener('fetch', function(event) {
-    // event.respondWith(caches.match(event.request).then(function(response) { return response || fetch(event.request); }));
-    //event.respondWith(getResponse(event.request));
     event.respondWith(caches.match(event.request).then(function(response) {
         return response || fetch(event.request).catch(error => caches.match("OFFLINE_PAGE_URL"));
     }));
