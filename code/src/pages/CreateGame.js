@@ -11,31 +11,31 @@ export default class CreateGame extends Component {
     this.form = React.createRef();
 
     let playerNumbers = [1, 2, 3, 4]
-    let properties = ['Publique', 'Privée']
+    // let properties = ['Publique', 'Privée']
     let maps = ['Verte', 'Blue', 'Rouge']
 
     this.state = {
       gameName: " ",
       playerNumber: playerNumbers,
-      property: properties,
+      // property: properties,
       map: maps,
     }
   }
 
   onChange = (e) => {
-    // const formData = new FormData((this.form.current))
-    // CreateGameStore.setFormData(formData)
+    const formData = new FormData((this.form.current))
+    CreateGameStore.setFormData(formData)
 
     this.currentGameName = CreateGameStore.createGameFormData.get('gameNameInput')
     this.currentPlayerNumber = CreateGameStore.createGameFormData.get('playerNumberSelect')
-    this.currentProperty = CreateGameStore.createGameFormData.get('propertySelect')
+    // this.currentProperty = CreateGameStore.createGameFormData.get('propertySelect')
     this.currentMap = CreateGameStore.createGameFormData.get('mapSelect')
 
     // Enable or disable button of form validation
     this.formIsValid =
       this.currentGameName !== "" &&
       this.currentPlayerNumber !== 0 &&
-      this.currentProperty !== "" &&
+      // this.currentProperty !== "" &&
       this.currentMap !== ""
 
     this.render()
@@ -47,26 +47,28 @@ export default class CreateGame extends Component {
   }
 
   createGame = () => {
-
+    
     axios.post('http://localhost:8000/api/games', {
-      name: "Party1",
-      code: "private",
+      owner: "/api/users/" + localStorage.getItem('userId'),  
+      name: this.currentGameName,
+      code: "N/A",
       round: 0,
-      owner_id: "/api/users/" + localStorage.getItem('userId'),
-      map: "Bleu",
-      date: "2021-01-28T13:49:18.218Z"
+      map: this.currentMap,
+      date: "N/A"
     }, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token')
       },
       }).then(result => {
-        if (result.status === 200) {
+        if (result.status === 200 || result.status === 201) {
           this.props.history.push('/saloon')
         } else {
           console.log(result)
+          alert(result)
         }
       }).catch(e => {
         console.log(e)
+        alert(e)
       });
   }
 
@@ -100,25 +102,25 @@ export default class CreateGame extends Component {
           />
 
           {/********************** PLAYER NUMBER SELECTOR **********************/}
-          <label className="custom-label">Nombre de joueurs sur la carte</label>
+          {/* <label className="custom-label">Nombre de joueurs sur la carte</label>
           <select className="custom-dropdown" name="playerNumberSelect">
             {
               this.state.playerNumber.map((e, i) => <option key={i} value={e}>
                 {e}
               </option>)
             }
-          </select>
+          </select> */}
 
 
           {/********************** PROPERTY SELECTOR **********************/}
-          <label className="custom-label">Qui peut rejoindre la partie ?</label>
+          {/* <label className="custom-label">Qui peut rejoindre la partie ?</label>
           <select className="custom-dropdown" name="propertySelect">
             {
               this.state.property.map((e, i) => <option key={i} value={e}>
                 {e}
               </option>)
             }
-          </select>
+          </select> */}
 
           {/********************** MAP SELECTOR **********************/}
           <label className="custom-label">Sélectionner la carte</label>
@@ -136,23 +138,6 @@ export default class CreateGame extends Component {
         </form>
 
       </div>
-
-      {/* <footer className="custom-footer">
-      <Observer>
-            {
-              () => <>
-                {/* WILL BE USE FOR OTHERS FUNCTIONNALITIES 
-                {/* {CreateGameStore.createGameFormData.get('gameNameInput')} 
-                {/* {JSON.stringify(CreateGameStore.createGameFormData.keys())} 
-                {this.resultGetAfterLoad}
-                {CreateGameStore.getResultGet('resultGet')}
-              </>
-            }
-          </Observer>
-          
-          <input type="submit" id="mySubmit" className="custom-button" disabled={true} value="Créer le salon"/>
-
-          </footer> */}
     </>
   }
 }
